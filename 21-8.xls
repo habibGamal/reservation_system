@@ -1,0 +1,3021 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <LastAuthor>AMT</LastAuthor>
+  <LastPrinted>2026-08-19T14:54:53Z</LastPrinted>
+  <LastSaved>2026-08-19T14:54:23Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>9465</WindowHeight>
+  <WindowWidth>21600</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial" x:CharSet="178" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s68">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Size="11" ss:Bold="1"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s69">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Size="11" ss:Bold="1"/>
+   <Interior/>
+   <NumberFormat ss:Format="@"/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet" ss:RightToLeft="1">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=Sheet!R1C1:R183C7"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="183" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="54" ss:DefaultRowHeight="14.25">
+   <Column ss:AutoFitWidth="0" ss:Width="93.75"/>
+   <Column ss:AutoFitWidth="0" ss:Width="117"/>
+   <Column ss:Width="66.75"/>
+   <Column ss:AutoFitWidth="0" ss:Width="84.75"/>
+   <Column ss:AutoFitWidth="0" ss:Width="168"/>
+   <Column ss:AutoFitWidth="0" ss:Width="56.25"/>
+   <Column ss:Width="105.75"/>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s68"><Data ss:Type="String">الرقم العسكرى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">نوع الوحدة السكنية</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">الرتبــــــة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">حالة الخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">اسم النزيل </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">رقم الغرفة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">رقم التليفون 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90296</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا لوسيـــــال</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد&#160;عبدالفتاح&#160;محمد محمد سكر</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">6</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01141114170</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">31720</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">على&#160;محمد&#160;حسن&#160;سعودى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">7</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01003078700</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">31736</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رأفت&#160;يسرى&#160;رشاد&#160;صبرى&#160;ميخائيل</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01001366670</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">40232</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">طارق&#160;عبدالرحمن&#160;دنيا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">9</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">6825320</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">66745</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">جمال احمد عبدالفتاح احمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">10</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01118454111</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">66748</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ممدوح شوقى احمد محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">13</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006067330</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">66759</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حسام&#160;السنوسى&#160;احمد&#160;ابوالعز</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">14</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01283461399</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">88228</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مجدى&#160;محمد&#160;محمد&#160;حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">15</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">010/06683435</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90277</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حسام&#160;فتحى&#160;محمد&#160;على</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">16</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01069909974</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">95757</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عمرو عبدالحميد&#160;يوسف&#160;ابوديب</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">19</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01001970017</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">95771</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">اشرف&#160;محمد&#160;محمد&#160;خلف</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">20</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01004683246</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100479</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ابراهيم&#160;عبدالرحمن&#160;ابراهيم&#160;مصطفى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">21</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006064507</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90294</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فيلا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حازم&#160;على عبدالغنى&#160;محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">22</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006068418</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">111513</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد احمد محمد عبداللطيف عامر</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01018583387</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">43154</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد&#160;عبداللطيف&#160;احمد&#160;عيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01223821837</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">133012</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  فنى تمريض  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">هبه ابراهيم حسين عبدالمجيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">6</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01011235933</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">28157</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محسن سعد زغلول على رفعت</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">7</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01015271587</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">133012</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  فنى تمريض  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">هبه ابراهيم حسين عبدالمجيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01011235933</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">118794</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">تامر محمد نبيل محمد كامل حسن رخيه</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">9</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01004659573</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">113765</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عبدالله محمد مرسى محمد المرسى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">10</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01064446660</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">109252</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عماد الدين محمد السيد شمس</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">11</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006976586</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">143729</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">طارق احمد مصطفى السعيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01020012606</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">143729</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">طارق احمد مصطفى السعيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">13</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01020012606</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">2607</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى احمد مصطفى ماهر</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">14</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">104819</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد نهاد حمزه الشربينى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">15</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01010118007</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">41815</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد حامد حامد سليمان محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">16</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">3466854</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">25785</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نبيل&#160;طه&#160;رزق&#160;حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">21</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005614061</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">25785</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نبيل&#160;طه&#160;رزق&#160;حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">22</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005614061</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">139762</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  فنى تمريض  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مى ابراهيم حسين عبدالمجيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">23</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">011/6020620</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">102560</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حازم محمد رجب حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">24</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">011/17635448</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">118687</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عادل محمد اسماعيل عبدالسلام</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">25</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01000040762</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">117666</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">كامل حسنين محمد كامل الدخميس</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">26</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01021997802</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">158979</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نقيب  فنى تمريض  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">امل عبدالمجيد محمود عبدالمجيد حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">27</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01279686849</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">63403</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ناصر&#160;عبدالمنعم&#160;محمد&#160;حسن</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">28</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01062550299</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">161980</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نقيب  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد مرسى مرسى عزب عبدالله</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">29</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0126593550</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">133110</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد عادل عبدالجواد مريكب</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">30</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01007231919</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">141190</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  فنى تمريض  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مها فتحى سيد احمد محمد سيد احمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">31</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0187472255</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">98317</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">طارق&#160;سمير&#160;عبدالفتاح&#160;عبدربه</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">32</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0115577050</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">149324</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بلال شحاته محمود احمد سليمان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">35</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01090887856</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">66759</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حسام&#160;السنوسى&#160;احمد&#160;ابوالعز</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">36</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01283461399</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136357</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى طاهر مصطفى عبدالجليل</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">37</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">  01013135001</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90758</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد&#160;سيد&#160;محمد&#160;علوان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">38</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006822425</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100124</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد فتحى محمد بسيونى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">39</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01221620515</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">39965</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فاروق&#160;محمد&#160;عبدالوهاب&#160;حامد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">41</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01000702309</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">104608</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">وليد محمد عبدالسلام عبدالعاطى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">42</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006068411</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90267</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد&#160;محمود&#160;سيد&#160;احمد&#160;ضيف&#160;الله</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">43</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01016413700</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">147921</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">على ماهر على محمد بيصار</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">44</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01092714055</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">158979</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نقيب  فنى تمريض  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">امل عبدالمجيد محمود عبدالمجيد حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">45</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01279686849</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136339</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد احمد محمد حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">46</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01145577455</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">94221</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حسام الدين محمد السيد احمد الكرديسى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">48</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">010/5292621</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">20033</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  محارب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد توفيق حسن الالفى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">51</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01285849447</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">20033</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  محارب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد توفيق حسن الالفى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">52</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01285849447</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">148243</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">باسم فتح الله صادق ابراهيم احمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">53</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01018112805</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">39965</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فاروق&#160;محمد&#160;عبدالوهاب&#160;حامد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">54</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01000702309</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">97341</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">تامر&#160;على&#160;صالح&#160;معوض&#160;ضبش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">55</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01001679219</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100169</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد حسين محمد عباس</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">56</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01113331603</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">114386</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">وائل السيد عبدالمطلب عبدالعال</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">57</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01110960000</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">114386</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">وائل السيد عبدالمطلب عبدالعال</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">58</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01110960000</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">165363</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نقيب  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حسن اشرف حسن يسن</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">61</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01551540777</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">40254</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">خضر بيومى محمد احمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">63</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01223433301</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">147240</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">اسلام عبدالحليم محمد حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">64</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01061156711</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">35874</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد&#160;حسين&#160;احمد-1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">65</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01012000131</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">146007</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">خالد ابراهيم عبدالمجيد ابراهيم</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">66</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01003090281</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">52608</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  مهندس  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فرج&#160;احمد&#160;صديق&#160;عبدالمولى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">67</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005473971</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">147242</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عبدالله عادل احمد احمد ابراهيم</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">69</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0100/8530646</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136405</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى شعبان عبدالله احمد حويحى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">70</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01002513563</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">126666</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  محارب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">سامح وفيق نصر حسانين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">71</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">011/21999777</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">140819</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عمرو سند جودة سلام</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">72</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0128121885</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">161441</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نقيب  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد رمضان محمد محمد المصرى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">73</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01020070052</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">162059</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نقيب  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حسام خليل شعبان محمد القطان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">74</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01227507001</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">152555</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد ماهر احمد محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">75</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0114191942</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">152555</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد ماهر احمد محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">76</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0114191942</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">52708</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد&#160;السيد&#160;البدرى&#160;عبدالحليم</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">82</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01125909797</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">129233</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ابراهيم احمد ابراهيم رمضان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">85</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01222499936</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">133110</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد عادل عبدالجواد مريكب</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">87</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01007231919</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136339</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد احمد محمد حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">94</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01145577455</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">113034</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">سيد محمد سيد اسماعيل</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">95</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005615533</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">72592</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">معتز&#160;محمد&#160;داود&#160;مصطفى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">96</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005513850</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90307</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">هشام&#160;محمد&#160;عبد&#160;السلام&#160;عبدالعاطى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">97</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01111722999</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">79650</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">طارق&#160;محمد&#160;حازم&#160;عبد&#160;الوهاب عياد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">98</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005281053</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136339</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد احمد محمد حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">99</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01145577455</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">133096</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد كريم حسن عبدالعزيز محمد عاشور</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">101</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005758027</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100291</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد محمد يحيى عبدالهادى علام</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">102</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">147379</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طبيب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">وائل فوزى احمد الشامى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">103</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">24742410</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">149403</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طبيب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد فتحى توفيق الرشيدى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">104</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0224744202</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">141060</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حمدى سمير حمدى ابراهيم</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">105</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01222395823</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">116623</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى محمد مصطفى زيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">106</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01063350601</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">97341</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">تامر&#160;على&#160;صالح&#160;معوض&#160;ضبش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">107</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01001679219</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136148</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">زكى السيد زكى السيد ضاعيه</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">108</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد / وائل ابراهيم محمد هيكل </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">40310</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد منتصر محمد عبدالعليم المراغى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01111119607</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">109929</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">باسم عبدالعاطى عبدالقادر ابوالخير</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01223820593</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">111979</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">هيثم عبدالعزيز محمد سيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">9</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006939569</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">38265</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ابراهيم عبدالوهاب ابراهيم سالم </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">10</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0100062982</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">88228</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مجدى&#160;محمد&#160;محمد&#160;حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">11</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">010/06683435</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100169</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد حسين محمد عباس</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01113331603</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136367</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى محمد يوسف محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">13</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">         01009198098</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">111600</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد محمد احمد متولى وهدان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">14</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005257939</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136357</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى طاهر مصطفى عبدالجليل</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">15</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">  01013135001</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">141748</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  محارب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">هشام عبدالحكيم عبدالمحسن درويش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">16</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01062627070</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">24342</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فؤاد&#160;محمد&#160;عبده&#160;على</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">7</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01062501199</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">48195</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حسن&#160;محمد&#160;نصرالدين&#160;عبدالعال</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01003443330</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">35809</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد محمد محمد غنيم</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">9</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005377251</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">98394</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">شريف صلاح الدين عبد الناصر حسن</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">10</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006064030</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">95764</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد&#160;حامد&#160;هاشم&#160;مصطفى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">11</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01069249666</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">40254</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">خضر بيومى محمد احمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01223433301</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">125044</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  محارب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمود محمد امام محمود عفيفى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">13</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">012/3343568</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">109252</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عماد الدين محمد السيد شمس</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">14</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006976586</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100362</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عادل ابراهيم محمد ابراهيم</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">15</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005837936</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">111939</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عزالدين نجيب عبده الجبالى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">16</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01001440202</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">108279</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عماد مصطفى احمد عبدالرحمن</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">18</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006064516</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">40288</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">طلعت محمود عوض الله</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">19</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01003103833</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">98470</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">وليد&#160;عبدالرحمن&#160;عبدالحميد&#160;الاشول</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">20</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01009088930</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90307</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">هشام&#160;محمد&#160;عبد&#160;السلام&#160;عبدالعاطى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">21</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01111722999</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90267</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد&#160;محمود&#160;سيد&#160;احمد&#160;ضيف&#160;الله</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">22</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01016413700</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">116698</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">شريف احمد محمد احمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">23</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01228267041</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">104819</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد نهاد حمزه الشربينى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">24</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01010118007</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">106401</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد ماهر مصباح سيد احمد نمير</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">25</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01222424600</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">109944</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمود وجدى محمد الحناوى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">26</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01012225148</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">2607</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى احمد مصطفى ماهر</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">27</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90280</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد&#160;محمد&#160;احمد&#160;جبر</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">28</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006068199</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90508</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ياسر سيد&#160;احمد&#160;المتولى&#160;ابراهيم</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">29</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01004539621</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">79622</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">علاء&#160;الدين&#160;على&#160;محمد&#160;على</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">30</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01202008009</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">106399</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد سمير محمد عثمان محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">31</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01118486458</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">114448</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد السعيد صابر عويس</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">32</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">116594</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد سعيد خليفه احمد جلال</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">33</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01068970251</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">116710</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد عبدالفتاح مصطفى حسن</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">34</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01159894775</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">116581</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد محمد راجح فتح الله محمد زهدى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">35</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01111900606</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">109848</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد ابراهيم مصطفى محمد جابر</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">36</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">012/06916060</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">111950</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عمرو محمد مصطفى الجلاد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">37</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01119996671</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">120926</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى السيد محمود عطيه عوض الله</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">38</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01141109966</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">116760</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">البرت مجدى شحاته حنا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">39</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01068068111</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">118687</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عادل محمد اسماعيل عبدالسلام</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">40</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01000040762</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">132279</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد على محمد رأفت</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">41</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">011/17806351</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">114289</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">خالد محمد عبدالغنى محمد راضى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">43</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01122222889</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">114358</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد رفعت ابوالعزم عبدالشكور</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">44</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01223352936</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">114386</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">وائل السيد عبدالمطلب عبدالعال</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">45</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01110960000</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">41155</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عمر&#160;رمضان&#160;عمر خليل</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">46</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006374073</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">108513</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  محارب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">اسامه محمد نصر ابوالمكارم الحسينى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">47</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90421</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عبدالناصر رضا عبدالناصر محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">48</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01003066173</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100525</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عادل&#160;منصور&#160;على&#160;الجارحى فوده</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">49</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006247870</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">40035</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد&#160;ماهر&#160;احمد&#160;محمود&#160;ماضى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">50</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006609113</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">64815</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد&#160;جمال&#160;فؤاد&#160;محمد&#160;مختار</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1005</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01280140504</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">52608</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  مهندس  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فرج&#160;احمد&#160;صديق&#160;عبدالمولى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1006</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005473971</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100522</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">اسامه&#160;محمد&#160;عبدالمطلب&#160;عبدالحى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1007</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01061495060</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">107921</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رضا محمود هاشم عثمان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1008</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01009663777</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">104646</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">خالد محمد احمد محمد عثمان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1009</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01223026162</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">60321</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">جمال&#160;مصطفى&#160;عبدالعال&#160;محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1010</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100533</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ياسر&#160;عبدالموجود&#160;عبدالعظيم طلبه خلاف</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1011</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01026299319</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">117666</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">كامل حسنين محمد كامل الدخميس</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1012</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01021997802</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">27634</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمدالسعيد&#160;محمدابراهيم&#160;الخرباوى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1013</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">010/6013347</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">60352</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  مهندس  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مصطفى&#160;لبيب&#160;طه&#160;حسن&#160;الحريرى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1014</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01001909486</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">117677</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد احمد نجيب عبدالكريم غيث</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1015</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01004310457</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">105656</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">دورين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  فني معهد  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عمرو عبدالله على حسن</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">1016</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01223489766</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">143691</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">غرفة فندق 5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد سعد احمد محمد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01119292818</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">25785</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نبيل&#160;طه&#160;رزق&#160;حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">101</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005614061</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">25785</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  جوى  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نبيل&#160;طه&#160;رزق&#160;حسين</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">102</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01005614061</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">149403</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طبيب  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد فتحى توفيق الرشيدى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">103</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0224744202</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"> ضابط قوات مسلحة محمد احمد شاهين </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">104</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">39965</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فاروق&#160;محمد&#160;عبدالوهاب&#160;حامد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">105</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01000702309</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">121319</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">اسامه صابر احمد ابوسعده</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">106</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006164402</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136378</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد مجدى محيى الدين محمود عطا الله</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">107</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0109170061</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90560</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">سعيد&#160;عبدالعزيز&#160;عثمان&#160;على</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">108</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01001413798</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">116760</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  جوى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">البرت مجدى شحاته حنا</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">109</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01068068111</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">126306</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">نقيب  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد صبرى عبدالعزيز فرماوى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">201</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01002858428</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">148216</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">رائد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد احمد شوقى احمد تهامى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">202</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01067234818</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">145916</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حماده جبر محمد جبر سالمان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">203</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01003242999</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد فكرى على </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">204</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">شريف محى الدين سيد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">205</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد على قطب</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">206</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">143052</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد عبدالرحيم بيومى اسماعيل</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">207</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01091084747</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">108992</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  صيدلى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">امل عبدالوهاب محمد عطيه</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">208</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">114387</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد محمد احمد حماد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">209</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">010/00001713</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">108992</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  صيدلى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">امل عبدالوهاب محمد عطيه</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">210</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String"></Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">100087</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">لواء  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">علاء الدين محمد محمد مراد</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">301</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01004723670</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">90758</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عميد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">محمد&#160;سيد&#160;محمد&#160;علوان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">302</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006822425</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">33113</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالمعاش</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد سعيد عبدالحليم سلامه</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">303</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01000424642</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">145916</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">حماده جبر محمد جبر سالمان</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">304</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01003242999</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">148973</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  صيدلى  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">كريم رضا محمد الزعبلاوى</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">305</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01069743444</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">132088</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  مهندس  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">هانى مصطفى محمد السعيد محمود</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">306</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">01006834055</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">136378</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">مقدم  طيار  </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد مجدى محيى الدين محمود عطا الله</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">307</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">0109170061</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s69"><Data ss:Type="String">118708</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">فندق 6 </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">عقيد  طيار  أح </Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">بالخدمة</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">احمد محمود عبدالله اسماعيل</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">308</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">012/22428957</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Layout x:Orientation="Landscape"/>
+   </PageSetup>
+   <Print>
+    <ValidPrinterInfo/>
+    <PaperSizeIndex>9</PaperSizeIndex>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Selected/>
+   <DisplayRightToLeft/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>96</ActiveRow>
+     <ActiveCol>4</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R183C7"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+  </AutoFilter>
+ </Worksheet>
+</Workbook>
