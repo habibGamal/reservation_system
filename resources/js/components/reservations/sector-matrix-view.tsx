@@ -319,8 +319,8 @@ function getResStatusTag(status: ReservationStatus | string) {
     return (
         <div className="space-y-4" dir="rtl">
             {/* Top Toolbar & Legend Bar */}
-            <div className="bg-card border-border/70 space-y-3 rounded-xl border p-4 shadow-xs">
-                <div className="flex flex-col items-center justify-between gap-3 md:flex-row">
+            <div className="bg-card border-border/70 space-y-3 rounded-xl border p-3 sm:p-4 shadow-xs">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                     {/* Search within matrix */}
                     <Input
                         placeholder="تصفية بالوحدة أو اسم النزيل..."
@@ -330,89 +330,93 @@ function getResStatusTag(status: ReservationStatus | string) {
                             <Search className="text-muted-foreground h-4 w-4" />
                         }
                         allowClear
-                        className="w-full md:w-80"
+                        className="w-full md:w-72 lg:w-80 text-xs"
                     />
 
-                    {/* Occupancy Filter Buttons */}
-                    <div className="flex w-full items-center justify-start gap-1.5 md:w-auto">
-                        <span className="text-muted-foreground ml-1 text-xs">
-                            عرض:
-                        </span>
-                        <Segmented<OccupancyFilter>
-                            value={occupancyFilter}
-                            onChange={(val) => setOccupancyFilter(val)}
-                            options={[
-                                {
-                                    value: 'all',
-                                    label: `الكل (${resortStats.totalUnits})`,
-                                },
-                                {
-                                    value: 'occupied',
-                                    label: `المشغول (${resortStats.occupiedTotal})`,
-                                },
-                                {
-                                    value: 'departed',
-                                    label: `غادر (${resortStats.departed})`,
-                                },
-                                {
-                                    value: 'vacant',
-                                    label: `الشواغر (${resortStats.vacant})`,
-                                },
-                            ]}
-                        />
-                    </div>
+                    {/* Filter & Expand Controls Container */}
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full md:w-auto">
+                        {/* Occupancy Filter Buttons with horizontal touch scrolling on mobile */}
+                        <div className="flex items-center gap-1.5 min-w-0 max-w-full overflow-x-auto scrollbar-none py-0.5">
+                            <span className="text-muted-foreground text-xs shrink-0">
+                                عرض:
+                            </span>
+                            <Segmented<OccupancyFilter>
+                                value={occupancyFilter}
+                                onChange={(val) => setOccupancyFilter(val)}
+                                className="min-w-max shrink-0"
+                                options={[
+                                    {
+                                        value: 'all',
+                                        label: `الكل (${resortStats.totalUnits})`,
+                                    },
+                                    {
+                                        value: 'occupied',
+                                        label: `المشغول (${resortStats.occupiedTotal})`,
+                                    },
+                                    {
+                                        value: 'departed',
+                                        label: `غادر (${resortStats.departed})`,
+                                    },
+                                    {
+                                        value: 'vacant',
+                                        label: `الشواغر (${resortStats.vacant})`,
+                                    },
+                                ]}
+                            />
+                        </div>
 
-                    {/* Expand / Collapse Controls */}
-                    <div className="flex items-center gap-1">
-                        <Button type="link" size="small" onClick={expandAll}>
-                            فتح الكل
-                        </Button>
-                        <span className="text-muted-foreground/40">•</span>
-                        <Button type="link" size="small" onClick={collapseAll}>
-                            طي الكل
-                        </Button>
+                        {/* Expand / Collapse Controls */}
+                        <div className="flex items-center justify-between sm:justify-end gap-1 shrink-0 text-xs border-t sm:border-t-0 pt-1 sm:pt-0">
+                            <Button type="link" size="small" onClick={expandAll} className="h-6 px-1.5 text-xs">
+                                فتح الكل
+                            </Button>
+                            <span className="text-muted-foreground/40">•</span>
+                            <Button type="link" size="small" onClick={collapseAll} className="h-6 px-1.5 text-xs">
+                                طي الكل
+                            </Button>
+                        </div>
                     </div>
                 </div>
 
                 {/* Legend Indicators */}
-                <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-3 text-xs">
-                    <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 border-t pt-3 text-[11px] sm:text-xs">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:gap-4">
                         <span className="text-muted-foreground font-semibold">
                             دليل الألوان:
                         </span>
                         <div className="flex items-center gap-1.5">
-                            <span className="inline-block h-3 w-3 rounded-full bg-emerald-600 shadow-2xs" />
+                            <span className="inline-block h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-emerald-600 shadow-2xs shrink-0" />
                             <span className="text-foreground font-medium">
                                 تم التسكين ({resortStats.checkedIn})
                             </span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <span className="inline-block h-3 w-3 rounded-full bg-blue-600 shadow-2xs" />
+                            <span className="inline-block h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-blue-600 shadow-2xs shrink-0" />
                             <span className="text-foreground font-medium">
                                 ثابت ({resortStats.confirmed})
                             </span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <span className="inline-block h-3 w-3 rounded-full bg-amber-500 shadow-2xs" />
+                            <span className="inline-block h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-amber-500 shadow-2xs shrink-0" />
                             <span className="text-foreground font-medium">
                                 انتظار ({resortStats.waiting})
                             </span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <span className="inline-block h-3 w-3 rounded-full bg-red-500 shadow-2xs" />
+                            <span className="inline-block h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-red-500 shadow-2xs shrink-0" />
                             <span className="text-foreground font-medium">
                                 غادر ({resortStats.departed})
                             </span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <span className="bg-muted-foreground/30 inline-block h-3 w-3 rounded-full border" />
+                            <span className="bg-muted-foreground/30 inline-block h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full border shrink-0" />
                             <span className="text-muted-foreground font-medium">
                                 شاغر ({resortStats.vacant})
                             </span>
                         </div>
                         {resortStats.multiBooking > 0 && (
                             <div className="flex items-center gap-1.5">
-                                <span className="inline-block h-3 w-3 rounded-full bg-purple-600 shadow-2xs" />
+                                <span className="inline-block h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-purple-600 shadow-2xs shrink-0" />
                                 <span className="text-foreground font-medium">
                                     حجز متعدد ({resortStats.multiBooking})
                                 </span>
@@ -420,7 +424,7 @@ function getResStatusTag(status: ReservationStatus | string) {
                         )}
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 mt-1 sm:mt-0">
                         <span className="text-muted-foreground">
                             نسبة الإشغال العام:
                         </span>
@@ -479,14 +483,14 @@ function getResStatusTag(status: ReservationStatus | string) {
                                 {/* Sector Header */}
                                 <div
                                     onClick={() => toggleSector(sector.id)}
-                                    className="bg-muted/20 hover:bg-muted/40 flex cursor-pointer select-none items-center justify-between border-b p-3.5"
+                                    className="bg-muted/20 hover:bg-muted/40 flex cursor-pointer select-none items-center justify-between border-b p-3 sm:p-3.5 gap-2"
                                 >
-                                    <div className="flex items-center gap-2.5">
-                                        <Building2 className="text-primary h-5 w-5" />
-                                        <div>
-                                            <h3 className="text-foreground flex items-center gap-2 font-bold text-sm">
-                                                <span>{sector.name}</span>
-                                                <span className="text-muted-foreground font-normal text-xs">
+                                    <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                                        <Building2 className="text-primary h-4 w-4 sm:h-5 sm:w-5 shrink-0" />
+                                        <div className="truncate">
+                                            <h3 className="text-foreground flex items-center gap-1.5 sm:gap-2 font-bold text-xs sm:text-sm">
+                                                <span className="truncate">{sector.name}</span>
+                                                <span className="text-muted-foreground font-normal text-[11px] sm:text-xs shrink-0">
                                                     ({allSectorUnits.length}{' '}
                                                     وحدة)
                                                 </span>
@@ -494,7 +498,7 @@ function getResStatusTag(status: ReservationStatus | string) {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                                         <div className="text-muted-foreground hidden items-center gap-2 text-xs sm:flex">
                                             <span>
                                                 مشغول:{' '}

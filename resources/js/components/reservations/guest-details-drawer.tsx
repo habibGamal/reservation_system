@@ -123,7 +123,7 @@ export function GuestDetailsDrawer({
       open={open}
       onClose={() => onOpenChange(false)}
       placement="left"
-      size={480}
+      width="min(480px, 100vw)"
       title={
         <Space>
           <Avatar

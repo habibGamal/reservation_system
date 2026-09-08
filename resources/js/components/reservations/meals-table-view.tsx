@@ -387,7 +387,7 @@ export function MealsTableView({
     return (
         <div className="space-y-4" dir="rtl">
             {/* Top KPI Metrics Banner */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
                 <Card
                     size="small"
                     className="border-amber-200 dark:border-amber-900/60 bg-gradient-to-br from-amber-50/70 to-amber-100/30 dark:from-amber-950/30 dark:to-amber-900/10 shadow-xs"
@@ -505,12 +505,12 @@ export function MealsTableView({
                         </Tag>
                     </div>
 
-                    <div className="flex items-center gap-2 self-end sm:self-auto">
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
                         <Button
                             type="primary"
                             icon={<Printer className="h-4 w-4" />}
                             onClick={() => setIsPrintOpen(true)}
-                            className="bg-amber-600 hover:bg-amber-500"
+                            className="w-full sm:w-auto bg-amber-600 hover:bg-amber-500"
                         >
                             طباعة كشف الوجبات
                         </Button>

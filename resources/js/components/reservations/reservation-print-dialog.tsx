@@ -578,12 +578,13 @@ export function ReservationPrintDialog({
         <Modal
             open={open}
             onCancel={() => onOpenChange(false)}
-            width={940}
+            width="min(940px, calc(100vw - 24px))"
+            style={{ maxWidth: 'calc(100vw - 24px)', margin: '16px auto' }}
             centered
             destroyOnClose
             title={
                 <div className="flex items-center gap-2 text-foreground pr-1" dir="rtl">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                         <Printer className="h-4 w-4" />
                     </div>
                     <div>
@@ -597,7 +598,7 @@ export function ReservationPrintDialog({
                 </div>
             }
             footer={
-                <div className="flex items-center justify-between gap-3 w-full" dir="rtl">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 w-full" dir="rtl">
                     <div className="text-xs text-muted-foreground flex items-center gap-2">
                         <span>
                             عدد السجلات المطابقة: <strong>{rowsToPrint.length}</strong>

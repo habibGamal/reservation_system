@@ -441,7 +441,7 @@ export default function Dashboard({
           }
           styles={{ body: { padding: 0 } }}
         >
-          <div className="w-full max-w-full min-w-0 overflow-x-auto">
+          <div className="w-full max-w-full min-w-0 overflow-x-auto overflow-y-hidden">
             <Table
               columns={columns}
               dataSource={filteredStats}
@@ -449,6 +449,7 @@ export default function Dashboard({
               rowKey="key"
               size="middle"
               scroll={{ x: 720 }}
+              className="[&_.ant-table-content]:overflow-y-hidden [&_.ant-table-body]:overflow-y-hidden"
               rowClassName="hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors"
               summary={() => (
                 <Table.Summary>

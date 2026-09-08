@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react"
 import { Slot } from "@radix-ui/react-slot"
 import type { VariantProps} from "class-variance-authority";
 import { cva } from "class-variance-authority"
@@ -112,6 +113,12 @@ function SidebarProvider({
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [toggleSidebar])
 
+  React.useEffect(() => {
+    return router.on("navigate", () => {
+      setOpenMobile(false)
+    })
+  }, [setOpenMobile])
+
   // We add a state so that we can do data-state="expanded" or "collapsed".
   // This makes it easier to style the sidebar with Tailwind classes.
   const state = open ? "expanded" : "collapsed"
@@ -200,7 +207,17 @@ function Sidebar({
           }
           side={side}
         >
-          <div className="flex h-full w-full flex-col">{children}</div>
+          <div
+            className="flex h-full w-full flex-col"
+            onClick={(event) => {
+              const target = event.target as HTMLElement | null
+              if (target?.closest("a")) {
+                setOpenMobile(false)
+              }
+            }}
+          >
+            {children}
+          </div>
         </SheetContent>
       </Sheet>
     )
@@ -704,6 +721,7 @@ function SidebarMenuSubButton({
 export {
   Sidebar,
   SidebarContent,
+  SidebarContext,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupAction,

@@ -343,14 +343,15 @@ export function ReservationFilterToolbar({
     };
 
     return (
-        <div className="p-4 rounded-xl border bg-card shadow-xs space-y-3.5">
+        <div className="p-3 sm:p-4 rounded-xl border bg-card shadow-xs space-y-3 sm:space-y-3.5">
             {/* Row 1: 3-View Switcher Tabs + Search Input */}
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-3">
-                {/* 2 View Modes Switcher via Ant Design Segmented */}
-                <div className="w-full lg:w-auto overflow-x-auto">
+            <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+                {/* 3 View Modes Switcher via Ant Design Segmented */}
+                <div className="w-full lg:w-auto overflow-x-auto max-w-full pb-1 scrollbar-none">
                     <Segmented<ActiveView>
                         value={activeView}
                         onChange={(val) => onSwitchView(val)}
+                        className="min-w-max"
                         options={[
                             {
                                 value: "table",
@@ -584,7 +585,7 @@ export function ReservationFilterToolbar({
                     <Select
                         value={paymentStatus}
                         onChange={onPaymentStatusChange}
-                        style={{ width: 140 }}
+                        className="w-full sm:w-[130px] flex-1 sm:flex-none min-w-[110px]"
                         options={[
                             { value: "all", label: "كافة الحسابات" },
                             { value: "paid", label: "مسدد بالكامل" },
@@ -597,7 +598,7 @@ export function ReservationFilterToolbar({
                     <Select
                         value={datePresetSelectValue}
                         onChange={onDatePresetSelectChange}
-                        style={{ minWidth: 200 }}
+                        className="w-full sm:w-[210px] flex-1 sm:flex-none min-w-[160px]"
                         options={[
                             { value: "all", label: "كافة الحجوزات (الكل)" },
                             {
@@ -633,26 +634,26 @@ export function ReservationFilterToolbar({
 
                     {/* Active Period Quick Stepper & Indicator */}
                     {activePeriod && (
-                        <div className="flex items-center gap-1 bg-primary/5 border border-primary/20 px-1.5 py-0.5 rounded-lg text-xs">
+                        <div className="flex items-center justify-between sm:justify-start gap-1 bg-primary/5 border border-primary/20 px-1.5 py-0.5 rounded-lg text-xs w-full sm:w-auto max-w-full overflow-x-auto scrollbar-none">
                             <Button
                                 type="text"
                                 size="small"
                                 onClick={onStepPrevPeriod}
                                 title="الفوج السابق (الجمعة السابقة)"
                                 icon={<ChevronRight className="h-3.5 w-3.5" />}
-                                className="h-6 px-1.5 text-[11px]"
+                                className="h-6 px-1.5 text-[11px] shrink-0"
                             >
                                 السابق
                             </Button>
 
-                            <div className="flex items-center gap-1 px-1.5 border-x border-primary/20 text-[11px] font-medium text-foreground">
-                                <Calendar className="h-3.5 w-3.5 text-primary" />
+                            <div className="flex items-center gap-1 px-1 sm:px-1.5 border-x border-primary/20 text-[10px] sm:text-[11px] font-medium text-foreground shrink-0">
+                                <Calendar className="h-3.5 w-3.5 text-primary shrink-0" />
                                 <span className="whitespace-nowrap">
                                     {activePeriod.label}
                                 </span>
                                 <Tag
                                     color="blue"
-                                    className="text-[10px] px-1.5 py-0 mr-1"
+                                    className="text-[10px] px-1 py-0 mr-1"
                                 >
                                     6 ليالٍ
                                 </Tag>
@@ -663,7 +664,7 @@ export function ReservationFilterToolbar({
                                 size="small"
                                 onClick={onStepNextPeriod}
                                 title="الفوج القادم (الجمعة التالية)"
-                                className="h-6 px-1.5 text-[11px]"
+                                className="h-6 px-1.5 text-[11px] shrink-0"
                             >
                                 <span>التالي</span>
                                 <ChevronLeft className="h-3.5 w-3.5 inline-block mr-0.5" />
@@ -675,7 +676,7 @@ export function ReservationFilterToolbar({
                                     size="small"
                                     onClick={onJumpToCurrentPeriod}
                                     title="العودة إلى الفترة الحالية"
-                                    className="h-6 px-1 text-[10px] font-semibold"
+                                    className="h-6 px-1 text-[10px] font-semibold shrink-0"
                                 >
                                     (الحالية)
                                 </Button>
@@ -685,34 +686,38 @@ export function ReservationFilterToolbar({
 
                     {/* Custom Date Inputs if 'custom' is selected */}
                     {datePreset === "custom" && (
-                        <div className="flex items-center gap-1.5 bg-muted/40 p-1 rounded-md border text-xs">
-                            <span className="text-muted-foreground px-0.5">
-                                من:
-                            </span>
-                            <Input
-                                type="date"
-                                value={startDate}
-                                onChange={(e) =>
-                                    onStartDateChange(e.target.value)
-                                }
-                                className="h-7 text-xs w-32"
-                            />
-                            <span className="text-muted-foreground px-0.5">
-                                إلى:
-                            </span>
-                            <Input
-                                type="date"
-                                value={endDate}
-                                onChange={(e) =>
-                                    onEndDateChange(e.target.value)
-                                }
-                                className="h-7 text-xs w-32"
-                            />
+                        <div className="flex flex-wrap items-center gap-1.5 bg-muted/40 p-1.5 rounded-md border text-xs w-full sm:w-auto">
+                            <div className="flex items-center gap-1">
+                                <span className="text-muted-foreground px-0.5">
+                                    من:
+                                </span>
+                                <Input
+                                    type="date"
+                                    value={startDate}
+                                    onChange={(e) =>
+                                        onStartDateChange(e.target.value)
+                                    }
+                                    className="h-7 text-xs w-28 sm:w-32"
+                                />
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <span className="text-muted-foreground px-0.5">
+                                    إلى:
+                                </span>
+                                <Input
+                                    type="date"
+                                    value={endDate}
+                                    onChange={(e) =>
+                                        onEndDateChange(e.target.value)
+                                    }
+                                    className="h-7 text-xs w-28 sm:w-32"
+                                />
+                            </div>
                             <Button
                                 size="small"
                                 onClick={onApplyCustomDates}
                                 disabled={!startDate || !endDate}
-                                className="h-7 text-xs px-2.5 font-medium"
+                                className="h-7 text-xs px-2.5 font-medium flex-1 sm:flex-none"
                             >
                                 تطبيق
                             </Button>

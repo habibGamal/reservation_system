@@ -167,24 +167,25 @@ export default function ReservationsIndex({
         <>
             <Head title="إدارة الحجوزات والإقامة - منتجع النسور" />
 
-            <div className="flex flex-col gap-5 p-4 md:p-6" dir="rtl">
+            <div className="flex flex-col gap-4 sm:gap-5 p-3 sm:p-4 md:p-6" dir="rtl">
                 {/* Page Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b pb-4">
                     <div>
-                        <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
-                            <Building2 className="h-7 w-7 text-primary" />
+                        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
+                            <Building2 className="h-6 w-6 sm:h-7 sm:w-7 text-primary shrink-0" />
                             منظومة إدارة الحجوزات والإقامة
                         </h1>
-                        <p className="text-sm text-muted-foreground mt-0.5">
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
                             متابعة تسكين النزلاء، منع التعارض، تحصيل الدفعات،
                             ومراقبة الإشغال عبر كافة أرجاء المنتجع
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                         <Button
                             onClick={modals.openPrintDialog}
                             icon={<Printer className="h-4 w-4 text-primary" />}
+                            className="flex-1 sm:flex-initial"
                         >
                             طباعة الكشف
                         </Button>
@@ -193,6 +194,7 @@ export default function ReservationsIndex({
                             icon={
                                 <FileSpreadsheet className="h-4 w-4 text-emerald-600" />
                             }
+                            className="flex-1 sm:flex-initial"
                         >
                             استيراد كشف إكسيل
                         </Button>
@@ -208,6 +210,7 @@ export default function ReservationsIndex({
                                 onClick={modals.openCreateDialog}
                                 disabled={!canCreateReservation}
                                 icon={<Plus className="h-4 w-4" />}
+                                className="w-full sm:w-auto order-first sm:order-last"
                             >
                                 تسجيل حجز جديد
                             </Button>

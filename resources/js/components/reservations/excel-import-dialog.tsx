@@ -283,7 +283,8 @@ export function ExcelImportDialog({ open, onOpenChange }: ExcelImportDialogProps
       cancelText="إلغاء"
       destroyOnHidden
       centered
-      width={640}
+      width="min(640px, calc(100vw - 24px))"
+      style={{ maxWidth: 'calc(100vw - 24px)', margin: '16px auto' }}
     >
       <div className="space-y-4 pt-1" dir="rtl">
         <Text type="secondary" className="text-xs block">

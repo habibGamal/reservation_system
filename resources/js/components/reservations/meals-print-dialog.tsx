@@ -525,7 +525,9 @@ export function MealsPrintDialog({
                     بدء الطباعة ({mealsReservations.length} حجز • {activeSelectedCount} أعمدة)
                 </Button>,
             ]}
-            width={640}
+            width="min(640px, calc(100vw - 24px))"
+            style={{ maxWidth: 'calc(100vw - 24px)', margin: '16px auto' }}
+            centered
             destroyOnClose
         >
             <div className="space-y-4 py-2 text-xs" dir="rtl">
