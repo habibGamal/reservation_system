@@ -49,11 +49,11 @@ if ! php -v | grep -q "PHP 8.4"; then
 fi
 
 # --- Deployment Logic ---
-cd /var/www/turbo_restaurant/larament
+cd /var/www/reservation_system
 
 echo "📦 Installing Dependencies..."
 composer install
-npm install && npm run build
+pnpm install && pnpm run build
 
 # --- PERMISSIONS SECTION ---
 echo "🔐 Setting Laravel Permissions for Filament..."
