@@ -6,6 +6,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PriceRuleController;
 use App\Http\Controllers\PushSubscriptionController;
+use App\Http\Controllers\ReservationAttachmentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReservationImportController;
 use App\Http\Controllers\ReservationPriceController;
@@ -31,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/reservations/{reservation}/status', [ReservationController::class, 'updateStatus'])->name('reservations.update-status');
     Route::patch('/reservations/{reservation}/quick-update', [ReservationController::class, 'quickUpdate'])->name('reservations.quick-update');
     Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+    Route::get('/reservations/{reservation}/attachments/{attachmentId}', [ReservationAttachmentController::class, 'show'])->name('reservations.attachments.show');
 
     // Guests
     Route::get('/guests', [GuestController::class, 'index'])->name('guests.index');

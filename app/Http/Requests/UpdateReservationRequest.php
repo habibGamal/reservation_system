@@ -68,6 +68,10 @@ class UpdateReservationRequest extends FormRequest
             'extra_fees.*.amount' => ['required_with:extra_fees', 'numeric', 'gt:0'],
             'total_price' => ['required', 'numeric', 'min:0'],
             'notes' => ['nullable', 'string', 'max:2000'],
+            'attachments' => ['nullable', 'array', 'max:10'],
+            'attachments.*' => ['file', 'max:20480', 'mimes:jpeg,png,jpg,webp,gif,bmp,pdf'],
+            'deleted_attachment_ids' => ['nullable', 'array'],
+            'deleted_attachment_ids.*' => ['string'],
         ];
     }
 
@@ -158,6 +162,9 @@ class UpdateReservationRequest extends FormRequest
             'status.required' => 'حالة الحجز مطلوبة',
             'total_price.required' => 'إجمالي المبلغ مطلوب',
             'total_price.min' => 'إجمالي المبلغ يجب ألا يقل عن 0',
+            'attachments.*.file' => 'الملف المرفق غير صالح',
+            'attachments.*.max' => 'حجم المرفق يجب ألا يتجاوز 20 ميجابايت',
+            'attachments.*.mimes' => 'صيغة المرفق غير مدعومة. الصيغ المسموح بها: JPG, PNG, WebP, GIF, PDF',
         ];
     }
 }

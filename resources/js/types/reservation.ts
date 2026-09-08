@@ -67,6 +67,18 @@ export interface ReservationExtraFee {
   updated_at?: string;
 }
 
+export interface ReservationAttachment {
+  id: string;
+  file_name: string;
+  file_path: string;
+  mime_type: string;
+  file_size: number;
+  url?: string;
+  human_size?: string;
+  is_image?: boolean;
+  created_at?: string;
+}
+
 export interface Reservation {
   id: number;
   guest_id: number;
@@ -92,6 +104,7 @@ export interface Reservation {
   nights_count?: number;
   payment_status: PaymentStatus;
   notes?: string | null;
+  attachments?: ReservationAttachment[];
   guest?: Guest;
   unit?: Unit;
   payments?: Payment[];

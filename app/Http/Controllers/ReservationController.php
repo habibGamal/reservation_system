@@ -14,11 +14,13 @@ use App\Models\Reservation;
 use App\Models\Sector;
 use App\Models\Unit;
 use App\Notifications\ReservationNotification;
+use App\Services\AttachmentCompressionService;
 use App\Services\PricingService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -280,7 +282,7 @@ class ReservationController extends Controller
             $data = $request->validated();
             $initialPayment = $data['initial_payment'] ?? null;
             $extraFees = $data['extra_fees'] ?? [];
-            unset($data['initial_payment'], $data['extra_fees']);
+            unset($data['initial_payment'], $data['extra_fees'], $data['attachments']);
 
             if (! empty($data['has_meals'])) {
                 $data['meals_persons_count'] = ! empty($data['meals_persons_count']) ? (int) $data['meals_persons_count'] : 4;
@@ -303,6 +305,25 @@ class ReservationController extends Controller
             }
 
             $reservation = Reservation::create($data);
+
+            if ($request->hasFile('attachments')) {
+                $uploadedFiles = $request->file('attachments');
+                if (! is_array($uploadedFiles)) {
+                    $uploadedFiles = [$uploadedFiles];
+                }
+
+                $compressionService = app(AttachmentCompressionService::class);
+                $attachmentsData = [];
+                foreach ($uploadedFiles as $file) {
+                    if ($file instanceof UploadedFile && $file->isValid()) {
+                        $attachmentsData[] = $compressionService->compressAndStore($file, $reservation->id);
+                    }
+                }
+
+                if (! empty($attachmentsData)) {
+                    $reservation->update(['attachments' => $attachmentsData]);
+                }
+            }
 
             if (! empty($extraFees) && is_array($extraFees)) {
                 foreach ($extraFees as $fee) {
@@ -370,7 +391,8 @@ class ReservationController extends Controller
 
         $data = $request->validated();
         $extraFees = array_key_exists('extra_fees', $data) ? $data['extra_fees'] : null;
-        unset($data['extra_fees']);
+        $deletedAttachmentIds = (array) ($data['deleted_attachment_ids'] ?? []);
+        unset($data['extra_fees'], $data['attachments'], $data['deleted_attachment_ids']);
 
         if (! empty($data['has_meals'])) {
             $data['meals_persons_count'] = ! empty($data['meals_persons_count'])
@@ -396,8 +418,45 @@ class ReservationController extends Controller
             $data['meals_total_price'] = 0.00;
         }
 
-        DB::transaction(function () use ($reservation, $data, $extraFees, $request) {
+        DB::transaction(function () use ($reservation, $data, $extraFees, $deletedAttachmentIds, $request) {
             $reservation->update($data);
+
+            // Handle deleted and newly uploaded attachments
+            $currentAttachments = $reservation->attachments ?? [];
+            $compressionService = app(AttachmentCompressionService::class);
+            $hasAttachmentChanges = false;
+
+            if (! empty($deletedAttachmentIds)) {
+                $remaining = [];
+                foreach ($currentAttachments as $att) {
+                    if (in_array($att['id'], $deletedAttachmentIds, true)) {
+                        if (! empty($att['file_path'])) {
+                            $compressionService->deleteFile($att['file_path']);
+                        }
+                        $hasAttachmentChanges = true;
+                    } else {
+                        $remaining[] = $att;
+                    }
+                }
+                $currentAttachments = $remaining;
+            }
+
+            if ($request->hasFile('attachments')) {
+                $uploadedFiles = $request->file('attachments');
+                if (! is_array($uploadedFiles)) {
+                    $uploadedFiles = [$uploadedFiles];
+                }
+                foreach ($uploadedFiles as $file) {
+                    if ($file instanceof UploadedFile && $file->isValid()) {
+                        $currentAttachments[] = $compressionService->compressAndStore($file, $reservation->id);
+                        $hasAttachmentChanges = true;
+                    }
+                }
+            }
+
+            if ($hasAttachmentChanges) {
+                $reservation->update(['attachments' => $currentAttachments]);
+            }
 
             if ($extraFees !== null) {
                 $existingIds = [];

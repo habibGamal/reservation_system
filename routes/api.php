@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ManagementController;
+use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Route;
 
 // Health check endpoints
-Route::get('/check', [ApiController::class, 'check']);
-Route::post('/check', [ApiController::class, 'check']);
+Route::match(['get', 'post'], '/check', [ApiController::class, 'check'])->name('api.check');
 
 // Management endpoints
 Route::prefix('management')->name('management.')->group(function () {

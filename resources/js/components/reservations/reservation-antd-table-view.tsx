@@ -43,6 +43,7 @@ import {
     Pencil,
     Phone,
     Plus,
+    Paperclip,
     Printer,
     QrCode,
     Receipt,
@@ -2501,6 +2502,22 @@ export function ReservationAntdTableView({
                                     </>
                                 )}
                             </>
+                        )}
+
+                        {res.attachments && res.attachments.length > 0 && (
+                            <Tooltip title={`يحتوي على ${res.attachments.length} مرفقات/صور — انقر لفتح المعرض والتعديل`}>
+                                <button
+                                    type="button"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onEdit(res);
+                                    }}
+                                    className="inline-flex items-center gap-1 text-[11px] font-medium text-sky-600 dark:text-sky-400 bg-sky-50 hover:bg-sky-100 dark:bg-sky-950/60 dark:hover:bg-sky-900/60 border border-sky-200 dark:border-sky-800 px-1.5 py-0.5 rounded cursor-pointer transition-colors shrink-0"
+                                >
+                                    <Paperclip className="h-3 w-3" />
+                                    <span>{res.attachments.length}</span>
+                                </button>
+                            </Tooltip>
                         )}
                     </div>
                 );

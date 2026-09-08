@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Sector;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\RoleAndPermissionSeeder;
@@ -165,5 +166,93 @@ class UserAndRoleSeederTest extends TestCase
         ]);
 
         $response->assertForbidden();
+    }
+
+    public function test_sector_restricted_viewer_accounts_are_seeded_with_correct_access(): void
+    {
+        $this->seed(DatabaseSeeder::class);
+
+        // 1. شاليهات: دورين و مميز و فندق 5
+        $chalets = User::where('email', 'chalets@eaglesresort.com')->first();
+        $this->assertNotNull($chalets);
+        $this->assertEquals('شاليهات', $chalets->name);
+        $this->assertTrue($chalets->hasRole('Viewer'));
+        $this->assertTrue($chalets->has_sector_restrictions);
+        $this->assertFalse($chalets->hasFullSectorAccess());
+        $this->assertEmpty($chalets->getEditableSectorIds());
+
+        $chaletSectorNames = $chalets->sectors()->pluck('sectors.name')->all();
+        $this->assertEqualsCanonicalizing(['دورين', 'مميز', 'فندق 5'], $chaletSectorNames);
+
+        $chaletSector = Sector::where('name', 'دورين')->first();
+        $hotelSector = Sector::where('name', 'فندق 1')->first();
+        $this->assertTrue($chalets->canViewSector($chaletSector));
+        $this->assertFalse($chalets->canViewSector($hotelSector));
+        $this->assertFalse($chalets->canEditSector($chaletSector));
+
+        // 2. فنادق: فندق 1 و 2 و 3 و 4
+        $hotels = User::where('email', 'hotels@eaglesresort.com')->first();
+        $this->assertNotNull($hotels);
+        $this->assertEquals('فنادق', $hotels->name);
+        $this->assertTrue($hotels->hasRole('Viewer'));
+        $this->assertTrue($hotels->has_sector_restrictions);
+
+        $hotelSectorNames = $hotels->sectors()->pluck('sectors.name')->all();
+        $this->assertEqualsCanonicalizing(['فندق 1', 'فندق 2', 'فندق 3', 'فندق 4'], $hotelSectorNames);
+        $this->assertTrue($hotels->canViewSector(Sector::where('name', 'فندق 1')->first()));
+        $this->assertTrue($hotels->canViewSector(Sector::where('name', 'فندق 2')->first()));
+        $this->assertTrue($hotels->canViewSector(Sector::where('name', 'فندق 3')->first()));
+        $this->assertTrue($hotels->canViewSector(Sector::where('name', 'فندق 4')->first()));
+        $this->assertFalse($hotels->canViewSector(Sector::where('name', 'فندق 5')->first()));
+
+        // 3. فيلات: لوسيال و فيلا قديم و فيلا جديد
+        $villas = User::where('email', 'villas@eaglesresort.com')->first();
+        $this->assertNotNull($villas);
+        $this->assertEquals('فيلات', $villas->name);
+        $this->assertTrue($villas->hasRole('Viewer'));
+        $this->assertTrue($villas->has_sector_restrictions);
+
+        $villaSectorNames = $villas->sectors()->pluck('sectors.name')->all();
+        $this->assertEqualsCanonicalizing(['لوسيال', 'فيلا قديم', 'فيلا جديد'], $villaSectorNames);
+        $this->assertTrue($villas->canViewSector(Sector::where('name', 'لوسيال')->first()));
+        $this->assertTrue($villas->canViewSector(Sector::where('name', 'فيلا قديم')->first()));
+        $this->assertTrue($villas->canViewSector(Sector::where('name', 'فيلا جديد')->first()));
+        $this->assertFalse($villas->canViewSector(Sector::where('name', 'دورين')->first()));
+
+        // 4. فندق 6: فندق 6
+        $hotel6 = User::where('email', 'hotel6@eaglesresort.com')->first();
+        $this->assertNotNull($hotel6);
+        $this->assertEquals('فندق 6', $hotel6->name);
+        $this->assertTrue($hotel6->hasRole('Viewer'));
+        $this->assertTrue($hotel6->has_sector_restrictions);
+
+        $hotel6SectorNames = $hotel6->sectors()->pluck('sectors.name')->all();
+        $this->assertEqualsCanonicalizing(['فندق 6'], $hotel6SectorNames);
+        $this->assertTrue($hotel6->canViewSector(Sector::where('name', 'فندق 6')->first()));
+        $this->assertFalse($hotel6->canViewSector(Sector::where('name', 'لوسيال')->first()));
+    }
+
+    public function test_sector_restricted_accounts_can_authenticate(): void
+    {
+        $this->seed(DatabaseSeeder::class);
+
+        $accounts = [
+            'chalets@eaglesresort.com',
+            'hotels@eaglesresort.com',
+            'villas@eaglesresort.com',
+            'hotel6@eaglesresort.com',
+        ];
+
+        foreach ($accounts as $email) {
+            $response = $this->post(route('login.store'), [
+                'email' => $email,
+                'password' => 'password',
+            ]);
+            $response->assertRedirect(route('dashboard', absolute: false));
+            $this->assertAuthenticated();
+
+            $this->post(route('logout'));
+            $this->assertGuest();
+        }
     }
 }

@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleAndPermissionSeeder::class,
-            UserSeeder::class,
             PriceRuleSeeder::class,
             SectorAndUnitSeeder::class,
+            UserSeeder::class,
         ]);
 
         // Create Sample Guests

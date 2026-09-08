@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\MembershipType;
 use App\Enums\ReservationStatus;
 use App\Enums\ReservationType;
+use App\Services\AttachmentCompressionService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -32,6 +33,7 @@ use Spatie\Activitylog\Support\LogOptions;
  * @property float $meals_total_price
  * @property float $total_price
  * @property string|null $notes
+ * @property array|null $attachments
  * @property-read float $paid_amount
  * @property-read float $balance
  * @property-read int $nights_count
@@ -66,6 +68,7 @@ class Reservation extends Model
         'meals_total_price',
         'total_price',
         'notes',
+        'attachments',
     ];
 
     /**
@@ -281,5 +284,71 @@ class Reservation extends Model
                 return 'Unpaid';
             }
         );
+    }
+
+    /**
+     * Get or set the attachments array attribute with computed metadata (url, human_size, is_image).
+     */
+    protected function attachments(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value): array {
+                if (empty($value)) {
+                    return [];
+                }
+
+                $raw = is_string($value) ? json_decode($value, true) : $value;
+                if (! is_array($raw)) {
+                    return [];
+                }
+
+                return array_values(array_map(
+                    fn (array $item) => AttachmentCompressionService::formatWithMeta($item),
+                    $raw
+                ));
+            },
+            set: function ($value): ?string {
+                if ($value === null) {
+                    return json_encode([]);
+                }
+
+                $arr = is_string($value) ? json_decode($value, true) : $value;
+                if (! is_array($arr)) {
+                    return json_encode([]);
+                }
+
+                $clean = array_map(function (array $item) {
+                    return [
+                        'id' => $item['id'] ?? '',
+                        'file_name' => $item['file_name'] ?? '',
+                        'file_path' => $item['file_path'] ?? '',
+                        'mime_type' => $item['mime_type'] ?? '',
+                        'file_size' => (int) ($item['file_size'] ?? 0),
+                        'created_at' => $item['created_at'] ?? now()->toDateTimeString(),
+                    ];
+                }, $arr);
+
+                return json_encode(array_values($clean));
+            }
+        );
+    }
+
+    /**
+     * The "booted" method of the model.
+     * Cleans up physical attachment files from disk when a reservation is deleted.
+     */
+    protected static function booted(): void
+    {
+        static::deleting(function (Reservation $reservation) {
+            $attachments = $reservation->attachments;
+            if (is_array($attachments)) {
+                $compressionService = app(AttachmentCompressionService::class);
+                foreach ($attachments as $att) {
+                    if (! empty($att['file_path'])) {
+                        $compressionService->deleteFile($att['file_path']);
+                    }
+                }
+            }
+        });
     }
 }

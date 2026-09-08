@@ -66,6 +66,8 @@ class StoreReservationRequest extends FormRequest
             'initial_payment' => ['nullable', 'array'],
             'initial_payment.amount' => ['nullable', 'numeric', 'gte:0'],
             'initial_payment.method' => ['nullable', 'string', Rule::in(PaymentMethod::values())],
+            'attachments' => ['nullable', 'array', 'max:10'],
+            'attachments.*' => ['file', 'max:20480', 'mimes:jpeg,png,jpg,webp,gif,bmp,pdf'],
         ];
     }
 
@@ -153,6 +155,9 @@ class StoreReservationRequest extends FormRequest
             'status.required' => 'حالة الحجز مطلوبة',
             'total_price.required' => 'إجمالي المبلغ مطلوب',
             'total_price.min' => 'إجمالي المبلغ يجب ألا يقل عن 0',
+            'attachments.*.file' => 'الملف المرفق غير صالح',
+            'attachments.*.max' => 'حجم المرفق يجب ألا يتجاوز 20 ميجابايت',
+            'attachments.*.mimes' => 'صيغة المرفق غير مدعومة. الصيغ المسموح بها: JPG, PNG, WebP, GIF, PDF',
         ];
     }
 }
