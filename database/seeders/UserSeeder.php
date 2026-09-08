@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
 
         // 3. Receptionist user (Front desk operations)
         $receptionist = User::firstOrCreate(
-            ['email' => 'receptionist@eaglesresort.com'],
+            ['email' => ' '],
             [
                 'name' => 'موظف الاستقبال',
                 'password' => Hash::make('password'),

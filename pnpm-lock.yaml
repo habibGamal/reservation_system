@@ -205,6 +205,9 @@ importers:
       date-fns:
         specifier: ^4.4.0
         version: 4.4.0
+      dayjs:
+        specifier: ^1.11.23
+        version: 1.11.23
       input-otp:
         specifier: ^1.4.2
         version: 1.5.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)

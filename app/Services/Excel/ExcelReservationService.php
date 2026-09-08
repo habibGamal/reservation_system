@@ -185,7 +185,7 @@ class ExcelReservationService
                     'type' => ReservationType::BRANCH->value,
                     'membership' => $membership,
                     'total_price' => 0.00,
-                    'notes' => $row->getFormattedNotes(),
+                    'notes' => ''
                 ]);
 
                 $createdCount++;
