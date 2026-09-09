@@ -5,6 +5,7 @@ import type { MenuProps } from 'antd';
 import {
     Reservation,
     ReservationStatus,
+    ReservationType,
     Sector,
     SharedProps,
     Unit,
@@ -76,6 +77,50 @@ export function SectorMatrixView({
         });
         setCollapsedSectors(collapsed);
     };
+
+function getResTypeTag(type?: ReservationType | string | null) {
+    if (!type) return null;
+
+    switch (type) {
+        case 'فرع':
+            return (
+                <Tag
+                    color="blue"
+                    className="m-0 shrink-0 px-1 py-0 text-[9px] sm:text-[10px] leading-tight font-medium"
+                >
+                    فرع
+                </Tag>
+            );
+        case 'ادارة':
+        case 'إدارة':
+            return (
+                <Tag
+                    color="purple"
+                    className="m-0 shrink-0 px-1 py-0 text-[9px] sm:text-[10px] leading-tight font-medium"
+                >
+                    {type}
+                </Tag>
+            );
+        case 'منتجع':
+            return (
+                <Tag
+                    color="cyan"
+                    className="m-0 shrink-0 px-1 py-0 text-[9px] sm:text-[10px] leading-tight font-medium"
+                >
+                    منتجع
+                </Tag>
+            );
+        default:
+            return (
+                <Tag
+                    color="default"
+                    className="m-0 shrink-0 px-1 py-0 text-[9px] sm:text-[10px] leading-tight font-medium"
+                >
+                    {type}
+                </Tag>
+            );
+    }
+}
 
 function getResStatusTag(status: ReservationStatus | string) {
     switch (status) {
@@ -283,6 +328,12 @@ function getResStatusTag(status: ReservationStatus | string) {
                                     .includes(term) ||
                                 (r.guest?.phone || '').includes(term) ||
                                 (r.guest?.mil_code || '')
+                                    .toLowerCase()
+                                    .includes(term) ||
+                                (r.type || '')
+                                    .toLowerCase()
+                                    .includes(term) ||
+                                (r.status || '')
                                     .toLowerCase()
                                     .includes(term),
                         );
@@ -688,9 +739,14 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                                               extraRes.check_out
                                                                                           }
                                                                                       </span>
-                                                                                      {getResStatusTag(
-                                                                                          extraRes.status,
-                                                                                      )}
+                                                                                      <div className="flex items-center gap-1 shrink-0">
+                                                                                          {getResTypeTag(
+                                                                                              extraRes.type,
+                                                                                          )}
+                                                                                          {getResStatusTag(
+                                                                                              extraRes.status,
+                                                                                          )}
+                                                                                      </div>
                                                                                   </div>
                                                                               ),
                                                                           }),
@@ -781,7 +837,10 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                                         'نزيل'}
                                                                                 </span>
                                                                             </div>
-                                                                            <div className="shrink-0 self-start">
+                                                                            <div className="flex flex-col items-end gap-0.5 shrink-0 self-start">
+                                                                                {getResTypeTag(
+                                                                                    r1.type,
+                                                                                )}
                                                                                 {getResStatusTag(
                                                                                     r1.status,
                                                                                 )}
@@ -830,7 +889,10 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                                         'نزيل'}
                                                                                 </span>
                                                                             </div>
-                                                                            <div className="shrink-0 self-start">
+                                                                            <div className="flex flex-col items-end gap-0.5 shrink-0 self-start">
+                                                                                {getResTypeTag(
+                                                                                    r2.type,
+                                                                                )}
                                                                                 {getResStatusTag(
                                                                                     r2.status,
                                                                                 )}
@@ -881,20 +943,25 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                     </span>
                                                                 </div>
 
-                                                                <Tag
-                                                                    color={
-                                                                        statusDetails.tagColor
-                                                                    }
-                                                                    className="mr-0 px-1.5 py-0 text-[10px] inline-flex items-center gap-0.5"
-                                                                >
-                                                                    {statusDetails.status ===
-                                                                        'departed' && (
-                                                                        <LogOut className="h-2.5 w-2.5 shrink-0" />
+                                                                <div className="flex flex-col items-end gap-1 shrink-0">
+                                                                    {getResTypeTag(
+                                                                        res.type,
                                                                     )}
-                                                                    {
-                                                                        statusDetails.label
-                                                                    }
-                                                                </Tag>
+                                                                    <Tag
+                                                                        color={
+                                                                            statusDetails.tagColor
+                                                                        }
+                                                                        className="m-0 px-1.5 py-0 text-[10px] inline-flex items-center gap-0.5"
+                                                                    >
+                                                                        {statusDetails.status ===
+                                                                            'departed' && (
+                                                                            <LogOut className="h-2.5 w-2.5 shrink-0" />
+                                                                        )}
+                                                                        {
+                                                                            statusDetails.label
+                                                                        }
+                                                                    </Tag>
+                                                                </div>
                                                             </div>
 
                                                             {/* Middle / Guest & Dates */}
