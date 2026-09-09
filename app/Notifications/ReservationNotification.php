@@ -52,23 +52,7 @@ class ReservationNotification extends Notification implements ShouldQueue
      */
     public static function resolveTag(string $action, ?string $changeType): string
     {
-        if ($changeType === 'status') {
-            return 'reservation-status';
-        }
-
-        if ($changeType === 'type') {
-            return 'reservation-type';
-        }
-
-        if ($changeType === 'membership') {
-            return 'reservation-membership';
-        }
-
-        return match ($action) {
-            'created' => 'reservation-created',
-            'deleted' => 'reservation-deleted',
-            default => 'reservation-updated',
-        };
+        return (string) now()->valueOf();
     }
 
     /**
@@ -113,7 +97,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             checkOut: is_string($reservation->check_out) ? $reservation->check_out : $reservation->check_out?->format('Y-m-d'),
             totalPrice: (float) $reservation->total_price,
             changeType: 'created',
-            tag: 'reservation-created',
+            tag: (string) now()->valueOf(),
             sectorId: $reservation->unit?->sector_id ?? $reservation->unit?->sector?->id,
         );
     }
@@ -155,7 +139,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             changeType: 'status',
             fromValue: $fromStatus,
             toValue: $toStatusValue,
-            tag: 'reservation-status',
+            tag: (string) now()->valueOf(),
             sectorId: $sectorId ?? $reservation->unit?->sector_id ?? $reservation->unit?->sector?->id,
             changes: $changes,
         );
@@ -196,7 +180,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             changeType: 'membership',
             fromValue: $from,
             toValue: $to,
-            tag: 'reservation-membership',
+            tag: (string) now()->valueOf(),
             sectorId: $sectorId ?? $reservation->unit?->sector_id ?? $reservation->unit?->sector?->id,
             changes: $changes,
         );
@@ -237,7 +221,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             changeType: 'type',
             fromValue: $from,
             toValue: $to,
-            tag: 'reservation-type',
+            tag: (string) now()->valueOf(),
             sectorId: $sectorId ?? $reservation->unit?->sector_id ?? $reservation->unit?->sector?->id,
             changes: $changes,
         );
@@ -274,6 +258,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             changeType: $changeType,
             fromValue: $fromValue,
             toValue: $toValue,
+            tag: (string) now()->valueOf(),
             sectorId: $sectorId ?? $reservation->unit?->sector_id ?? $reservation->unit?->sector?->id,
             changes: $changes,
             additionalSectorIds: $additionalSectorIds,
@@ -299,7 +284,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             checkOut: is_string($reservation->check_out) ? $reservation->check_out : $reservation->check_out?->format('Y-m-d'),
             totalPrice: (float) $reservation->total_price,
             changeType: 'deleted',
-            tag: 'reservation-deleted',
+            tag: (string) now()->valueOf(),
             sectorId: $reservation->unit?->sector_id ?? $reservation->unit?->sector?->id,
         );
     }
@@ -507,7 +492,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             ->icon('/192.png')
             ->badge('/favicon.svg')
             ->body($this->getBody())
-            ->tag($this->tag ?? 'eagles-resort-notification')
+            ->tag($this->tag ?? (string) now()->valueOf())
             ->renotify()
             ->action('عرض الحجز', 'open_dashboard')
             ->options([

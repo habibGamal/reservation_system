@@ -55,8 +55,8 @@ export function KpiDashboard({
                         size="small"
                         onClick={() => handleCardClick(null)}
                         className={`cursor-pointer transition-all ${isTotalActive
-                                ? 'border-primary shadow-xs ring-2 ring-primary/20'
-                                : 'opacity-90 hover:opacity-100'
+                            ? 'border-primary shadow-xs ring-2 ring-primary/20'
+                            : 'opacity-90 hover:opacity-100'
                             }`}
                         styles={{ body: { padding: '12px 14px' } }}
                     >
@@ -90,8 +90,8 @@ export function KpiDashboard({
                         size="small"
                         onClick={() => handleCardClick('تم التسكين')}
                         className={`cursor-pointer transition-all ${isCheckedInActive
-                                ? 'border-emerald-500 bg-emerald-50/50 shadow-xs ring-2 ring-emerald-500/20 dark:bg-emerald-950/30'
-                                : 'opacity-90 hover:opacity-100'
+                            ? 'border-emerald-500 bg-emerald-50/50 shadow-xs ring-2 ring-emerald-500/20 dark:bg-emerald-950/30'
+                            : 'opacity-90 hover:opacity-100'
                             }`}
                         styles={{ body: { padding: '12px 14px' } }}
                     >
@@ -126,8 +126,8 @@ export function KpiDashboard({
                         size="small"
                         onClick={() => handleCardClick('ثابت')}
                         className={`cursor-pointer transition-all ${isConfirmedActive
-                                ? 'border-blue-500 bg-blue-50/50 shadow-xs ring-2 ring-blue-500/20 dark:bg-blue-950/30'
-                                : 'opacity-90 hover:opacity-100'
+                            ? 'border-blue-500 bg-blue-50/50 shadow-xs ring-2 ring-blue-500/20 dark:bg-blue-950/30'
+                            : 'opacity-90 hover:opacity-100'
                             }`}
                         styles={{ body: { padding: '12px 14px' } }}
                     >
@@ -150,7 +150,7 @@ export function KpiDashboard({
                             }}
                         />
                         <span className="mt-1 block text-[11px] text-blue-600/80 dark:text-blue-400/80">
-                            جاهز للتسكين
+                            مخصصة
                         </span>
                     </Card>
                 </Col>
@@ -162,8 +162,8 @@ export function KpiDashboard({
                         size="small"
                         onClick={() => handleCardClick('انتظار')}
                         className={`cursor-pointer transition-all ${isWaitingActive
-                                ? 'border-amber-500 bg-amber-50/50 shadow-xs ring-2 ring-amber-500/20 dark:bg-amber-950/30'
-                                : 'opacity-90 hover:opacity-100'
+                            ? 'border-amber-500 bg-amber-50/50 shadow-xs ring-2 ring-amber-500/20 dark:bg-amber-950/30'
+                            : 'opacity-90 hover:opacity-100'
                             }`}
                         styles={{ body: { padding: '12px 14px' } }}
                     >
@@ -198,8 +198,8 @@ export function KpiDashboard({
                         size="small"
                         onClick={() => handleCardClick('غادر')}
                         className={`cursor-pointer transition-all ${isDepartedActive
-                                ? 'border-red-500 bg-red-50/50 shadow-xs ring-2 ring-red-500/20 dark:bg-red-950/30'
-                                : 'opacity-90 hover:opacity-100'
+                            ? 'border-red-500 bg-red-50/50 shadow-xs ring-2 ring-red-500/20 dark:bg-red-950/30'
+                            : 'opacity-90 hover:opacity-100'
                             }`}
                         styles={{ body: { padding: '12px 14px' } }}
                     >
@@ -227,79 +227,6 @@ export function KpiDashboard({
                     </Card>
                 </Col>
 
-                {/* 6. Collected Revenue */}
-                <Col xs={12} sm={6} lg={4} xl={3} className="flex-1">
-                    <Card
-                        size="small"
-                        styles={{ body: { padding: '12px 14px' } }}
-                        className="bg-card"
-                    >
-                        <div className="flex items-center justify-between">
-                            <span className="text-muted-foreground text-xs font-medium">
-                                المتحصلات
-                            </span>
-                            <TrendingUp className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                        </div>
-                        <Statistic
-                            value={Number(stats.total_collected_revenue)}
-                            precision={0}
-                            suffix={
-                                <span className="text-muted-foreground text-xs font-normal">
-                                    ج.م
-                                </span>
-                            }
-                            styles={{
-                                content: {
-                                    fontSize: '1.25rem',
-                                    fontWeight: 700,
-                                    color: '#10b981',
-                                    lineHeight: 1.2,
-                                    marginTop: 4,
-                                },
-                            }}
-                        />
-                        <span className="text-muted-foreground mt-1 block text-[11px]">
-                            المحصل بالخزينة
-                        </span>
-                    </Card>
-                </Col>
-
-                {/* 7. Outstanding Balance */}
-                <Col xs={12} sm={6} lg={4} xl={3} className="flex-1">
-                    <Card
-                        size="small"
-                        styles={{ body: { padding: '12px 14px' } }}
-                        className="bg-card"
-                    >
-                        <div className="flex items-center justify-between">
-                            <span className="text-muted-foreground text-xs font-medium">
-                                المتبقي
-                            </span>
-                            <TrendingDown className="h-4 w-4 text-rose-600 dark:text-rose-400" />
-                        </div>
-                        <Statistic
-                            value={Number(stats.total_outstanding_balance)}
-                            precision={0}
-                            suffix={
-                                <span className="text-muted-foreground text-xs font-normal">
-                                    ج.م
-                                </span>
-                            }
-                            styles={{
-                                content: {
-                                    fontSize: '1.25rem',
-                                    fontWeight: 700,
-                                    color: '#ef4444',
-                                    lineHeight: 1.2,
-                                    marginTop: 4,
-                                },
-                            }}
-                        />
-                        <span className="text-muted-foreground mt-1 block text-[11px]">
-                            مستحقات معلقة
-                        </span>
-                    </Card>
-                </Col>
             </Row>
         </div>
     );

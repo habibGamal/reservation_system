@@ -96,7 +96,7 @@ class ReservationNotificationTest extends TestCase
 
         Notification::assertSentTo($this->superAdmin, ReservationNotification::class, function ($notification) {
             return $notification->action === 'created'
-                && $notification->tag === 'reservation-created'
+                && is_numeric($notification->tag)
                 && str_contains($notification->getBody(), 'حجز جديد فندق 1 - 22 اللواء علي بواسطة حبيب جمال');
         });
 
@@ -130,7 +130,7 @@ class ReservationNotificationTest extends TestCase
         Notification::assertSentTo($this->superAdmin, ReservationNotification::class, function ($notification) use ($reservation) {
             return $notification->action === 'updated'
                 && $notification->changeType === 'status'
-                && $notification->tag === 'reservation-status'
+                && is_numeric($notification->tag)
                 && $notification->reservationId === $reservation->id
                 && $notification->getBody() === 'تم تسكين فندق 1 - 22 اللواء علي بواسطة حبيب جمال';
         });
@@ -164,7 +164,7 @@ class ReservationNotificationTest extends TestCase
         Notification::assertSentTo($this->superAdmin, ReservationNotification::class, function ($notification) {
             return $notification->action === 'updated'
                 && $notification->changeType === 'status'
-                && $notification->tag === 'reservation-status'
+                && is_numeric($notification->tag)
                 && $notification->getBody() === 'مغادرة فندق 1 - 22 اللواء علي بواسطة سيف';
         });
     }
@@ -197,7 +197,7 @@ class ReservationNotificationTest extends TestCase
         Notification::assertSentTo($this->superAdmin, ReservationNotification::class, function ($notification) {
             return $notification->action === 'updated'
                 && $notification->changeType === 'membership'
-                && $notification->tag === 'reservation-membership'
+                && is_numeric($notification->tag)
                 && $notification->getBody() === 'تغيير حجز فندق 1 - 22 من عضو الى غير عضو بواسطة علي';
         });
     }
@@ -230,7 +230,7 @@ class ReservationNotificationTest extends TestCase
         Notification::assertSentTo($this->superAdmin, ReservationNotification::class, function ($notification) {
             return $notification->action === 'updated'
                 && $notification->changeType === 'type'
-                && $notification->tag === 'reservation-type'
+                && is_numeric($notification->tag)
                 && $notification->getBody() === 'تغيير حجز فندق 1 - 22 من فرع الى ادارة بواسطة سيف';
         });
     }
@@ -258,7 +258,7 @@ class ReservationNotificationTest extends TestCase
 
         Notification::assertSentTo($this->superAdmin, ReservationNotification::class, function ($notification) use ($reservation) {
             return $notification->action === 'deleted'
-                && $notification->tag === 'reservation-deleted'
+                && is_numeric($notification->tag)
                 && $notification->reservationId === $reservation->id
                 && $notification->getBody() === 'حذف حجز فندق 1 - 22 اللواء علي بواسطة سوبر ادمن';
         });
@@ -286,12 +286,12 @@ class ReservationNotificationTest extends TestCase
         $arrayData = $notification->toArray($this->superAdmin);
         $this->assertEquals('updated', $arrayData['action']);
         $this->assertEquals('status', $arrayData['change_type']);
-        $this->assertEquals('reservation-status', $arrayData['tag']);
+        $this->assertTrue(is_numeric($arrayData['tag']));
         $this->assertEquals('تم تسكين فندق 1 - 22 اللواء علي بواسطة حبيب جمال', $arrayData['message']);
 
         $webPush = $notification->toWebPush($this->superAdmin, $notification);
         $payload = $webPush->toArray();
-        $this->assertEquals('reservation-status', $payload['tag']);
+        $this->assertTrue(is_numeric($payload['tag']));
         $this->assertEquals('تم تسكين فندق 1 - 22 اللواء علي بواسطة حبيب جمال', $payload['body']);
         $this->assertEquals('/reservations?search='.$reservation->id, $payload['data']['url']);
         $this->assertEquals($this->sector->id, $payload['data']['sector_id']);
