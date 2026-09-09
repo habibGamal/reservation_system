@@ -418,6 +418,16 @@ class ReservationDashboardTest extends TestCase
         );
     }
 
+    public function test_dashboard_defaults_to_matrix_view(): void
+    {
+        $response = $this->actingAs($this->user)->get(route('reservations.index'));
+        $response->assertOk();
+        $response->assertInertia(fn (Assert $page) => $page
+            ->component('reservations/index')
+            ->where('filters.view', 'matrix')
+        );
+    }
+
     public function test_dashboard_switches_active_view_mode(): void
     {
         $views = ['table', 'cards', 'matrix'];

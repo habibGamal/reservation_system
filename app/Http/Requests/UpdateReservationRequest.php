@@ -41,6 +41,21 @@ class UpdateReservationRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        if (! $this->boolean('has_meals')) {
+            $this->merge([
+                'has_meals' => false,
+                'meals_persons_count' => null,
+                'meals_start_date' => null,
+                'meals_end_date' => null,
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
@@ -58,8 +73,8 @@ class UpdateReservationRequest extends FormRequest
             'enter_from_gates' => ['nullable', 'boolean'],
             'has_meals' => ['nullable', 'boolean'],
             'meals_persons_count' => ['nullable', 'integer', 'min:1', 'max:50'],
-            'meals_start_date' => ['nullable', 'required_if:has_meals,true', 'date', 'date_format:Y-m-d', 'after_or_equal:check_in', 'before_or_equal:check_out'],
-            'meals_end_date' => ['nullable', 'required_if:has_meals,true', 'date', 'date_format:Y-m-d', 'after_or_equal:meals_start_date', 'before_or_equal:check_out'],
+            'meals_start_date' => ['nullable', 'required_if:has_meals,true,1', 'date', 'date_format:Y-m-d', 'after_or_equal:check_in', 'before_or_equal:check_out'],
+            'meals_end_date' => ['nullable', 'required_if:has_meals,true,1', 'date', 'date_format:Y-m-d', 'after_or_equal:meals_start_date', 'before_or_equal:check_out'],
             'meals_rate_per_night' => ['nullable', 'numeric', 'min:0'],
             'meals_total_price' => ['nullable', 'numeric', 'min:0'],
             'extra_fees' => ['nullable', 'array'],
@@ -112,9 +127,9 @@ class UpdateReservationRequest extends FormRequest
             $membership = (string) $this->input('membership');
             $totalPrice = (float) $this->input('total_price');
             $hasMeals = (bool) $this->boolean('has_meals');
-            $mealsPersonsCount = $this->filled('meals_persons_count') ? (int) $this->input('meals_persons_count') : 4;
-            $mealsStartDate = $this->input('meals_start_date');
-            $mealsEndDate = $this->input('meals_end_date');
+            $mealsPersonsCount = $hasMeals && $this->filled('meals_persons_count') ? (int) $this->input('meals_persons_count') : null;
+            $mealsStartDate = $hasMeals ? $this->input('meals_start_date') : null;
+            $mealsEndDate = $hasMeals ? $this->input('meals_end_date') : null;
             $extraFees = (array) $this->input('extra_fees', []);
 
             $calculation = $pricingService->calculate(

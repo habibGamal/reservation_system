@@ -279,29 +279,7 @@ export default function ReservationsIndex({
                     onResetFilters={filtersHook.handleResetFilters}
                 />
 
-                {/* Dynamic View Rendering: Table & Sector Matrix */}
-                {filtersHook.activeView === "table" && (
-                    <ReservationAntdTableView
-                        reservations={sortedReservations}
-                        units={scopedUnits}
-                        sectorId={filtersHook.sectorId}
-                        sectorIds={filtersHook.sectorIds}
-                        search={filtersHook.search}
-                        statusFilter={filtersHook.statusFilter}
-                        statusFilters={filtersHook.statusFilters}
-                        paymentStatusFilter={filtersHook.paymentStatus}
-                        onEdit={modals.openEditDialog}
-                        onDelete={handleDelete}
-                        onRecordPayment={modals.openPaymentDialog}
-                        onViewGuestDetails={modals.openGuestDetailsDrawer}
-                        onBookUnit={(unit) =>
-                            modals.openForUnit(unit, filtersHook.startDate)
-                        }
-                        onPrint={modals.openPrintDialog}
-                        loading={filtersHook.isLoading}
-                    />
-                )}
-
+                {/* Dynamic View Rendering: Sector Matrix & Table */}
                 {filtersHook.activeView === "matrix" && (
                     <SectorMatrixView
                         sectors={
@@ -321,6 +299,28 @@ export default function ReservationsIndex({
                             modals.openForUnit(unit, filtersHook.startDate)
                         }
                         onEditReservation={modals.openEditDialog}
+                    />
+                )}
+
+                {filtersHook.activeView === "table" && (
+                    <ReservationAntdTableView
+                        reservations={sortedReservations}
+                        units={scopedUnits}
+                        sectorId={filtersHook.sectorId}
+                        sectorIds={filtersHook.sectorIds}
+                        search={filtersHook.search}
+                        statusFilter={filtersHook.statusFilter}
+                        statusFilters={filtersHook.statusFilters}
+                        paymentStatusFilter={filtersHook.paymentStatus}
+                        onEdit={modals.openEditDialog}
+                        onDelete={handleDelete}
+                        onRecordPayment={modals.openPaymentDialog}
+                        onViewGuestDetails={modals.openGuestDetailsDrawer}
+                        onBookUnit={(unit) =>
+                            modals.openForUnit(unit, filtersHook.startDate)
+                        }
+                        onPrint={modals.openPrintDialog}
+                        loading={filtersHook.isLoading}
                     />
                 )}
 

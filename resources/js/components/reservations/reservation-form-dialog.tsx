@@ -488,6 +488,8 @@ export function ReservationFormDialog({
         ...prev,
         unit_id: val,
         has_meals: false,
+        meals_start_date: '',
+        meals_end_date: '',
       }));
     } else {
       setData('unit_id', val);
@@ -541,6 +543,17 @@ export function ReservationFormDialog({
 
     const stagedFiles = stagedAttachments.map((s) => s.file);
 
+    const submitData: Record<string, any> = {
+      ...data,
+    };
+
+    if (!data.has_meals || !sectorHasMeals) {
+      delete submitData.has_meals;
+      delete submitData.meals_persons_count;
+      delete submitData.meals_start_date;
+      delete submitData.meals_end_date;
+    }
+
     if (isEditing && reservation) {
       if (!hasSectorEditPermission) {
         message.error('لا تملك صلاحية تعديل الحجوزات في هذا القطاع (صلاحية عرض فقط)');
@@ -552,7 +565,7 @@ export function ReservationFormDialog({
         `/reservations/${reservation.id}`,
         {
           _method: 'put',
-          ...data,
+          ...submitData,
           attachments: stagedFiles,
           deleted_attachment_ids: deletedAttachmentIds,
         },
@@ -581,7 +594,7 @@ export function ReservationFormDialog({
       router.post(
         '/reservations',
         {
-          ...data,
+          ...submitData,
           attachments: stagedFiles,
         },
         {
@@ -682,7 +695,7 @@ export function ReservationFormDialog({
           onOpenChange(false);
         }
       }}
-      maskClosable={false}
+      // maskClosable={false}
       closable={!isSubmitting && !isDeleting}
       title={
         <div className="flex items-center gap-2 text-stone-800 dark:text-stone-100 font-bold text-base pb-1">
@@ -722,8 +735,8 @@ export function ReservationFormDialog({
             ? 'جاري تحديث الحجز...'
             : 'جاري إنشاء الحجز...'
           : isEditing
-          ? 'تحديث الحجز'
-          : 'تأكيد الحجز'
+            ? 'تحديث الحجز'
+            : 'تأكيد الحجز'
       }
       cancelText="إلغاء"
       footer={
@@ -776,8 +789,8 @@ export function ReservationFormDialog({
                     ? 'جاري تحديث الحجز...'
                     : 'جاري إنشاء الحجز...'
                   : isEditing
-                  ? 'تحديث الحجز'
-                  : 'تأكيد الحجز'}
+                    ? 'تحديث الحجز'
+                    : 'تأكيد الحجز'}
               </Button>
             </Space>
           </div>
@@ -789,7 +802,6 @@ export function ReservationFormDialog({
       style={{ maxWidth: 'calc(100vw - 24px)', margin: '16px auto' }}
       styles={{
         body: {
-          padding: '16px 20px 24px',
           overflowX: 'hidden',
         },
       }}
@@ -868,7 +880,7 @@ export function ReservationFormDialog({
             {/* Sector & Unit Selection */}
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={12}>
-                <Form.Item label={<span className="text-xs font-semibold text-stone-700 dark:text-stone-300">تصفية حسب القطاع</span>} className="mb-0">
+                <Form.Item label={<span className="text-xs font-semibold text-stone-700 dark:text-stone-300">القطاع</span>} className="mb-0">
                   <Select
                     value={selectedSectorId}
                     onChange={setSelectedSectorId}
@@ -968,7 +980,7 @@ export function ReservationFormDialog({
                 <div className="mt-3 flex items-center justify-between px-3 py-2 bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800 rounded-lg text-xs">
                   <span className="text-stone-600 dark:text-stone-400">مدة الإقامة المحسوبة:</span>
                   <Tag color="blue" className="text-xs font-bold m-0 px-2.5 py-0.5">
-                    {nightsCount} {nightsCount === 1 ? 'ليلة واحدة' : nightsCount === 2 ? 'ليلتان' : `${nightsCount} ليالٍ`}
+                    {nightsCount} {nightsCount === 1 ? 'ليلة واحدة' : nightsCount === 2 ? 'ليلتان' : ` ليالٍ`}
                   </Tag>
                 </div>
               )}

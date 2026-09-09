@@ -420,4 +420,81 @@ class ReservationMealsAndExtraFeesTest extends TestCase
         $sector->refresh();
         $this->assertFalse($sector->has_meals);
     }
+
+    public function test_receptionist_can_create_reservation_when_meals_fields_are_omitted(): void
+    {
+        // 2 nights for member in hotel6: 2 * 800 = 1600. No meals sent in payload.
+        $response = $this->actingAs($this->receptionist)->post(
+            route('reservations.store'),
+            [
+                'guest_id' => $this->guest->id,
+                'unit_id' => $this->hotel6Unit->id,
+                'check_in' => '2026-10-01',
+                'check_out' => '2026-10-03',
+                'status' => ReservationStatus::CONFIRMED->value,
+                'type' => ReservationType::BRANCH->value,
+                'membership' => MembershipType::MEMBER->value,
+                'total_price' => 1600.00,
+            ]
+        );
+
+        $response->assertRedirect(route('reservations.index'));
+
+        $reservation = Reservation::where('guest_id', $this->guest->id)->latest('id')->first();
+        $this->assertNotNull($reservation);
+        $this->assertFalse($reservation->has_meals);
+        $this->assertNull($reservation->meals_persons_count);
+        $this->assertNull($reservation->meals_start_date);
+        $this->assertNull($reservation->meals_end_date);
+        $this->assertEquals(0.00, (float) $reservation->meals_total_price);
+        $this->assertEquals(1600.00, (float) $reservation->total_price);
+    }
+
+    public function test_receptionist_can_update_reservation_and_remove_meals_when_meals_fields_are_omitted(): void
+    {
+        // Initially has meals: room (2400) + meals (4 * 450 * 1 = 1800) = 4200
+        $reservation = Reservation::create([
+            'guest_id' => $this->guest->id,
+            'unit_id' => $this->hotel6Unit->id,
+            'check_in' => '2026-10-01',
+            'check_out' => '2026-10-04',
+            'status' => ReservationStatus::CONFIRMED,
+            'type' => ReservationType::BRANCH,
+            'membership' => MembershipType::MEMBER,
+            'has_meals' => true,
+            'meals_persons_count' => 4,
+            'meals_start_date' => '2026-10-01',
+            'meals_end_date' => '2026-10-02',
+            'meals_rate_per_night' => 450.00,
+            'meals_total_price' => 1800.00,
+            'total_price' => 4200.00,
+            'created_by' => $this->receptionist->id,
+        ]);
+
+        // Update with NO meals fields in payload (meals toggled off)
+        // New price should be just room (3 nights * 800 = 2400)
+        $response = $this->actingAs($this->receptionist)->put(
+            route('reservations.update', $reservation),
+            [
+                'guest_id' => $this->guest->id,
+                'unit_id' => $this->hotel6Unit->id,
+                'check_in' => '2026-10-01',
+                'check_out' => '2026-10-04',
+                'status' => ReservationStatus::CONFIRMED->value,
+                'type' => ReservationType::BRANCH->value,
+                'membership' => MembershipType::MEMBER->value,
+                'total_price' => 2400.00,
+            ]
+        );
+
+        $response->assertRedirect();
+
+        $reservation->refresh();
+        $this->assertFalse($reservation->has_meals);
+        $this->assertNull($reservation->meals_persons_count);
+        $this->assertNull($reservation->meals_start_date);
+        $this->assertNull($reservation->meals_end_date);
+        $this->assertEquals(0.00, (float) $reservation->meals_total_price);
+        $this->assertEquals(2400.00, (float) $reservation->total_price);
+    }
 }

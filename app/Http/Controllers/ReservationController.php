@@ -33,7 +33,7 @@ class ReservationController extends Controller
      */
     public function index(Request $request): Response
     {
-        $view = $request->input('view', 'table');
+        $view = $request->input('view', 'matrix');
         $search = $request->input('search');
         $statuses = $this->parseMultiFilter($request->input('status') ?? $request->input('statuses'));
         $rawSectorIds = $this->parseMultiFilter($request->input('sector_id') ?? $request->input('sector_ids'));
@@ -409,7 +409,7 @@ class ReservationController extends Controller
                 $nights = max(0, $in->diffInDays($out));
                 $data['meals_total_price'] = round($data['meals_persons_count'] * $data['meals_rate_per_night'] * $nights, 2);
             }
-        } elseif (array_key_exists('has_meals', $data)) {
+        } else {
             $data['has_meals'] = false;
             $data['meals_persons_count'] = null;
             $data['meals_start_date'] = null;

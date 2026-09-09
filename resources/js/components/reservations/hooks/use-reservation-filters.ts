@@ -44,7 +44,7 @@ export function useReservationFilters({
         if (Array.isArray(filters.statuses)) {
             return filters.statuses.map(String).filter((s) => s && s !== "all");
         }
-        if (filters.status && filters.status !== "all") {
+        if (filters.status && (filters.status as string) !== "all") {
             return [filters.status];
         }
         return [];
@@ -62,7 +62,7 @@ export function useReservationFilters({
 
     // Filter states initialized from server props
     const [activeView, setActiveView] = useState<ActiveView>(
-        initialFilters.view === "matrix" ? "matrix" : (initialFilters.view === "meals" ? "meals" : "table"),
+        initialFilters.view === "table" ? "table" : (initialFilters.view === "meals" ? "meals" : "matrix"),
     );
     const [search, setSearch] = useState(initialFilters.search || "");
     const [sectorIds, setSectorIds] = useState<string[]>(() =>
@@ -131,7 +131,7 @@ export function useReservationFilters({
     // Synchronize local states if server props change (e.g., browser back/forward or external navigation)
     useEffect(() => {
         const targetView: ActiveView =
-            initialFilters.view === "matrix" ? "matrix" : (initialFilters.view === "meals" ? "meals" : "table");
+            initialFilters.view === "table" ? "table" : (initialFilters.view === "meals" ? "meals" : "matrix");
         if (initialFilters.view && targetView !== stateRef.current.activeView) {
             setActiveView(targetView);
         }
@@ -213,7 +213,7 @@ export function useReservationFilters({
 
             const query: Record<string, string> = {};
 
-            if (effectiveView && effectiveView !== "table") {
+            if (effectiveView && effectiveView !== "matrix") {
                 query.view = effectiveView;
             }
             if (effectiveSearch && effectiveSearch.trim() !== "") {

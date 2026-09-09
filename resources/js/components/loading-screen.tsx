@@ -9,7 +9,7 @@ export function triggerLoadingScreen() {
     if (!el) return;
 
     // Restart SVG fill animation from beginning
-    const svg = el.querySelector('#app-loading-svg');
+    const svg = el.querySelector('#app-loading-svg') as HTMLElement | null;
     if (svg) {
         svg.classList.remove('svg-elem-loop');
         void svg.offsetWidth; // Force DOM reflow to restart keyframe animation

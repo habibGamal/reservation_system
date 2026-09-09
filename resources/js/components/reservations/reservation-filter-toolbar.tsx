@@ -324,14 +324,6 @@ export function ReservationFilterToolbar({
         }
     };
 
-    const handleSectorDropdownChange = (vals: string[]) => {
-        const clean = (vals || []).filter((id) => id && id !== "all");
-        if (onSectorIdsChange) {
-            onSectorIdsChange(clean);
-        } else if (onSectorIdChange) {
-            onSectorIdChange(clean.length > 0 ? clean.join(",") : "all");
-        }
-    };
 
     const handleSelectAllSectors = () => {
         const allIds = allowedSectors.map((s) => String(s.id));
@@ -354,14 +346,14 @@ export function ReservationFilterToolbar({
                         className="min-w-max"
                         options={[
                             {
-                                value: "table",
-                                icon: <LayoutList className="h-4 w-4" />,
-                                label: "جدول الحجوزات",
-                            },
-                            {
                                 value: "matrix",
                                 icon: <Grid className="h-4 w-4" />,
                                 label: "مصفوفة القطاعات",
+                            },
+                            {
+                                value: "table",
+                                icon: <LayoutList className="h-4 w-4" />,
+                                label: "جدول الحجوزات",
                             },
                             {
                                 value: "meals",
@@ -501,22 +493,6 @@ export function ReservationFilterToolbar({
                                 )}
                             </span>
                         </Checkbox>
-
-                        {/* Searchable Select for Quick Search among Sectors */}
-                        <Select
-                            mode="multiple"
-                            size="small"
-                            allowClear
-                            placeholder="بحث واختيار قطاعات محددة..."
-                            value={effectiveSectorIds}
-                            onChange={handleSectorDropdownChange}
-                            maxTagCount="responsive"
-                            className="w-full sm:w-auto min-w-[200px] max-w-xs text-xs"
-                            options={allowedSectors.map((sec) => ({
-                                value: String(sec.id),
-                                label: `${sec.name} (${sec.units?.length ?? 0} وحدة)`,
-                            }))}
-                        />
                     </div>
 
                     {/* Quick Action Indicators / Clear */}

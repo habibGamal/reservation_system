@@ -26,9 +26,9 @@ export function KpiDashboard({
 }: KpiDashboardProps) {
     const activeStatuses = React.useMemo(() => {
         if (currentStatusFilters !== undefined) {
-            return currentStatusFilters.filter((s) => s && s !== 'all');
+            return currentStatusFilters.filter((s) => s && (s as string) !== 'all');
         }
-        if (currentStatusFilter && currentStatusFilter !== 'all') {
+        if (currentStatusFilter && (currentStatusFilter as string) !== 'all') {
             return [currentStatusFilter];
         }
         return [];
