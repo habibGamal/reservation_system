@@ -21,10 +21,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Activitylog\Models\Activity;
 
 class ReservationController extends Controller
 {
@@ -356,6 +358,276 @@ class ReservationController extends Controller
 
         return redirect()->back(fallback: route('reservations.index'))
             ->with('success', 'تم تسجيل وتأكيد الحجز بنجاح');
+    }
+
+    /**
+     * Friendly Arabic labels for reservation change tracking.
+     *
+     * @var array<string, string>
+     */
+    protected const RESERVATION_FIELD_LABELS = [
+        'status' => 'حالة الحجز',
+        'unit_id' => 'الوحدة السكنية',
+        'guest_id' => 'النزيل',
+        'check_in' => 'تاريخ الوصول',
+        'check_out' => 'تاريخ المغادرة',
+        'membership' => 'نوع العضوية',
+        'type' => 'نوع الحجز',
+        'total_price' => 'إجمالي المبلغ',
+        'notes' => 'الملاحظات',
+        'enter_from_gates' => 'دخول من البوابات',
+        'has_meals' => 'وجبات الإعاشة',
+        'meals_persons_count' => 'عدد أفراد الإعاشة',
+        'meals_rate_per_night' => 'سعر الفرد لليلة',
+        'meals_total_price' => 'إجمالي وجبات الإعاشة',
+        'meals_start_date' => 'تاريخ بدء الإعاشة',
+        'meals_end_date' => 'تاريخ انتهاء الإعاشة',
+        'attachments' => 'المرفقات',
+    ];
+
+    /**
+     * Display the specified reservation details page.
+     */
+    public function show(Request $request, Reservation $reservation): Response|JsonResponse
+    {
+        $user = $request->user();
+        if (! $user || ! $user->can('reservations.view')) {
+            abort(403, 'غير مصرح لك بعرض الحجوزات');
+        }
+
+        $reservation->loadMissing(['unit.sector']);
+        if (! $user->canViewSector($reservation->unit?->sector_id)) {
+            abort(403, 'غير مصرح لك بعرض حجوزات هذا القطاع');
+        }
+
+        $reservation->load([
+            'guest',
+            'unit.sector',
+            'payments' => fn ($q) => $q->with('user')->latest('id'),
+            'extraFees' => fn ($q) => $q->latest('id'),
+        ]);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'reservation' => $reservation,
+            ]);
+        }
+
+        // Fetch activity logs for this reservation
+        $rawActivities = Activity::forSubject($reservation)
+            ->with('causer')
+            ->latest('id')
+            ->take(50)
+            ->get();
+
+        $activityLogs = $this->formatReservationActivities($rawActivities);
+
+        // Fetch sectors, units, and guests for editing dialog if user has edit permission
+        $allowedSectorIds = $user->getAllowedSectorIds();
+        $sectorsQuery = Sector::query()->withCount('units');
+        $unitsQuery = Unit::query()->with('sector');
+
+        if ($allowedSectorIds !== null) {
+            $sectorsQuery->whereIn('id', $allowedSectorIds);
+            $unitsQuery->whereIn('sector_id', $allowedSectorIds);
+        }
+
+        $sectors = $sectorsQuery->get();
+        $units = $unitsQuery->get();
+        $guests = Guest::query()->latest('id')->take(100)->get();
+
+        $canEdit = $user->can('reservations.edit') && $user->canEditSector($reservation->unit?->sector_id);
+        $canDelete = $user->can('reservations.delete') && $user->canEditSector($reservation->unit?->sector_id);
+        $canUpdateStatus = ($user->can('reservations.edit') || $user->can('reservations.update_status')) && $user->canEditSector($reservation->unit?->sector_id);
+        $canManagePayments = $user->can('payments.manage');
+
+        return Inertia::render('reservations/show', [
+            'reservation' => $reservation,
+            'activityLogs' => $activityLogs,
+            'canEdit' => $canEdit,
+            'canDelete' => $canDelete,
+            'canUpdateStatus' => $canUpdateStatus,
+            'canManagePayments' => $canManagePayments,
+            'sectors' => $sectors,
+            'units' => $units,
+            'guests' => $guests,
+        ]);
+    }
+
+    /**
+     * Safely extract change attributes array from an activity model.
+     *
+     * @return array<string, mixed>
+     */
+    protected function extractActivityChanges(Activity $activity): array
+    {
+        $raw = $activity->attribute_changes;
+        if (! $raw) {
+            $raw = $activity->properties;
+        }
+
+        if (! $raw) {
+            return [];
+        }
+
+        if (is_array($raw)) {
+            return $raw;
+        }
+
+        if ($raw instanceof Collection) {
+            return $raw->toArray();
+        }
+
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        if (is_object($raw) && method_exists($raw, 'toArray')) {
+            return $raw->toArray();
+        }
+
+        return [];
+    }
+
+    /**
+     * Format activity logs for reservation show view.
+     *
+     * @param  Collection<int, Activity>  $activities
+     * @return array<int, array<string, mixed>>
+     */
+    protected function formatReservationActivities($activities): array
+    {
+        if ($activities->isEmpty()) {
+            return [];
+        }
+
+        $unitIds = collect();
+        $guestIds = collect();
+        foreach ($activities as $act) {
+            $props = $this->extractActivityChanges($act);
+            foreach (['old', 'attributes'] as $bag) {
+                if (isset($props[$bag]['unit_id']) && is_numeric($props[$bag]['unit_id'])) {
+                    $unitIds->push((int) $props[$bag]['unit_id']);
+                }
+                if (isset($props[$bag]['guest_id']) && is_numeric($props[$bag]['guest_id'])) {
+                    $guestIds->push((int) $props[$bag]['guest_id']);
+                }
+            }
+        }
+        $unitNames = Unit::whereIn('id', $unitIds->unique())->pluck('name', 'id');
+        $guestNames = Guest::whereIn('id', $guestIds->unique())->pluck('name', 'id');
+
+        return $activities->map(function (Activity $activity) use ($unitNames, $guestNames) {
+            $props = $this->extractActivityChanges($activity);
+            $attributes = $props['attributes'] ?? [];
+            $old = $props['old'] ?? [];
+
+            $diffs = [];
+            $excluded = ['created_at', 'updated_at', 'id', 'remember_token'];
+
+            if ($activity->event === 'updated' || (! empty($old) && ! empty($attributes))) {
+                $allKeys = array_unique(array_merge(array_keys($attributes), array_keys($old)));
+                foreach ($allKeys as $key) {
+                    if (in_array($key, $excluded, true)) {
+                        continue;
+                    }
+
+                    $oldVal = $old[$key] ?? null;
+                    $newVal = $attributes[$key] ?? null;
+
+                    // Normalize for comparison
+                    $normOld = ($oldVal instanceof \BackedEnum) ? $oldVal->value : $oldVal;
+                    $normNew = ($newVal instanceof \BackedEnum) ? $newVal->value : $newVal;
+
+                    if ($normOld === $normNew && array_key_exists($key, $old) && array_key_exists($key, $attributes)) {
+                        continue;
+                    }
+
+                    $label = self::RESERVATION_FIELD_LABELS[$key] ?? $key;
+
+                    $diffs[] = [
+                        'field' => $key,
+                        'label' => $label,
+                        'old' => $oldVal,
+                        'new' => $newVal,
+                        'old_label' => $this->formatReservationFieldValue($key, $oldVal, $unitNames, $guestNames),
+                        'new_label' => $this->formatReservationFieldValue($key, $newVal, $unitNames, $guestNames),
+                    ];
+                }
+            }
+
+            // Provide human-friendly description
+            $description = $activity->description;
+            if ($activity->event === 'created' || $description === 'created') {
+                $description = 'تم إنشاء وتسجيل الحجز';
+            } elseif ($activity->event === 'updated' || $description === 'updated') {
+                if (! empty($diffs)) {
+                    $fieldLabels = array_slice(array_column($diffs, 'label'), 0, 3);
+                    $description = 'تم تعديل '.implode('، ', $fieldLabels).(count($diffs) > 3 ? ' وغيرها' : '');
+                } else {
+                    $description = 'تم تحديث بيانات الحجز';
+                }
+            } elseif ($activity->event === 'deleted' || $description === 'deleted') {
+                $description = 'تم إلغاء / حذف الحجز';
+            }
+
+            return [
+                'id' => $activity->id,
+                'description' => $description,
+                'event' => $activity->event ?: 'updated',
+                'causer_name' => $activity->causer?->name ?? 'النظام التلقائي',
+                'causer_email' => $activity->causer?->email,
+                'created_at' => $activity->created_at?->timezone('Africa/Cairo')->format('Y-m-d h:i A'),
+                'created_at_human' => $activity->created_at?->diffForHumans(),
+                'changes' => $diffs,
+            ];
+        })->values()->all();
+    }
+
+    /**
+     * Format a specific reservation attribute value for human display.
+     */
+    protected function formatReservationFieldValue(string $field, mixed $val, $unitNames, $guestNames = null): string
+    {
+        if ($val instanceof \BackedEnum) {
+            $val = $val->value;
+        }
+
+        if ($val instanceof \DateTimeInterface) {
+            $val = $val->format('Y-m-d');
+        }
+
+        if ($val === null || $val === '') {
+            return '—';
+        }
+
+        if ($field === 'unit_id' && isset($unitNames[$val])) {
+            return "وحدة {$unitNames[$val]} (#{$val})";
+        }
+
+        if ($field === 'guest_id' && isset($guestNames[$val])) {
+            return "{$guestNames[$val]} (#{$val})";
+        }
+
+        if (in_array($field, ['has_meals', 'enter_from_gates'], true) || is_bool($val)) {
+            return $val ? 'نعم' : 'لا';
+        }
+
+        if ($field === 'meals_persons_count' && is_numeric($val)) {
+            return "{$val} أفراد";
+        }
+
+        if (in_array($field, ['total_price', 'meals_rate_per_night', 'meals_total_price', 'amount'], true) && is_numeric($val)) {
+            return number_format((float) $val, 2).' ج.م';
+        }
+
+        if (is_array($val)) {
+            return count($val).' ملف/عنصر';
+        }
+
+        return (string) $val;
     }
 
     /**

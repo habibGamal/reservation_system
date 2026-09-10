@@ -293,7 +293,7 @@ class ReservationNotificationTest extends TestCase
         $payload = $webPush->toArray();
         $this->assertTrue(is_numeric($payload['tag']));
         $this->assertEquals('تم تسكين فندق 1 - 22 اللواء علي بواسطة حبيب جمال', $payload['body']);
-        $this->assertEquals('/reservations?search='.$reservation->id, $payload['data']['url']);
+        $this->assertEquals('/reservations/'.$reservation->id, $payload['data']['url']);
         $this->assertEquals($this->sector->id, $payload['data']['sector_id']);
         $this->assertArrayHasKey('status', $payload['data']['changes']);
     }

@@ -99,13 +99,13 @@ self.addEventListener('push', function (event) {
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
 
-    const url = event.notification.data?.url || '/dashboard';
-
     // If an action was clicked, handle it
     if (event.action === 'open_dashboard') {
         event.waitUntil(clients.openWindow('/dashboard'));
         return;
     }
+
+    const url = event.notification.data?.url || '/reservations';
 
     // Default: open or focus the target URL
     event.waitUntil(

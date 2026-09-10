@@ -28,6 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/reservations/calculate-price', [ReservationPriceController::class, 'calculate'])->name('reservations.calculate-price');
     Route::post('/reservations/import', [ReservationImportController::class, 'import'])->name('reservations.import');
     Route::post('/reservations/import/preview', [ReservationImportController::class, 'preview'])->name('reservations.import.preview');
+    Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
     Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::patch('/reservations/{reservation}/status', [ReservationController::class, 'updateStatus'])->name('reservations.update-status');
     Route::patch('/reservations/{reservation}/quick-update', [ReservationController::class, 'quickUpdate'])->name('reservations.quick-update');

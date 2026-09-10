@@ -479,7 +479,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             return '/reservations';
         }
 
-        return "/reservations?search={$this->reservationId}";
+        return "/reservations/{$this->reservationId}";
     }
 
     /**
@@ -494,7 +494,7 @@ class ReservationNotification extends Notification implements ShouldQueue
             ->body($this->getBody())
             ->tag($this->tag ?? (string) now()->valueOf())
             ->renotify()
-            ->action('عرض الحجز', 'open_dashboard')
+            ->action('عرض الحجز', 'view_reservation')
             ->options([
                 'TTL' => 86400,
                 'urgency' => 'high',
