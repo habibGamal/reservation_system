@@ -7,6 +7,7 @@ use App\Enums\ReservationStatus;
 use App\Enums\ReservationType;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Http\Resources\ReservationIndexResource;
 use App\Models\Guest;
 use App\Models\Payment;
 use App\Models\PriceRule;
@@ -50,7 +51,13 @@ class ReservationController extends Controller
         $allowedSectorIds = $user?->getAllowedSectorIds();
 
         $query = Reservation::query()
-            ->with(['guest', 'unit.sector', 'payments', 'extraFees'])
+            ->with([
+                'guest' => fn ($q) => $q->select(['id', 'name', 'phone', 'mil_code']),
+                'unit' => fn ($q) => $q->select(['id', 'sector_id', 'price_rule_id', 'name', 'rooms_count']),
+                'unit.sector' => fn ($q) => $q->select(['id', 'name', 'has_meals']),
+            ])
+            ->withSum('payments', 'amount')
+            ->withSum('extraFees', 'amount')
             ->latest('id');
 
         // Sector scoping based on user sector permissions
@@ -238,19 +245,18 @@ class ReservationController extends Controller
 
         $reservations = $query->get();
 
-        $sectors = ($allowedSectorIds !== null)
-            ? Sector::whereIn('id', $allowedSectorIds)->with(['units.priceRule', 'units.currentReservation.guest'])->get()
-            : Sector::with(['units.priceRule', 'units.currentReservation.guest'])->get();
-
-        $units = ($allowedSectorIds !== null)
-            ? Unit::whereIn('sector_id', $allowedSectorIds)->with(['sector', 'priceRule', 'currentReservation.guest'])->get()
-            : Unit::with(['sector', 'priceRule', 'currentReservation.guest'])->get();
+        $sectors = ($allowedSectorIds !== null ? Sector::whereIn('id', $allowedSectorIds) : Sector::query())
+            ->select(['id', 'name', 'has_meals'])
+            ->with([
+                'units' => fn ($q) => $q->select(['id', 'sector_id', 'price_rule_id', 'name', 'rooms_count']),
+            ])
+            ->get();
 
         return Inertia::render('reservations/index', [
-            'reservations' => $reservations,
+            'reservations' => ReservationIndexResource::collection($reservations)->resolve(),
             'sectors' => $sectors,
-            'units' => $units,
-            'guests' => fn () => Guest::select(['id', 'name', 'phone', 'mil_code'])->latest('id')->limit(500)->get(),
+            'price_rules' => PriceRule::select(['id', 'rules'])->get(),
+            'guests' => [],
             'stats' => $stats,
             'status_counts' => $statusCounts,
             'filters' => [
@@ -403,6 +409,7 @@ class ReservationController extends Controller
         $reservation->load([
             'guest',
             'unit.sector',
+            'unit.priceRule',
             'payments' => fn ($q) => $q->with('user')->latest('id'),
             'extraFees' => fn ($q) => $q->latest('id'),
         ]);
@@ -1106,9 +1113,11 @@ class ReservationController extends Controller
         ReservationNotification::notifySuperAdmins($notification);
 
         if (! $request->header('X-Inertia') && ($request->wantsJson() || $request->ajax())) {
+            $freshReservation = $reservation->fresh(['guest', 'unit.sector']);
+
             return response()->json([
                 'message' => 'تم تحديث بيانات الحجز بنجاح',
-                'reservation' => $reservation->fresh(['guest', 'unit.sector', 'payments', 'extraFees']),
+                'reservation' => (new ReservationIndexResource($freshReservation))->resolve(),
             ]);
         }
 

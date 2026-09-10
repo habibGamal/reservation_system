@@ -72,7 +72,7 @@ interface ReservationFormDialogProps {
   defaultCheckIn?: string | null;
   defaultCheckOut?: string | null;
   units: Unit[];
-  guests: Guest[];
+  guests?: Guest[];
   sectors: Sector[];
   existingReservations?: Reservation[];
   onViewGuestDetails?: (guest: Guest) => void;
@@ -86,7 +86,7 @@ export function ReservationFormDialog({
   defaultCheckIn,
   defaultCheckOut,
   units,
-  guests,
+  guests = [],
   sectors,
   existingReservations = [],
   onViewGuestDetails,
@@ -129,6 +129,10 @@ export function ReservationFormDialog({
 
   const [selectedSectorId, setSelectedSectorId] = useState<string>('all');
   const [isPriceOverridden, setIsPriceOverridden] = useState<boolean>(false);
+  const [fullReservation, setFullReservation] = useState<Reservation | null>(null);
+  const [isLoadingDetails, setIsLoadingDetails] = useState<boolean>(false);
+
+  const activeReservation = fullReservation ?? reservation;
 
   // Attachments state & handlers
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -140,9 +144,9 @@ export function ReservationFormDialog({
   const [previewGroupCurrent, setPreviewGroupCurrent] = useState<number>(0);
 
   const existingAttachments = useMemo(() => {
-    const list: ReservationAttachment[] = (reservation?.attachments ?? []) as ReservationAttachment[];
+    const list: ReservationAttachment[] = (activeReservation?.attachments ?? []) as ReservationAttachment[];
     return list.filter((att) => !deletedAttachmentIds.includes(att.id));
-  }, [reservation?.attachments, deletedAttachmentIds]);
+  }, [activeReservation?.attachments, deletedAttachmentIds]);
 
   const existingImageAttachments = useMemo(() => {
     return existingAttachments.filter((att) => att.is_image || att.mime_type?.startsWith('image/'));
@@ -175,7 +179,7 @@ export function ReservationFormDialog({
     existingImageAttachments.forEach((att) => {
       list.push({
         key: `existing-${att.id}`,
-        src: att.url || `/reservations/${reservation?.id}/attachments/${att.id}`,
+        src: att.url || `/reservations/${activeReservation?.id}/attachments/${att.id}`,
         title: att.file_name,
         subTitle: att.human_size || '',
         isStaged: false,
@@ -197,7 +201,7 @@ export function ReservationFormDialog({
     });
 
     return list;
-  }, [existingImageAttachments, stagedImageAttachments, stagedAttachments, reservation?.id]);
+  }, [existingImageAttachments, stagedImageAttachments, stagedAttachments, activeReservation?.id]);
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -249,12 +253,12 @@ export function ReservationFormDialog({
   // Determine current active sector and whether meals apply
   const currentSector = useMemo(() => {
     if (selectedUnit?.sector) return selectedUnit.sector;
-    if (reservation?.unit?.sector) return reservation.unit.sector;
+    if (activeReservation?.unit?.sector) return activeReservation.unit.sector;
     if (selectedSectorId && selectedSectorId !== 'all') {
       return sectors.find((s) => String(s.id) === selectedSectorId) ?? null;
     }
     return null;
-  }, [selectedUnit, reservation, selectedSectorId, sectors]);
+  }, [selectedUnit, activeReservation, selectedSectorId, sectors]);
 
   const sectorHasMeals = Boolean(
     currentSector?.has_meals || currentSector?.name === 'فندق 6' || selectedUnit?.sector?.has_meals
@@ -273,6 +277,7 @@ export function ReservationFormDialog({
       setPreviewGroupCurrent(0);
 
       if (reservation) {
+        setFullReservation(null);
         setData({
           guest_id: String(reservation.guest_id),
           unit_id: String(reservation.unit_id),
@@ -299,7 +304,42 @@ export function ReservationFormDialog({
           setSelectedSectorId(String(currentUnit.sector_id));
         }
         setIsPriceOverridden(false);
+
+        // Fetch full reservation details on demand (extra_fees, attachments, etc.)
+        setIsLoadingDetails(true);
+        fetch(`/reservations/${reservation.id}`, {
+          headers: {
+            Accept: 'application/json',
+          },
+          credentials: 'same-origin',
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error('Failed to fetch reservation details');
+            return res.json();
+          })
+          .then((json) => {
+            if (json.reservation) {
+              const full = json.reservation as Reservation;
+              setFullReservation(full);
+              if (full.extra_fees && full.extra_fees.length > 0) {
+                setData((prev) => ({
+                  ...prev,
+                  extra_fees: full.extra_fees!.map((fee) => ({
+                    id: fee.id,
+                    description: fee.description,
+                    amount: String(fee.amount),
+                  })),
+                }));
+              }
+            }
+          })
+          .catch(() => {})
+          .finally(() => {
+            setIsLoadingDetails(false);
+          });
       } else {
+        setFullReservation(null);
+        setIsLoadingDetails(false);
         reset();
         clearErrors();
         setIsPriceOverridden(false);
@@ -576,7 +616,6 @@ export function ReservationFormDialog({
           only: ['reservations', 'units', 'sectors', 'stats', 'status_counts', 'guests'],
           onSuccess: () => {
             onOpenChange(false);
-            reset();
             setStagedAttachments([]);
             setDeletedAttachmentIds([]);
             message.success('تم تحديث بيانات الحجز بنجاح');
@@ -1216,7 +1255,7 @@ export function ReservationFormDialog({
 
                   {(!data.extra_fees || data.extra_fees.length === 0) ? (
                     <div className="text-xs text-stone-400 py-1">
-                      لا توجد رسوم إضافية مسجلة على هذا الحجز.
+                      {isLoadingDetails ? 'جاري تحميل تفاصيل الرسوم الإضافية...' : 'لا توجد رسوم إضافية مسجلة على هذا الحجز.'}
                     </div>
                   ) : (
                     <div className="space-y-2.5 pt-2">
@@ -1858,7 +1897,9 @@ export function ReservationFormDialog({
 
             {existingAttachments.length === 0 && stagedAttachments.length === 0 && (
               <div className="text-xs text-stone-400 py-3 text-center rounded-lg border border-dashed border-stone-200 dark:border-stone-800 bg-white/40 dark:bg-stone-900/40">
-                لا توجد صور أو مستندات مرفقة على هذا الحجز حتى الآن. انقر على &quot;إرفاق ملفات / صور&quot; للرفع.
+                {isLoadingDetails
+                  ? 'جاري تحميل المرفقات من الخادم...'
+                  : 'لا توجد صور أو مستندات مرفقة على هذا الحجز حتى الآن. انقر على "إرفاق ملفات / صور" للرفع.'}
               </div>
             )}
           </Card>

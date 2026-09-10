@@ -354,7 +354,7 @@ class ReservationNotification extends Notification implements ShouldQueue
                     'users' => $recipients->pluck('name', 'id')->toArray(),
                     'sector_ids' => $notification->getRelevantSectorIds(),
                 ]);
-                NotificationFacade::sendNow($recipients, $notification);
+                NotificationFacade::send($recipients, $notification);
             }
         } catch (\Throwable $e) {
             logger()->error('ReservationNotification error: '.$e->getMessage());

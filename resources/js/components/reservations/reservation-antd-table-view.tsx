@@ -1680,6 +1680,208 @@ const TABLE_LOCALE = {
 const PHONE_ICON = <Phone className="h-2.5 w-2.5 shrink-0 opacity-70" />;
 const SHIELD_ICON = <Shield className="h-2.5 w-2.5 shrink-0 opacity-70" />;
 
+interface ExpandedPaymentHistoryProps {
+    res: Reservation;
+    canCreatePayment: boolean;
+    canDeletePayment: boolean;
+    hasSectorEditAccess: boolean;
+    onRecordPayment: (res: Reservation) => void;
+    handleDeletePayment: (payment: Payment) => void;
+}
+
+const ExpandedPaymentHistory = React.memo(function ExpandedPaymentHistory({
+    res,
+    canCreatePayment,
+    canDeletePayment,
+    hasSectorEditAccess,
+    onRecordPayment,
+    handleDeletePayment,
+}: ExpandedPaymentHistoryProps) {
+    const [payments, setPayments] = useState<Payment[] | null>(res.payments ?? null);
+    const [isLoading, setIsLoading] = useState<boolean>(!res.payments);
+
+    useEffect(() => {
+        if (res.payments && res.payments.length > 0) {
+            setPayments(res.payments);
+            return;
+        }
+
+        let isMounted = true;
+        setIsLoading(true);
+        fetch(`/reservations/${res.id}`, {
+            headers: {
+                Accept: 'application/json',
+            },
+            credentials: 'same-origin',
+        })
+            .then((r) => {
+                if (!r.ok) throw new Error('Failed to load payments');
+                return r.json();
+            })
+            .then((data) => {
+                if (isMounted && data.reservation) {
+                    setPayments(data.reservation.payments || []);
+                }
+            })
+            .catch(() => {
+                if (isMounted) setPayments([]);
+            })
+            .finally(() => {
+                if (isMounted) setIsLoading(false);
+            });
+
+        return () => {
+            isMounted = false;
+        };
+    }, [res.id, res.payments]);
+
+    if (isLoading) {
+        return (
+            <div className="bg-background flex items-center justify-center gap-2 rounded-xl border p-6 text-xs text-muted-foreground shadow-2xs">
+                <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                <span>جاري استرجاع سجل الدفعات المالية من الخادم...</span>
+            </div>
+        );
+    }
+
+    const currentPayments = payments ?? [];
+
+    return (
+        <div className="bg-background space-y-3 rounded-xl border p-4 shadow-2xs">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <Receipt className="text-primary h-4 w-4" />
+                    <span className="text-foreground text-xs font-bold">
+                        سجل دفعات الحجز (#{res.id} - النزيل:{' '}
+                        {res.guest?.name ?? 'غير محدد'})
+                    </span>
+                    <Tag className="text-[11px]">
+                        {currentPayments.length}{' '}
+                        {currentPayments.length === 1 ? 'دفعة مسجلة' : 'دفعات'}
+                    </Tag>
+                </div>
+
+                {canCreatePayment && res.balance > 0 && hasSectorEditAccess && (
+                    <AntButton
+                        size="small"
+                        onClick={() => onRecordPayment(res)}
+                        icon={<Plus className="h-3 w-3" />}
+                        className="text-xs"
+                    >
+                        إضافة دفعة
+                    </AntButton>
+                )}
+            </div>
+
+            {currentPayments.length === 0 ? (
+                <div className="text-muted-foreground bg-muted/10 rounded-lg border py-3 text-center text-xs">
+                    لم يتم تسجيل أي مدفوعات نقدية أو إلكترونية لهذا الحجز حتى الآن.
+                </div>
+            ) : (
+                <div className="overflow-hidden rounded-lg border">
+                    <table className="w-full caption-bottom border-collapse text-sm">
+                        <thead>
+                            <tr className="bg-muted/50 text-[11px]">
+                                <th className="px-3 py-2 text-right">
+                                    تاريخ الدفعة
+                                </th>
+                                <th className="px-3 py-2 text-right">
+                                    المبلغ المسدد
+                                </th>
+                                <th className="px-3 py-2 text-right">
+                                    طريقة الدفع
+                                </th>
+                                <th className="px-3 py-2 text-right">
+                                    رقم الحوالة / الإيصال
+                                </th>
+                                {canDeletePayment && hasSectorEditAccess && (
+                                    <th className="w-[80px] px-3 py-2 text-center">
+                                        إجراء
+                                    </th>
+                                )}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {currentPayments.map((p) => (
+                                <tr
+                                    key={p.id}
+                                    className="hover:bg-muted/20 border-t text-xs"
+                                >
+                                    <td className="text-muted-foreground px-3 py-2">
+                                        {p.created_at
+                                            ? new Date(
+                                                p.created_at,
+                                            ).toLocaleString('ar-EG', {
+                                                dateStyle: 'medium',
+                                                timeStyle: 'short',
+                                            })
+                                            : '—'}
+                                    </td>
+                                    <td className="px-3 py-2 font-bold text-emerald-600 dark:text-emerald-400">
+                                        {Number(p.amount).toLocaleString()}{' '}
+                                        ج.م
+                                    </td>
+                                    <td className="px-3 py-2">
+                                        {getPaymentMethodTag(p.method)}
+                                    </td>
+                                    <td className="text-muted-foreground px-3 py-2">
+                                        {p.reference_number ? (
+                                            <code className="bg-muted rounded px-1.5 py-0.5 text-[11px]">
+                                                {p.reference_number}
+                                            </code>
+                                        ) : (
+                                            'بدون رقم إيصال'
+                                        )}
+                                    </td>
+                                    {canDeletePayment && hasSectorEditAccess && (
+                                        <td className="px-3 py-2 text-center">
+                                            <AntButton
+                                                type="text"
+                                                danger
+                                                size="small"
+                                                onClick={() =>
+                                                    handleDeletePayment(p)
+                                                }
+                                                className="h-7 w-7 cursor-pointer"
+                                                title="حذف الدفعة"
+                                                icon={
+                                                    <Trash2 className="h-3.5 w-3.5" />
+                                                }
+                                            />
+                                        </td>
+                                    )}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+
+            {/* Sub-summary */}
+            <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-2 border-t pt-2.5 text-xs">
+                <div>
+                    إجمالي المطلوب:{' '}
+                    <span className="text-foreground font-bold">
+                        {Number(res.total_price).toLocaleString()} ج.م
+                    </span>
+                </div>
+                <div>
+                    إجمالي المسدد:{' '}
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                        {Number(res.paid_amount).toLocaleString()} ج.م
+                    </span>
+                </div>
+                <div>
+                    المتبقي:{' '}
+                    <span className="text-destructive font-bold">
+                        {Number(res.balance).toLocaleString()} ج.م
+                    </span>
+                </div>
+            </div>
+        </div>
+    );
+});
+
 /**
  * Rebuilt Reservation Table View using Ant Design Table with RTL,
  * expandable payment histories, in-cell inline edits, sorting, and summary metrics.
@@ -2504,8 +2706,8 @@ export function ReservationAntdTableView({
                             </>
                         )}
 
-                        {res.attachments && res.attachments.length > 0 && (
-                            <Tooltip title={`يحتوي على ${res.attachments.length} مرفقات/صور — انقر لفتح المعرض والتعديل`}>
+                        {((res.attachments_count ?? res.attachments?.length ?? 0) > 0) && (
+                            <Tooltip title={`يحتوي على ${res.attachments_count ?? res.attachments?.length ?? 0} مرفقات/صور — انقر لفتح المعرض والتعديل`}>
                                 <button
                                     type="button"
                                     onClick={(e) => {
@@ -2515,7 +2717,7 @@ export function ReservationAntdTableView({
                                     className="inline-flex items-center gap-1 text-[11px] font-medium text-sky-600 dark:text-sky-400 bg-sky-50 hover:bg-sky-100 dark:bg-sky-950/60 dark:hover:bg-sky-900/60 border border-sky-200 dark:border-sky-800 px-1.5 py-0.5 rounded cursor-pointer transition-colors shrink-0"
                                 >
                                     <Paperclip className="h-3 w-3" />
-                                    <span>{res.attachments.length}</span>
+                                    <span>{res.attachments_count ?? res.attachments?.length ?? 0}</span>
                                 </button>
                             </Tooltip>
                         )}
@@ -3013,145 +3215,25 @@ export function ReservationAntdTableView({
     );
 
     // Expandable payment history section
-    const renderExpandedPaymentHistory = useCallback((res: Reservation) => {
-        const payments = res.payments ?? [];
-
-        return (
-            <div className="bg-background space-y-3 rounded-xl border p-4 shadow-2xs">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <Receipt className="text-primary h-4 w-4" />
-                        <span className="text-foreground text-xs font-bold">
-                            سجل دفعات الحجز (#{res.id} - النزيل:{' '}
-                            {res.guest?.name ?? 'غير محدد'})
-                        </span>
-                        <Tag className="text-[11px]">
-                            {payments.length}{' '}
-                            {payments.length === 1 ? 'دفعة مسجلة' : 'دفعات'}
-                        </Tag>
-                    </div>
-
-                    {canCreatePayment && res.balance > 0 && hasSectorEditAccess(res) && (
-                        <AntButton
-                            size="small"
-                            onClick={() => onRecordPayment(res)}
-                            icon={<Plus className="h-3 w-3" />}
-                            className="text-xs"
-                        >
-                            إضافة دفعة
-                        </AntButton>
-                    )}
-                </div>
-
-                {payments.length === 0 ? (
-                    <div className="text-muted-foreground bg-muted/10 rounded-lg border py-3 text-center text-xs">
-                        لم يتم تسجيل أي مدفوعات نقدية أو إلكترونية لهذا الحجز
-                        حتى الآن.
-                    </div>
-                ) : (
-                    <div className="overflow-hidden rounded-lg border">
-                        <table className="w-full caption-bottom border-collapse text-sm">
-                            <thead>
-                                <tr className="bg-muted/50 text-[11px]">
-                                    <th className="px-3 py-2 text-right">
-                                        تاريخ الدفعة
-                                    </th>
-                                    <th className="px-3 py-2 text-right">
-                                        المبلغ المسدد
-                                    </th>
-                                    <th className="px-3 py-2 text-right">
-                                        طريقة الدفع
-                                    </th>
-                                    <th className="px-3 py-2 text-right">
-                                        رقم الحوالة / الإيصال
-                                    </th>
-                                    {canDeletePayment && hasSectorEditAccess(res) && (
-                                        <th className="w-[80px] px-3 py-2 text-center">
-                                            إجراء
-                                        </th>
-                                    )}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {payments.map((p) => (
-                                    <tr
-                                        key={p.id}
-                                        className="hover:bg-muted/20 border-t text-xs"
-                                    >
-                                        <td className="text-muted-foreground px-3 py-2">
-                                            {p.created_at
-                                                ? new Date(
-                                                    p.created_at,
-                                                ).toLocaleString('ar-EG', {
-                                                    dateStyle: 'medium',
-                                                    timeStyle: 'short',
-                                                })
-                                                : '—'}
-                                        </td>
-                                        <td className="px-3 py-2 font-bold text-emerald-600 dark:text-emerald-400">
-                                            {Number(p.amount).toLocaleString()}{' '}
-                                            ج.م
-                                        </td>
-                                        <td className="px-3 py-2">
-                                            {getPaymentMethodTag(p.method)}
-                                        </td>
-                                        <td className="text-muted-foreground px-3 py-2">
-                                            {p.reference_number ? (
-                                                <code className="bg-muted rounded px-1.5 py-0.5 text-[11px]">
-                                                    {p.reference_number}
-                                                </code>
-                                            ) : (
-                                                'بدون رقم إيصال'
-                                            )}
-                                        </td>
-                                        {canDeletePayment && hasSectorEditAccess(res) && (
-                                            <td className="px-3 py-2 text-center">
-                                                <AntButton
-                                                    type="text"
-                                                    danger
-                                                    size="small"
-                                                    onClick={() =>
-                                                        handleDeletePayment(p)
-                                                    }
-                                                    className="h-7 w-7 cursor-pointer"
-                                                    title="حذف الدفعة"
-                                                    icon={
-                                                        <Trash2 className="h-3.5 w-3.5" />
-                                                    }
-                                                />
-                                            </td>
-                                        )}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-
-                {/* Sub-summary */}
-                <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-2 border-t pt-2.5 text-xs">
-                    <div>
-                        إجمالي المطلوب:{' '}
-                        <span className="text-foreground font-bold">
-                            {Number(res.total_price).toLocaleString()} ج.م
-                        </span>
-                    </div>
-                    <div>
-                        إجمالي المسدد:{' '}
-                        <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                            {Number(res.paid_amount).toLocaleString()} ج.م
-                        </span>
-                    </div>
-                    <div>
-                        المتبقي:{' '}
-                        <span className="text-destructive font-bold">
-                            {Number(res.balance).toLocaleString()} ج.م
-                        </span>
-                    </div>
-                </div>
-            </div>
-        );
-    }, [canCreatePayment, canDeletePayment, handleDeletePayment, hasSectorEditAccess, onRecordPayment]);
+    const renderExpandedPaymentHistory = useCallback(
+        (res: Reservation) => (
+            <ExpandedPaymentHistory
+                res={res}
+                canCreatePayment={canCreatePayment}
+                canDeletePayment={canDeletePayment}
+                hasSectorEditAccess={hasSectorEditAccess(res)}
+                onRecordPayment={onRecordPayment}
+                handleDeletePayment={handleDeletePayment}
+            />
+        ),
+        [
+            canCreatePayment,
+            canDeletePayment,
+            hasSectorEditAccess,
+            onRecordPayment,
+            handleDeletePayment,
+        ],
+    );
 
     // Stable expandable config to avoid re-creating object on every render
     const expandableConfig = useMemo(() => ({

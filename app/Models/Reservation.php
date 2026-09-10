@@ -164,6 +164,14 @@ class Reservation extends Model
     {
         return Attribute::make(
             get: function (): float {
+                if (isset($this->attributes['extra_fees_total'])) {
+                    return round((float) $this->attributes['extra_fees_total'], 2);
+                }
+
+                if (isset($this->attributes['extra_fees_sum_amount'])) {
+                    return round((float) $this->attributes['extra_fees_sum_amount'], 2);
+                }
+
                 if ($this->relationLoaded('extraFees')) {
                     return round((float) $this->extraFees->sum('amount'), 2);
                 }
@@ -225,6 +233,14 @@ class Reservation extends Model
     {
         return Attribute::make(
             get: function (): float {
+                if (isset($this->attributes['paid_amount'])) {
+                    return round((float) $this->attributes['paid_amount'], 2);
+                }
+
+                if (isset($this->attributes['payments_sum_amount'])) {
+                    return round((float) $this->attributes['payments_sum_amount'], 2);
+                }
+
                 if ($this->relationLoaded('payments')) {
                     return round((float) $this->payments->sum('amount'), 2);
                 }

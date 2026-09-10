@@ -6,6 +6,7 @@ import {
     DashboardFilterState,
     Guest,
     KPIStats,
+    PriceRule,
     Reservation,
     ReservationStatus,
     Sector,
@@ -44,8 +45,9 @@ import { StatusCounts } from "@/types/reservation";
 interface IndexProps {
     reservations: Reservation[];
     sectors: Sector[];
-    units: Unit[];
-    guests: Guest[];
+    units?: Unit[];
+    price_rules?: PriceRule[];
+    guests?: Guest[];
     stats: KPIStats;
     status_counts: Record<string, number>;
     filters: DashboardFilterState;
@@ -55,7 +57,8 @@ export default function ReservationsIndex({
     reservations,
     sectors,
     units,
-    guests,
+    price_rules = [],
+    guests = [],
     stats,
     status_counts,
     filters,
@@ -69,6 +72,25 @@ export default function ReservationsIndex({
             (user?.editable_sector_ids && user.editable_sector_ids.length > 0),
     );
 
+    // Map price rules by ID for instant O(1) lookup
+    const priceRulesMap = useMemo(() => {
+        return new Map((price_rules ?? []).map((pr) => [pr.id, pr]));
+    }, [price_rules]);
+
+    // Flatten units from sectors with sector and price_rule attached, eliminating duplicate wire payload
+    const flattenedUnits = useMemo<Unit[]>(() => {
+        if (units && units.length > 0) {
+            return units;
+        }
+        return sectors.flatMap((s) =>
+            (s.units || []).map((u) => ({
+                ...u,
+                sector: { id: s.id, name: s.name, has_meals: s.has_meals },
+                price_rule: u.price_rule_id ? priceRulesMap.get(u.price_rule_id) ?? null : null,
+            }))
+        );
+    }, [units, sectors, priceRulesMap]);
+
     // Strictly scope sectors and units by user sector permissions (Option B)
     const scopedSectors = useMemo(() => {
         if (user?.has_full_sector_access) return sectors;
@@ -77,10 +99,10 @@ export default function ReservationsIndex({
     }, [sectors, user?.has_full_sector_access, user?.allowed_sector_ids]);
 
     const scopedUnits = useMemo(() => {
-        if (user?.has_full_sector_access) return units;
+        if (user?.has_full_sector_access) return flattenedUnits;
         const allowed = user?.allowed_sector_ids ?? [];
-        return units.filter((u) => allowed.includes(u.sector_id));
-    }, [units, user?.has_full_sector_access, user?.allowed_sector_ids]);
+        return flattenedUnits.filter((u) => allowed.includes(u.sector_id));
+    }, [flattenedUnits, user?.has_full_sector_access, user?.allowed_sector_ids]);
 
     // Encapsulated filter state & resort period navigation (triggers backend Inertia partial reloads)
     const filtersHook = useReservationFilters({

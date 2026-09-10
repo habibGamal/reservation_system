@@ -32,7 +32,7 @@ const { Text } = Typography;
 interface GuestComboboxProps {
   value: string; // guest_id
   onChange: (guestId: string, guest?: Guest) => void;
-  guests: Guest[];
+  guests?: Guest[];
   initialGuest?: Guest | null;
   onGuestsUpdate?: (updatedGuests: Guest[]) => void;
   error?: string;
@@ -49,7 +49,7 @@ function getXsrfToken(): string {
 export function GuestCombobox({
   value,
   onChange,
-  guests,
+  guests = [],
   initialGuest,
   onGuestsUpdate,
   error,
@@ -75,6 +75,40 @@ export function GuestCombobox({
   const [isSubmittingNewGuest, setIsSubmittingNewGuest] = useState(false);
   const [createErrors, setCreateErrors] = useState<Record<string, string>>({});
 
+  // Lazy load initial recent guests if list is empty or only has initialGuest
+  useEffect(() => {
+    let isMounted = true;
+    if (allGuests.length <= 1) {
+      fetch('/guests', {
+        headers: {
+          Accept: 'application/json',
+        },
+        credentials: 'same-origin',
+      })
+        .then((res) => (res.ok ? res.json() : []))
+        .then((recentGuests: Guest[]) => {
+          if (!isMounted || !Array.isArray(recentGuests)) return;
+          setAllGuests((prev) => {
+            const map = new Map<number, Guest>();
+            prev.forEach((g) => map.set(g.id, g));
+            recentGuests.forEach((g) => {
+              if (!map.has(g.id)) map.set(g.id, g);
+            });
+            const merged = Array.from(map.values());
+            if (onGuestsUpdate) {
+              onGuestsUpdate(merged);
+            }
+            return merged;
+          });
+        })
+        .catch(() => {});
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Sync initialGuest
   useEffect(() => {
     if (initialGuest) {
@@ -92,12 +126,14 @@ export function GuestCombobox({
 
   // Sync external guests
   useEffect(() => {
-    setAllGuests((prev) => {
-      const existingIds = new Set(prev.map((g) => g.id));
-      const newlyAdded = guests.filter((g) => !existingIds.has(g.id));
-      if (newlyAdded.length === 0) return prev;
-      return [...newlyAdded, ...prev];
-    });
+    if (guests && guests.length > 0) {
+      setAllGuests((prev) => {
+        const existingIds = new Set(prev.map((g) => g.id));
+        const newlyAdded = guests.filter((g) => !existingIds.has(g.id));
+        if (newlyAdded.length === 0) return prev;
+        return [...newlyAdded, ...prev];
+      });
+    }
   }, [guests]);
 
   // Auto-fetch guest if value is set but guest is not in allGuests
