@@ -16,6 +16,7 @@ import {
 import {
   CheckOutlined,
   CloseOutlined,
+  EditOutlined,
   EyeOutlined,
   LoadingOutlined,
   PhoneOutlined,
@@ -74,6 +75,15 @@ export function GuestCombobox({
   const [newMilCode, setNewMilCode] = useState('');
   const [isSubmittingNewGuest, setIsSubmittingNewGuest] = useState(false);
   const [createErrors, setCreateErrors] = useState<Record<string, string>>({});
+
+  // Inline Quick Edit dialog state
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editGuest, setEditGuest] = useState<Guest | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editPhone, setEditPhone] = useState('');
+  const [editMilCode, setEditMilCode] = useState('');
+  const [isUpdatingGuest, setIsUpdatingGuest] = useState(false);
+  const [editErrors, setEditErrors] = useState<Record<string, string>>({});
 
   // Lazy load initial recent guests if list is empty or only has initialGuest
   useEffect(() => {
@@ -232,7 +242,7 @@ export function GuestCombobox({
 
     return allGuests.filter((g) => {
       const nameMatch = g.name.toLowerCase().includes(term);
-      const phoneMatch = g.phone.includes(term);
+      const phoneMatch = g.phone ? g.phone.includes(term) : false;
       const milMatch = g.mil_code ? g.mil_code.toLowerCase().includes(term) : false;
       return nameMatch || phoneMatch || milMatch;
     });
@@ -240,6 +250,11 @@ export function GuestCombobox({
 
   // Handle selecting a guest
   const handleSelect = (guestId: string) => {
+    if (guestId.startsWith('__CREATE_NEW__:')) {
+      const nameToCreate = guestId.replace('__CREATE_NEW__:', '');
+      handleQuickCreate(nameToCreate);
+      return;
+    }
     const found = allGuests.find((g) => String(g.id) === guestId);
     onChange(guestId, found);
     setSearchTerm('');
@@ -248,6 +263,60 @@ export function GuestCombobox({
   // Handle clear
   const handleClear = () => {
     onChange('', undefined);
+  };
+
+  // Immediate guest creation (when pressing Enter or clicking fast add with name)
+  const handleQuickCreate = async (nameToCreate: string) => {
+    const trimmedName = nameToCreate.trim();
+    if (!trimmedName) return;
+
+    setIsSubmittingNewGuest(true);
+
+    try {
+      const response = await fetch('/guests', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'X-XSRF-TOKEN': getXsrfToken(),
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          name: trimmedName,
+          phone: null,
+          mil_code: null,
+        }),
+      });
+
+      const resData = await response.json();
+
+      if (response.ok && resData.guest) {
+        const createdGuest: Guest = resData.guest;
+
+        setAllGuests((prev) => [createdGuest, ...prev]);
+        if (onGuestsUpdate) {
+          onGuestsUpdate([createdGuest, ...allGuests]);
+        }
+
+        // Auto-select the newly created guest
+        onChange(String(createdGuest.id), createdGuest);
+
+        setCreateDialogOpen(false);
+        setSearchTerm('');
+        message.success(`تم تسجيل النزيل "${createdGuest.name}" فوراً وتحديده في الحجز`);
+      } else if (response.status === 422 && resData.errors) {
+        const errorMsg = resData.errors.name
+          ? (Array.isArray(resData.errors.name) ? resData.errors.name[0] : resData.errors.name)
+          : 'بيانات النزيل غير صالحة';
+        message.error(errorMsg);
+      } else {
+        message.error(resData.message || 'حدث خطأ أثناء حفظ بيانات النزيل');
+      }
+    } catch {
+      message.error('تعذر الاتصال بالخادم، يرجى المحاولة مرة أخرى');
+    } finally {
+      setIsSubmittingNewGuest(false);
+    }
   };
 
   // Open inline creation modal
@@ -268,16 +337,84 @@ export function GuestCombobox({
     setCreateDialogOpen(true);
   };
 
+  // Open quick edit dialog
+  const openEditDialog = (guest: Guest) => {
+    setEditGuest(guest);
+    setEditName(guest.name || '');
+    setEditPhone(guest.phone || '');
+    setEditMilCode(guest.mil_code || '');
+    setEditErrors({});
+    setEditDialogOpen(true);
+  };
+
+  // Submit quick edit update
+  const handleUpdateGuest = async () => {
+    if (!editGuest) return;
+    setEditErrors({});
+
+    const trimmedName = editName.trim();
+    if (!trimmedName) {
+      setEditErrors({ name: 'اسم النزيل مطلوب' });
+      return;
+    }
+
+    setIsUpdatingGuest(true);
+
+    try {
+      const response = await fetch(`/guests/${editGuest.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'X-XSRF-TOKEN': getXsrfToken(),
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          name: trimmedName,
+          phone: editPhone.trim() || null,
+          mil_code: editMilCode.trim() || null,
+        }),
+      });
+
+      const resData = await response.json();
+
+      if (response.ok && resData.guest) {
+        const updated: Guest = resData.guest;
+        setAllGuests((prev) =>
+          prev.map((g) => (g.id === updated.id ? { ...g, ...updated } : g))
+        );
+        if (onGuestsUpdate) {
+          onGuestsUpdate(
+            allGuests.map((g) => (g.id === updated.id ? { ...g, ...updated } : g))
+          );
+        }
+        onChange(String(updated.id), updated);
+        setEditDialogOpen(false);
+        message.success(`تم تحديث بيانات النزيل "${updated.name}" بنجاح`);
+      } else if (response.status === 422 && resData.errors) {
+        const mappedErrors: Record<string, string> = {};
+        Object.keys(resData.errors).forEach((key) => {
+          mappedErrors[key] = Array.isArray(resData.errors[key])
+            ? resData.errors[key][0]
+            : resData.errors[key];
+        });
+        setEditErrors(mappedErrors);
+      } else {
+        message.error(resData.message || 'حدث خطأ أثناء تحديث بيانات النزيل');
+      }
+    } catch {
+      message.error('تعذر الاتصال بالخادم، يرجى المحاولة مرة أخرى');
+    } finally {
+      setIsUpdatingGuest(false);
+    }
+  };
+
   // Submit inline guest creation
   const handleCreateGuest = async () => {
     setCreateErrors({});
 
     if (!newName.trim()) {
       setCreateErrors((prev) => ({ ...prev, name: 'اسم النزيل مطلوب' }));
-      return;
-    }
-    if (!newPhone.trim()) {
-      setCreateErrors((prev) => ({ ...prev, phone: 'رقم الهاتف مطلوب' }));
       return;
     }
 
@@ -294,7 +431,7 @@ export function GuestCombobox({
         credentials: 'same-origin',
         body: JSON.stringify({
           name: newName.trim(),
-          phone: newPhone.trim(),
+          phone: newPhone.trim() || null,
           mil_code: newMilCode.trim() || null,
         }),
       });
@@ -336,11 +473,34 @@ export function GuestCombobox({
 
   // Select options mapped from filteredGuests
   const selectOptions = useMemo(() => {
-    const options = filteredGuests.map((guest) => ({
-      value: String(guest.id),
-      label: guest.name,
-      guest,
-    }));
+    const options: Array<{ value: string; label: string; guest?: Guest; isCreateAction?: boolean }> = [];
+
+    const term = searchTerm.trim();
+    const isDigitsOnly = /^[\d+ -]+$/.test(term);
+
+    // Map filtered guests
+    filteredGuests.forEach((guest) => {
+      options.push({
+        value: String(guest.id),
+        label: guest.name,
+        guest,
+      });
+    });
+
+    // If search term is entered and not digits only, add quick create option
+    if (term && !isDigitsOnly) {
+      const createActionOption = {
+        value: `__CREATE_NEW__:${term}`,
+        label: `+ تسجيل "${term}" كنزيل جديد فوراً (اضغط Enter)`,
+        isCreateAction: true,
+      };
+
+      if (filteredGuests.length === 0) {
+        options.unshift(createActionOption);
+      } else {
+        options.push(createActionOption);
+      }
+    }
 
     if (selectedGuest && !options.some((o) => o.value === String(selectedGuest.id))) {
       options.unshift({
@@ -351,7 +511,7 @@ export function GuestCombobox({
     }
 
     return options;
-  }, [filteredGuests, selectedGuest]);
+  }, [filteredGuests, selectedGuest, searchTerm]);
 
   return (
     <div className="w-full" dir="rtl">
@@ -408,7 +568,7 @@ export function GuestCombobox({
                 </div>
                 <div className="flex items-center gap-2 text-xs text-stone-500 dark:text-stone-400 mt-0.5 flex-wrap">
                   <span dir="ltr" className="font-mono font-medium">
-                    {selectedGuest.phone}
+                    {selectedGuest.phone || 'بدون رقم هاتف'}
                   </span>
                   {typeof selectedGuest.reservations_count === 'number' && (
                     <Tag color="cyan" className="text-[10px] m-0">
@@ -429,6 +589,18 @@ export function GuestCombobox({
                   className="text-sky-600 hover:text-sky-700 hover:bg-sky-50 dark:hover:bg-sky-950 text-xs px-2"
                 >
                   سجل النزيل
+                </Button>
+              )}
+
+              {!disabled && (
+                <Button
+                  type="text"
+                  size="small"
+                  icon={<EditOutlined />}
+                  onClick={() => openEditDialog(selectedGuest)}
+                  className="text-amber-600 hover:text-amber-700 hover:bg-amber-50 dark:hover:bg-amber-950 text-xs px-2 font-medium"
+                >
+                  تعديل سريع
                 </Button>
               )}
 
@@ -464,6 +636,17 @@ export function GuestCombobox({
               searchValue: searchTerm,
               onSearch: setSearchTerm,
             }}
+            onInputKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const term = searchTerm.trim();
+                const isDigitsOnly = /^[\d+ -]+$/.test(term);
+                if (term && !isDigitsOnly && filteredGuests.length === 0) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleQuickCreate(term);
+                }
+              }
+            }}
             value={value ? String(value) : undefined}
             placeholder="ابحث بالاسم، رقم الهاتف، أو الرقم العسكري..."
             status={error ? 'error' : undefined}
@@ -479,7 +662,16 @@ export function GuestCombobox({
               )
             }
             optionRender={(option) => {
+              if (option.data.isCreateAction) {
+                return (
+                  <div className="flex items-center gap-2 py-1.5 text-sky-600 dark:text-sky-400 font-semibold text-xs">
+                    <UserAddOutlined className="text-sm shrink-0" />
+                    <span className="truncate">{option.data.label}</span>
+                  </div>
+                );
+              }
               const g = option.data.guest as Guest;
+              if (!g) return <span>{option.data.label}</span>;
               return (
                 <div className="flex items-center justify-between py-1">
                   <div className="flex items-center gap-2 min-w-0">
@@ -494,7 +686,7 @@ export function GuestCombobox({
                         )}
                       </div>
                       <div dir="ltr" className="font-mono text-[11px] text-stone-400">
-                        {g.phone}
+                        {g.phone || 'بدون رقم هاتف'}
                       </div>
                     </div>
                   </div>
@@ -513,11 +705,19 @@ export function GuestCombobox({
                     type="link"
                     size="small"
                     icon={<UserAddOutlined />}
-                    onClick={openCreateDialog}
+                    onClick={() => {
+                      const term = searchTerm.trim();
+                      const isDigitsOnly = /^[\d+ -]+$/.test(term);
+                      if (term && !isDigitsOnly) {
+                        handleQuickCreate(term);
+                      } else {
+                        openCreateDialog();
+                      }
+                    }}
                     className="w-full text-right justify-start font-semibold text-xs text-sky-600 p-0 h-7"
                   >
-                    {searchTerm.trim()
-                      ? `إضافة نزيل جديد باسم "${searchTerm.trim()}"`
+                    {searchTerm.trim() && !/^[\d+ -]+$/.test(searchTerm.trim())
+                      ? `إضافة وتسجيل "${searchTerm.trim()}" كنزيل جديد فوراً (اضغط Enter)`
                       : 'إضافة وتسجيل نزيل جديد الآن'}
                   </Button>
                 </div>
@@ -527,11 +727,22 @@ export function GuestCombobox({
                     <p>لم يتم العثور على نزلاء مطابقين.</p>
                     <Button
                       size="small"
+                      type="primary"
                       icon={<PlusOutlined />}
-                      onClick={openCreateDialog}
+                      onClick={() => {
+                        const term = searchTerm.trim();
+                        const isDigitsOnly = /^[\d+ -]+$/.test(term);
+                        if (term && !isDigitsOnly) {
+                          handleQuickCreate(term);
+                        } else {
+                          openCreateDialog();
+                        }
+                      }}
                       className="mt-2 text-xs"
                     >
-                      تسجيل هذا النزيل كملف جديد
+                      {searchTerm.trim() && !/^[\d+ -]+$/.test(searchTerm.trim())
+                        ? `تسجيل "${searchTerm.trim()}" كنزيل جديد فوراً`
+                        : 'تسجيل هذا النزيل كملف جديد'}
                     </Button>
                   </div>
                 )}
@@ -570,7 +781,7 @@ export function GuestCombobox({
           قم بإدخال بيانات النزيل ليتم حفظه فوراً وربطه بالحجز الحالي بدون مغادرة النموذج.
         </p>
 
-        <Form layout="vertical" className="pt-2">
+        <Form layout="vertical" onFinish={handleCreateGuest} className="pt-2">
           <Form.Item
             label="الاسم الكامل"
             required
@@ -584,14 +795,14 @@ export function GuestCombobox({
                 setNewName(e.target.value);
                 if (createErrors.name) setCreateErrors((prev) => ({ ...prev, name: '' }));
               }}
+              onPressEnter={handleCreateGuest}
               placeholder="مثال: أحمد منصور عبد الله"
               autoFocus
             />
           </Form.Item>
 
           <Form.Item
-            label="رقم الهاتف / الموبايل"
-            required
+            label="رقم الهاتف / الموبايل (اختياري)"
             validateStatus={createErrors.phone ? 'error' : ''}
             help={createErrors.phone}
           >
@@ -602,6 +813,7 @@ export function GuestCombobox({
                 setNewPhone(e.target.value);
                 if (createErrors.phone) setCreateErrors((prev) => ({ ...prev, phone: '' }));
               }}
+              onPressEnter={handleCreateGuest}
               placeholder="مثال: 01012345678"
               className="font-mono text-left"
               dir="ltr"
@@ -618,6 +830,86 @@ export function GuestCombobox({
               prefix={<SafetyCertificateOutlined className="text-stone-400" />}
               value={newMilCode}
               onChange={(e) => setNewMilCode(e.target.value)}
+              onPressEnter={handleCreateGuest}
+              placeholder="مثال: M-9842 أو 1234567"
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* Inline Quick Edit Guest Modal */}
+      <Modal
+        open={editDialogOpen}
+        onCancel={() => setEditDialogOpen(false)}
+        title={
+          <Space>
+            <EditOutlined className="text-amber-600" />
+            <span>تعديل سريع لبيانات النزيل</span>
+          </Space>
+        }
+        onOk={handleUpdateGuest}
+        confirmLoading={isUpdatingGuest}
+        okText="حفظ التعديلات"
+        cancelText="إلغاء"
+        destroyOnHidden
+        centered
+        width="min(460px, calc(100vw - 24px))"
+        style={{ maxWidth: 'calc(100vw - 24px)', margin: '8px auto' }}
+      >
+        <p className="text-xs text-stone-500 mb-4">
+          يمكنك تعديل اسم النزيل أو إضافة رقم الهاتف والرقم العسكري فوراً مع تحديث بيانات الحجز تلقائياً.
+        </p>
+
+        <Form layout="vertical" onFinish={handleUpdateGuest} className="pt-2">
+          <Form.Item
+            label="الاسم الكامل"
+            required
+            validateStatus={editErrors.name ? 'error' : ''}
+            help={editErrors.name}
+          >
+            <Input
+              prefix={<UserOutlined className="text-stone-400" />}
+              value={editName}
+              onChange={(e) => {
+                setEditName(e.target.value);
+                if (editErrors.name) setEditErrors((prev) => ({ ...prev, name: '' }));
+              }}
+              onPressEnter={handleUpdateGuest}
+              placeholder="مثال: أحمد منصور عبد الله"
+              autoFocus
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="رقم الهاتف / الموبايل (اختياري)"
+            validateStatus={editErrors.phone ? 'error' : ''}
+            help={editErrors.phone}
+          >
+            <Input
+              prefix={<PhoneOutlined className="text-stone-400" />}
+              value={editPhone}
+              onChange={(e) => {
+                setEditPhone(e.target.value);
+                if (editErrors.phone) setEditErrors((prev) => ({ ...prev, phone: '' }));
+              }}
+              onPressEnter={handleUpdateGuest}
+              placeholder="مثال: 01012345678"
+              className="font-mono text-left"
+              dir="ltr"
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="الرقم العسكري / القومي (اختياري)"
+            validateStatus={editErrors.mil_code ? 'error' : ''}
+            help={editErrors.mil_code}
+            extra="للفئات العسكرية والأعضاء"
+          >
+            <Input
+              prefix={<SafetyCertificateOutlined className="text-stone-400" />}
+              value={editMilCode}
+              onChange={(e) => setEditMilCode(e.target.value)}
+              onPressEnter={handleUpdateGuest}
               placeholder="مثال: M-9842 أو 1234567"
             />
           </Form.Item>

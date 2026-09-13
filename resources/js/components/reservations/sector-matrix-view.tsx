@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { usePage } from '@inertiajs/react';
 import { Button, Dropdown, Input, Segmented, Tag } from 'antd';
 import type { MenuProps } from 'antd';
@@ -28,8 +28,12 @@ interface SectorMatrixViewProps {
     sectors: Sector[];
     reservations?: Reservation[];
     isDateFiltered?: boolean;
+    statusFilters?: string[];
+    search?: string;
+    paymentStatus?: string;
     onBookUnit: (unit: Unit) => void;
     onEditReservation: (reservation: Reservation) => void;
+    onResetFilters?: () => void;
 }
 
 type OccupancyFilter = 'all' | 'vacant' | 'occupied' | 'departed';
@@ -38,8 +42,12 @@ export function SectorMatrixView({
     sectors,
     reservations = [],
     isDateFiltered = false,
+    statusFilters = [],
+    search = '',
+    paymentStatus = 'all',
     onBookUnit,
     onEditReservation,
+    onResetFilters,
 }: SectorMatrixViewProps) {
     const { auth } = usePage<SharedProps>().props;
     const user = auth?.user;
@@ -55,12 +63,28 @@ export function SectorMatrixView({
         return sectors.filter((s) => allowed.includes(s.id));
     }, [sectors, user?.has_full_sector_access, user?.allowed_sector_ids]);
 
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState(search || '');
     const [occupancyFilter, setOccupancyFilter] =
         useState<OccupancyFilter>('all');
     const [collapsedSectors, setCollapsedSectors] = useState<
         Record<number, boolean>
     >({});
+
+    // Synchronize local searchTerm with external search prop
+    useEffect(() => {
+        setSearchTerm(search || '');
+    }, [search]);
+
+    const effectiveSearch = (searchTerm || search || '').trim().toLowerCase();
+    const hasStatusFilter = Boolean(statusFilters && statusFilters.length > 0);
+    const hasPaymentFilter = Boolean(paymentStatus && paymentStatus !== 'all');
+    const hasSearchFilter = Boolean(effectiveSearch !== '');
+    const hasOccupancyFilter = occupancyFilter !== 'all';
+    const hasActiveFilter =
+        hasStatusFilter ||
+        hasPaymentFilter ||
+        hasSearchFilter ||
+        hasOccupancyFilter;
 
     const toggleSector = (sectorId: number) => {
         setCollapsedSectors((prev) => ({
@@ -309,37 +333,63 @@ function getResStatusTag(status: ReservationStatus | string) {
         }
     };
 
-    // Filter sectors and units
+    // Filter sectors and units based on active filters
     const filteredSectors = useMemo(() => {
         return allowedSectors
             .map((sector) => {
                 const units = (sector.units || []).filter((unit) => {
                     const resList = getUnitReservations(unit);
 
-                    if (searchTerm) {
-                        const term = searchTerm.toLowerCase();
-                        const matchesName = (unit.name || '')
+                    // If NO filters are active, show all units in the sector (default matrix state for period)
+                    if (!hasActiveFilter) {
+                        return true;
+                    }
+
+                    // 1. Status Filter: Unit must have at least one reservation with matching status
+                    if (hasStatusFilter) {
+                        const hasMatchingStatus = resList.some((r) =>
+                            statusFilters.includes(r.status),
+                        );
+                        if (!hasMatchingStatus) return false;
+                    }
+
+                    // 2. Payment Status Filter: Backend query already filtered reservations by payment_status,
+                    // so unit must have at least one reservation
+                    if (hasPaymentFilter) {
+                        if (resList.length === 0) return false;
+                    }
+
+                    // 3. Search Filter: Matches unit name OR guest/reservation details
+                    if (hasSearchFilter) {
+                        const matchesUnitName = (unit.name || '')
                             .toLowerCase()
-                            .includes(term);
-                        const matchesAnyGuest = resList.some(
+                            .includes(effectiveSearch);
+                        const matchesReservation = resList.some(
                             (r) =>
                                 (r.guest?.name || '')
                                     .toLowerCase()
-                                    .includes(term) ||
-                                (r.guest?.phone || '').includes(term) ||
+                                    .includes(effectiveSearch) ||
+                                (r.guest?.phone || '').includes(
+                                    effectiveSearch,
+                                ) ||
                                 (r.guest?.mil_code || '')
                                     .toLowerCase()
-                                    .includes(term) ||
+                                    .includes(effectiveSearch) ||
+                                (r.notes || '')
+                                    .toLowerCase()
+                                    .includes(effectiveSearch) ||
+                                String(r.id).includes(effectiveSearch) ||
                                 (r.type || '')
                                     .toLowerCase()
-                                    .includes(term) ||
+                                    .includes(effectiveSearch) ||
                                 (r.status || '')
                                     .toLowerCase()
-                                    .includes(term),
+                                    .includes(effectiveSearch),
                         );
-                        if (!matchesName && !matchesAnyGuest) return false;
+                        if (!matchesUnitName && !matchesReservation) return false;
                     }
 
+                    // 4. Matrix Occupancy Filter
                     if (occupancyFilter === 'vacant') {
                         if (resList.length > 0) return false;
                     } else if (occupancyFilter === 'occupied') {
@@ -364,8 +414,40 @@ function getResStatusTag(status: ReservationStatus | string) {
                     filteredUnits: units,
                 };
             })
-            .filter((sector) => sector.filteredUnits.length > 0 || !searchTerm);
-    }, [allowedSectors, searchTerm, occupancyFilter, unitReservationsMap]);
+            .filter((sector) => sector.filteredUnits.length > 0);
+    }, [
+        allowedSectors,
+        hasActiveFilter,
+        hasStatusFilter,
+        statusFilters,
+        hasPaymentFilter,
+        hasSearchFilter,
+        effectiveSearch,
+        occupancyFilter,
+        unitReservationsMap,
+    ]);
+
+    const totalMatchingUnits = useMemo(() => {
+        return filteredSectors.reduce(
+            (acc, sec) => acc + sec.filteredUnits.length,
+            0,
+        );
+    }, [filteredSectors]);
+
+    const totalResortUnits = useMemo(() => {
+        return allowedSectors.reduce(
+            (acc, sec) => acc + (sec.units?.length || 0),
+            0,
+        );
+    }, [allowedSectors]);
+
+    const handleResetAllFilters = () => {
+        setSearchTerm('');
+        setOccupancyFilter('all');
+        if (onResetFilters) {
+            onResetFilters();
+        }
+    };
 
     return (
         <div className="space-y-4" dir="rtl">
@@ -486,11 +568,45 @@ function getResStatusTag(status: ReservationStatus | string) {
                 </div>
             </div>
 
+            {/* Active Filter Summary Banner */}
+            {hasActiveFilter && (
+                <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2.5 bg-primary/5 border border-primary/20 rounded-xl text-xs">
+                    <div className="flex items-center gap-2">
+                        <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse shrink-0" />
+                        <span className="font-bold text-primary">تم تطبيق الفلترة:</span>
+                        <span className="text-foreground">
+                            يتم عرض <strong>{totalMatchingUnits}</strong> وحدة مطابقة من إجمالي <strong>{totalResortUnits}</strong> وحدة في المنتجع
+                        </span>
+                    </div>
+                    {onResetFilters && (
+                        <Button
+                            type="link"
+                            size="small"
+                            onClick={handleResetAllFilters}
+                            className="h-auto p-0 text-xs text-red-600 hover:text-red-700 font-semibold"
+                        >
+                            إلغاء الفلاتر وعرض كافة الوحدات
+                        </Button>
+                    )}
+                </div>
+            )}
+
             {/* Sectors Accordion List */}
             <div className="space-y-4">
                 {filteredSectors.length === 0 ? (
-                    <div className="bg-card text-muted-foreground rounded-xl border p-12 text-center">
-                        لا توجد وحدات مطابقة لمعايير البحث في المصفوفة
+                    <div className="bg-card text-muted-foreground rounded-xl border p-12 text-center space-y-3">
+                        <p className="text-sm font-medium">
+                            لا توجد وحدات مطابقة لمعايير الفلترة المحددة في المصفوفة
+                        </p>
+                        {hasActiveFilter && onResetFilters && (
+                            <Button
+                                type="primary"
+                                size="small"
+                                onClick={handleResetAllFilters}
+                            >
+                                إلغاء الفلاتر وعرض كافة الوحدات
+                            </Button>
+                        )}
                     </div>
                 ) : (
                     filteredSectors.map((sector) => {
@@ -542,8 +658,13 @@ function getResStatusTag(status: ReservationStatus | string) {
                                             <h3 className="text-foreground flex items-center gap-1.5 sm:gap-2 font-bold text-xs sm:text-sm">
                                                 <span className="truncate">{sector.name}</span>
                                                 <span className="text-muted-foreground font-normal text-[11px] sm:text-xs shrink-0">
-                                                    ({allSectorUnits.length}{' '}
-                                                    وحدة)
+                                                    {hasActiveFilter ? (
+                                                        <span className="text-primary font-medium">
+                                                            ({sector.filteredUnits.length} من {allSectorUnits.length} وحدة)
+                                                        </span>
+                                                    ) : (
+                                                        `(${allSectorUnits.length} وحدة)`
+                                                    )}
                                                 </span>
                                             </h3>
                                         </div>
@@ -551,46 +672,61 @@ function getResStatusTag(status: ReservationStatus | string) {
 
                                     <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                                         <div className="text-muted-foreground hidden items-center gap-2 text-xs sm:flex">
-                                            <span>
-                                                مشغول:{' '}
-                                                <strong className="text-foreground">
-                                                    {occupiedSectorUnits}
-                                                </strong>
-                                            </span>
-                                            {departedSectorUnits > 0 && (
+                                            {hasActiveFilter ? (
+                                                <span>
+                                                    مطابق للفلاتر:{' '}
+                                                    <strong className="text-primary font-bold">
+                                                        {sector.filteredUnits.length}
+                                                    </strong>
+                                                </span>
+                                            ) : (
                                                 <>
+                                                    <span>
+                                                        مشغول:{' '}
+                                                        <strong className="text-foreground">
+                                                            {occupiedSectorUnits}
+                                                        </strong>
+                                                    </span>
+                                                    {departedSectorUnits > 0 && (
+                                                        <>
+                                                            <span className="text-muted-foreground/50">
+                                                                •
+                                                            </span>
+                                                            <span>
+                                                                غادر:{' '}
+                                                                <strong className="text-red-600 dark:text-red-400">
+                                                                    {departedSectorUnits}
+                                                                </strong>
+                                                            </span>
+                                                        </>
+                                                    )}
                                                     <span className="text-muted-foreground/50">
                                                         •
                                                     </span>
                                                     <span>
-                                                        غادر:{' '}
-                                                        <strong className="text-red-600 dark:text-red-400">
-                                                            {departedSectorUnits}
+                                                        شاغر:{' '}
+                                                        <strong className="text-emerald-600 dark:text-emerald-400">
+                                                            {vacantSectorUnits}
                                                         </strong>
                                                     </span>
                                                 </>
                                             )}
-                                            <span className="text-muted-foreground/50">
-                                                •
-                                            </span>
-                                            <span>
-                                                شاغر:{' '}
-                                                <strong className="text-emerald-600 dark:text-emerald-400">
-                                                    {vacantSectorUnits}
-                                                </strong>
-                                            </span>
                                         </div>
 
                                         <Tag
                                             color={
-                                                sectorRate > 75
-                                                    ? 'error'
-                                                    : sectorRate > 40
-                                                      ? 'processing'
-                                                      : 'success'
+                                                hasActiveFilter
+                                                    ? 'processing'
+                                                    : sectorRate > 75
+                                                      ? 'error'
+                                                      : sectorRate > 40
+                                                        ? 'processing'
+                                                        : 'success'
                                             }
                                         >
-                                            إشغال {sectorRate}%
+                                            {hasActiveFilter
+                                                ? `${sector.filteredUnits.length} معروض`
+                                                : `إشغال ${sectorRate}%`}
                                         </Tag>
 
                                         <Button

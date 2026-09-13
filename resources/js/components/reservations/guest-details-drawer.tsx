@@ -167,7 +167,7 @@ export function GuestDetailsDrawer({
                 <Space>
                   <PhoneOutlined className="text-stone-400" />
                   <span dir="ltr" className="font-mono font-semibold text-sm">
-                    {guestData.phone}
+                    {guestData.phone || 'بدون رقم هاتف'}
                   </span>
                 </Space>
 

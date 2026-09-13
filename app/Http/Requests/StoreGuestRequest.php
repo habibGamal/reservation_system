@@ -12,7 +12,9 @@ class StoreGuestRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()?->can('guests.manage') ?? false;
+        $user = $this->user();
+
+        return $user && ($user->can('guests.manage') || $user->can('reservations.create') || $user->can('reservations.edit'));
     }
 
     /**
@@ -24,7 +26,7 @@ class StoreGuestRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:50'],
+            'phone' => ['nullable', 'string', 'max:50'],
             'mil_code' => ['nullable', 'string', 'max:100'],
         ];
     }
@@ -36,7 +38,6 @@ class StoreGuestRequest extends FormRequest
     {
         return [
             'name.required' => 'اسم النزيل مطلوب',
-            'phone.required' => 'رقم الهاتف مطلوب',
         ];
     }
 }

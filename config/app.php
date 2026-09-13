@@ -125,6 +125,5 @@ return [
 
     'manage_operations_url' => env('MANAGE_OPERATIONS_URL'),
     'management_secret_key' => env('MANAGEMENT_SECRET_KEY'),
-    
 
 ];

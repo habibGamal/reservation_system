@@ -26,7 +26,9 @@ import {
 import {
   CalculatorOutlined,
   CalendarOutlined,
+  CheckCircleFilled,
   CheckCircleOutlined,
+  ClockCircleOutlined,
   CoffeeOutlined,
   DeleteOutlined,
   DollarOutlined,
@@ -37,6 +39,7 @@ import {
   IdcardOutlined,
   InfoCircleOutlined,
   LockOutlined,
+  LogoutOutlined,
   PaperClipOutlined,
   PictureOutlined,
   PlusOutlined,
@@ -63,6 +66,56 @@ import {
 } from '@/types/reservation';
 
 const { Text } = Typography;
+
+const STATUS_CONFIG: Record<
+  ReservationStatus,
+  {
+    label: string;
+    description: string;
+    icon: React.ReactNode;
+    color: string;
+    badgeBg: string;
+    selectClass: string;
+    textClass: string;
+  }
+> = {
+  'تم التسكين': {
+    label: 'تم التسكين',
+    description: 'النزيل متواجد ومقيم حالياً',
+    icon: <CheckCircleFilled className="text-emerald-600 dark:text-emerald-400" />,
+    color: 'success',
+    badgeBg: '#10b981',
+    selectClass: 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/40 shadow-emerald-500/10',
+    textClass: 'text-emerald-800 dark:text-emerald-300',
+  },
+  'ثابت': {
+    label: 'ثابت',
+    description: 'حجز مؤكد ومحجوز',
+    icon: <CheckCircleOutlined className="text-sky-600 dark:text-sky-400" />,
+    color: 'processing',
+    badgeBg: '#0284c7',
+    selectClass: 'border-sky-500 bg-sky-50/80 dark:bg-sky-950/40 shadow-sky-500/10',
+    textClass: 'text-sky-800 dark:text-sky-300',
+  },
+  'انتظار': {
+    label: 'انتظار',
+    description: 'قيد الانتظار والمراجعة',
+    icon: <ClockCircleOutlined className="text-amber-600 dark:text-amber-400" />,
+    color: 'warning',
+    badgeBg: '#f59e0b',
+    selectClass: 'border-amber-500 bg-amber-50/80 dark:bg-amber-950/40 shadow-amber-500/10',
+    textClass: 'text-amber-800 dark:text-amber-300',
+  },
+  'غادر': {
+    label: 'غادر',
+    description: 'تم إنهاء الإقامة والمغادرة',
+    icon: <LogoutOutlined className="text-stone-500 dark:text-stone-400" />,
+    color: 'default',
+    badgeBg: '#64748b',
+    selectClass: 'border-stone-400 bg-stone-100/80 dark:bg-stone-800/40 shadow-stone-500/10',
+    textClass: 'text-stone-700 dark:text-stone-300',
+  },
+};
 
 interface ReservationFormDialogProps {
   open: boolean;
@@ -333,7 +386,7 @@ export function ReservationFormDialog({
               }
             }
           })
-          .catch(() => {})
+          .catch(() => { })
           .finally(() => {
             setIsLoadingDetails(false);
           });
@@ -361,9 +414,9 @@ export function ReservationFormDialog({
           unit_id: targetUnitId,
           check_in: initialCheckIn,
           check_out: initialCheckOut,
-          status: 'ثابت',
+          status: 'انتظار',
           type: 'فرع',
-          membership: 'عضو',
+          membership: 'غير عضو',
           enter_from_gates: false,
           has_meals: hasMealsDefault,
           meals_persons_count: 4,
@@ -716,15 +769,17 @@ export function ReservationFormDialog({
   }, [filteredUnits]);
 
   // Ensure editing reservation's guest is always present in guest options
+  const [localGuests, setLocalGuests] = useState<Guest[]>([]);
   const allAvailableGuests = useMemo(() => {
+    const base = localGuests.length > 0 ? localGuests : guests;
     if (reservation?.guest) {
-      const exists = guests.some((g) => g.id === reservation.guest!.id);
+      const exists = base.some((g) => g.id === reservation.guest!.id);
       if (!exists) {
-        return [reservation.guest, ...guests];
+        return [reservation.guest, ...base];
       }
     }
-    return guests;
-  }, [guests, reservation?.guest]);
+    return base;
+  }, [guests, localGuests, reservation?.guest]);
 
   return (
     <Modal
@@ -910,6 +965,7 @@ export function ReservationFormDialog({
                 onChange={(val) => setData('guest_id', val)}
                 guests={allAvailableGuests}
                 initialGuest={reservation?.guest}
+                onGuestsUpdate={setLocalGuests}
                 error={errors.guest_id}
                 disabled={isReadOnly}
                 onViewGuestDetails={onViewGuestDetails}
@@ -1042,18 +1098,48 @@ export function ReservationFormDialog({
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={12} md={6}>
                 <Form.Item label={<span className="text-xs font-semibold text-stone-700 dark:text-stone-300">حالة الحجز</span>} className="mb-0">
-                  <Select
-                    value={data.status}
-                    onChange={(val) => setData('status', val as ReservationStatus)}
-                    options={[
-                      { value: 'ثابت', label: 'ثابت' },
-                      { value: 'انتظار', label: 'انتظار' },
-                      { value: 'تم التسكين', label: 'تم التسكين (نشط)' },
-                      { value: 'غادر', label: 'غادر' },
-                    ]}
-                    disabled={isReadOnly}
-                    className="w-full"
-                  />
+                  <div
+                    className={`rounded-lg border-2 p-0.5 transition-all duration-200 shadow-sm ${STATUS_CONFIG[data.status]?.selectClass || 'border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800'
+                      }`}
+                  >
+                    <Select
+                      value={data.status}
+                      onChange={(val) => setData('status', val as ReservationStatus)}
+                      options={[
+                        { value: 'ثابت', label: 'ثابت' },
+                        { value: 'انتظار', label: 'انتظار' },
+                        { value: 'تم التسكين', label: 'تم التسكين (نشط)' },
+                        { value: 'غادر', label: 'غادر' },
+                      ]}
+                      disabled={isReadOnly}
+                      className="w-full font-bold"
+                      variant="borderless"
+                      labelRender={(props) => {
+                        const status = (props.value as ReservationStatus) || data.status;
+                        const config = STATUS_CONFIG[status];
+                        if (!config) return <span>{props.label}</span>;
+                        return (
+                          <div className="flex items-center gap-1.5 font-bold text-xs py-0.5">
+                            <span className="text-sm shrink-0">{config.icon}</span>
+                            <span className={config.textClass}>{config.label}</span>
+                          </div>
+                        );
+                      }}
+                      optionRender={(option) => {
+                        const status = option.value as ReservationStatus;
+                        const config = STATUS_CONFIG[status];
+                        if (!config) return <span>{option.label}</span>;
+                        return (
+                          <div className="flex items-center justify-between py-1 px-1">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm shrink-0">{config.icon}</span>
+                              <span className={`font-bold text-xs ${config.textClass}`}>{config.label}</span>
+                            </div>
+                          </div>
+                        );
+                      }}
+                    />
+                  </div>
                 </Form.Item>
               </Col>
 
@@ -1340,6 +1426,19 @@ export function ReservationFormDialog({
                 </Space>
               )}
             </div>
+
+            {/* Price of one night highlight banner */}
+            {ratePerNight > 0 && (
+              <div className="mb-3 px-3 py-2 rounded-lg bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/80 flex items-center justify-between text-xs flex-wrap gap-2">
+                <span className="text-stone-600 dark:text-stone-300 font-medium flex items-center gap-1.5">
+                  <DollarOutlined className="text-blue-600 dark:text-blue-400" />
+                  <span>سعر الليلة الواحدة (وفقاً لفئة {data.membership}):</span>
+                </span>
+                <Tag color="blue" className="text-xs font-bold font-mono m-0 px-2.5 py-0.5">
+                  {ratePerNight.toLocaleString('ar-EG')} ج.م / ليلة
+                </Tag>
+              </div>
+            )}
 
             {/* Price breakdown cards */}
             {(nightsCount > 0 || calculatedTotalPrice > 0) && (

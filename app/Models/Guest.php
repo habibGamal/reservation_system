@@ -12,7 +12,7 @@ use Spatie\Activitylog\Support\LogOptions;
 /**
  * @property int $id
  * @property string $name
- * @property string $phone
+ * @property string|null $phone
  * @property string|null $mil_code
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at

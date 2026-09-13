@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Row, Statistic } from 'antd';
+import { Card, Col, Row, Statistic, Tooltip } from 'antd';
 import { KPIStats, ReservationStatus } from '@/types/reservation';
 import {
     BedDouble,
@@ -7,22 +7,25 @@ import {
     Clock,
     Layers,
     LogOut,
-    TrendingDown,
     TrendingUp,
 } from 'lucide-react';
 
 interface KpiDashboardProps {
     stats: KPIStats;
+    totalUnits?: number;
     currentStatusFilter?: ReservationStatus | null;
     currentStatusFilters?: (ReservationStatus | string)[];
     onSelectStatusFilter?: (status: ReservationStatus | null) => void;
+    onSelectStatusesFilter?: (statuses: ReservationStatus[]) => void;
 }
 
 export function KpiDashboard({
     stats,
+    totalUnits,
     currentStatusFilter,
     currentStatusFilters,
     onSelectStatusFilter,
+    onSelectStatusesFilter,
 }: KpiDashboardProps) {
     const activeStatuses = React.useMemo(() => {
         if (currentStatusFilters !== undefined) {
@@ -34,10 +37,29 @@ export function KpiDashboard({
         return [];
     }, [currentStatusFilters, currentStatusFilter]);
 
+    const actualCount = (stats.checked_in || 0) + (stats.waiting || 0);
+
+    const occupancyRate = React.useMemo(() => {
+        if (totalUnits && totalUnits > 0 && actualCount <= totalUnits) {
+            return Math.round((actualCount / totalUnits) * 100);
+        }
+        if (stats.total > 0) {
+            return Math.round((actualCount / stats.total) * 100);
+        }
+        return 0;
+    }, [actualCount, totalUnits, stats.total]);
+
+    const isActualActive =
+        activeStatuses.length === 2 &&
+        activeStatuses.includes('تم التسكين') &&
+        activeStatuses.includes('انتظار');
+
     const isTotalActive = activeStatuses.length === 0;
-    const isCheckedInActive = activeStatuses.includes('تم التسكين');
+    const isCheckedInActive =
+        !isActualActive && activeStatuses.length === 1 && activeStatuses.includes('تم التسكين');
     const isConfirmedActive = activeStatuses.includes('ثابت');
-    const isWaitingActive = activeStatuses.includes('انتظار');
+    const isWaitingActive =
+        !isActualActive && activeStatuses.length === 1 && activeStatuses.includes('انتظار');
     const isDepartedActive = activeStatuses.includes('غادر');
 
     const handleCardClick = (status: ReservationStatus | null) => {
@@ -45,11 +67,23 @@ export function KpiDashboard({
         onSelectStatusFilter(status);
     };
 
+    const handleActualOccupancyClick = () => {
+        if (onSelectStatusesFilter) {
+            if (isActualActive) {
+                onSelectStatusesFilter([]);
+            } else {
+                onSelectStatusesFilter(['تم التسكين', 'انتظار']);
+            }
+        } else if (onSelectStatusFilter) {
+            onSelectStatusFilter(isActualActive ? null : 'تم التسكين');
+        }
+    };
+
     return (
         <div dir="rtl" className="w-full">
             <Row gutter={[12, 12]}>
                 {/* 1. Total Reservations */}
-                <Col xs={12} sm={6} lg={4} xl={3} className="flex-1">
+                <Col xs={12} sm={8} lg={4} className="flex-1">
                     <Card
                         hoverable
                         size="small"
@@ -83,8 +117,60 @@ export function KpiDashboard({
                     </Card>
                 </Col>
 
-                {/* 2. Checked-in */}
-                <Col xs={12} sm={6} lg={4} xl={3} className="flex-1">
+                {/* 2. Actual Occupancy Rate (نسبة الإسكان الفعلي) */}
+                <Col xs={12} sm={8} lg={4} className="flex-1">
+                    <Tooltip
+                        title={`الإسكان الفعلي: ${actualCount} وحدة (${occupancyRate}% من الطاقة الاستيعابية) - يشمل النزلاء المسكنين (${stats.checked_in}) وقائمة الانتظار (${stats.waiting})`}
+                    >
+                        <Card
+                            hoverable
+                            size="small"
+                            onClick={handleActualOccupancyClick}
+                            className={`cursor-pointer transition-all ${isActualActive
+                                ? 'border-indigo-600 bg-indigo-50/80 shadow-xs ring-2 ring-indigo-500/30 dark:bg-indigo-950/50'
+                                : 'border-indigo-100 bg-gradient-to-br from-indigo-50/40 via-white to-white opacity-90 hover:opacity-100 dark:border-indigo-900/40 dark:from-indigo-950/20 dark:via-stone-900 dark:to-stone-900'
+                                }`}
+                            styles={{ body: { padding: '12px 14px' } }}
+                        >
+                            <div className="flex items-center justify-between">
+                                <span className="text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+                                    نسبة الإسكان الفعلي
+                                </span>
+                                <TrendingUp className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                            </div>
+                            <div className="flex items-baseline justify-between gap-1">
+                                <Statistic
+                                    value={occupancyRate}
+                                    suffix="%"
+                                    styles={{
+                                        content: {
+                                            fontSize: '1.5rem',
+                                            fontWeight: 700,
+                                            color: '#6366f1',
+                                            lineHeight: 1.2,
+                                            marginTop: 4,
+                                        },
+                                    }}
+                                />
+                                <span className="text-[11px] font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-100/80 dark:bg-indigo-900/60 px-1.5 py-0.5 rounded">
+                                    {actualCount} فعلي
+                                </span>
+                            </div>
+                            <div className="mt-1 flex items-center justify-between text-[11px] border-t border-indigo-100 dark:border-indigo-900/40 pt-1">
+                                <span className="text-emerald-700 dark:text-emerald-400 font-medium">
+                                    تسكين: <strong className="font-bold">{stats.checked_in}</strong>
+                                </span>
+                                <span className="text-stone-300 dark:text-stone-600">•</span>
+                                <span className="text-amber-700 dark:text-amber-400 font-medium">
+                                    انتظار: <strong className="font-bold">{stats.waiting}</strong>
+                                </span>
+                            </div>
+                        </Card>
+                    </Tooltip>
+                </Col>
+
+                {/* 3. Checked-in */}
+                <Col xs={12} sm={8} lg={4} className="flex-1">
                     <Card
                         hoverable
                         size="small"
@@ -119,8 +205,8 @@ export function KpiDashboard({
                     </Card>
                 </Col>
 
-                {/* 3. Confirmed */}
-                <Col xs={12} sm={6} lg={4} xl={3} className="flex-1">
+                {/* 4. Confirmed */}
+                <Col xs={12} sm={8} lg={4} className="flex-1">
                     <Card
                         hoverable
                         size="small"
@@ -155,8 +241,8 @@ export function KpiDashboard({
                     </Card>
                 </Col>
 
-                {/* 4. Waiting */}
-                <Col xs={12} sm={6} lg={4} xl={3} className="flex-1">
+                {/* 5. Waiting */}
+                <Col xs={12} sm={8} lg={4} className="flex-1">
                     <Card
                         hoverable
                         size="small"
@@ -191,8 +277,8 @@ export function KpiDashboard({
                     </Card>
                 </Col>
 
-                {/* 5. Departed */}
-                <Col xs={12} sm={6} lg={4} xl={3} className="flex-1">
+                {/* 6. Departed */}
+                <Col xs={12} sm={8} lg={4} className="flex-1">
                     <Card
                         hoverable
                         size="small"

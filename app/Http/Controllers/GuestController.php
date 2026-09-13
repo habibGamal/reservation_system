@@ -86,13 +86,13 @@ class GuestController extends Controller
     public function update(Request $request, Guest $guest): JsonResponse|RedirectResponse
     {
         $user = $request->user();
-        if (! $user || (! $user->can('guests.manage') && ! $user->can('reservations.edit'))) {
+        if (! $user || (! $user->can('guests.manage') && ! $user->can('reservations.edit') && ! $user->can('reservations.create'))) {
             abort(403, 'غير مصرح لك بتعديل بيانات النزيل');
         }
 
         $validated = $request->validate([
             'name' => ['sometimes', 'required', 'string', 'max:255'],
-            'phone' => ['sometimes', 'required', 'string', 'max:50'],
+            'phone' => ['sometimes', 'nullable', 'string', 'max:50'],
             'mil_code' => ['nullable', 'string', 'max:100'],
         ]);
 

@@ -8,7 +8,7 @@ export type ActiveView = 'table' | 'matrix' | 'meals';
 export interface Guest {
   id: number;
   name: string;
-  phone: string;
+  phone?: string | null;
   mil_code?: string | null;
   reservations_count?: number;
   created_at: string;
@@ -105,6 +105,7 @@ export interface Reservation {
   payment_status: PaymentStatus;
   notes?: string | null;
   attachments?: ReservationAttachment[];
+  attachments_count?: number;
   guest?: Guest;
   unit?: Unit;
   payments?: Payment[];

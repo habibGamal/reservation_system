@@ -85,7 +85,7 @@ export default function ReservationsIndex({
         return sectors.flatMap((s) =>
             (s.units || []).map((u) => ({
                 ...u,
-                sector: { id: s.id, name: s.name, has_meals: s.has_meals },
+                sector: { id: s.id, name: s.name, has_meals: s.has_meals } as Sector,
                 price_rule: u.price_rule_id ? priceRulesMap.get(u.price_rule_id) ?? null : null,
             }))
         );
@@ -109,6 +109,15 @@ export default function ReservationsIndex({
         initialFilters: filters,
         statusCounts: status_counts as unknown as StatusCounts,
     });
+
+    const activeUnitsCount = useMemo(() => {
+        if (filtersHook.sectorIds && filtersHook.sectorIds.length > 0) {
+            const selectedIds = filtersHook.sectorIds.map(Number);
+            const filtered = scopedUnits.filter((u) => selectedIds.includes(u.sector_id));
+            return filtered.length > 0 ? filtered.length : scopedUnits.length;
+        }
+        return scopedUnits.length;
+    }, [scopedUnits, filtersHook.sectorIds]);
 
     // Encapsulated dialog & drawer modals state
     const modals = useReservationModals();
@@ -243,6 +252,7 @@ export default function ReservationsIndex({
                 {/* Live KPI Dashboard Cards with 1-Click Status Filter (calculated on backend) */}
                 <KpiDashboard
                     stats={stats}
+                    totalUnits={activeUnitsCount}
                     currentStatusFilter={
                         filtersHook.statusFilters.length === 1
                             ? (filtersHook.statusFilters[0] as ReservationStatus)
@@ -250,6 +260,9 @@ export default function ReservationsIndex({
                     }
                     currentStatusFilters={filtersHook.statusFilters as ReservationStatus[]}
                     onSelectStatusFilter={filtersHook.handleKpiStatusFilter}
+                    onSelectStatusesFilter={(statuses) =>
+                        filtersHook.setStatusFilters(statuses as string[])
+                    }
                 />
 
                 {/* View Switcher Bar & Filters Toolbar */}
@@ -317,10 +330,14 @@ export default function ReservationsIndex({
                                 filtersHook.startDate && filtersHook.endDate,
                             ) || filtersHook.isFilterActive
                         }
+                        statusFilters={filtersHook.statusFilters}
+                        search={filtersHook.search}
+                        paymentStatus={filtersHook.paymentStatus}
                         onBookUnit={(unit) =>
                             modals.openForUnit(unit, filtersHook.startDate)
                         }
                         onEditReservation={modals.openEditDialog}
+                        onResetFilters={filtersHook.handleResetFilters}
                     />
                 )}
 
