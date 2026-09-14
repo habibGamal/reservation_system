@@ -290,6 +290,30 @@ class ReservationNotification extends Notification implements ShouldQueue
     }
 
     /**
+     * Create a notification instance for a reservation due for checkout today.
+     */
+    public static function checkoutDue(Reservation $reservation): self
+    {
+        $reservation->loadMissing(['guest', 'unit.sector']);
+
+        return new self(
+            action: 'checkout_due',
+            reservationId: $reservation->id,
+            guestName: $reservation->guest?->name ?? 'غير محدد',
+            unitName: $reservation->unit?->name ?? 'غير محدد',
+            sectorName: $reservation->unit?->sector?->name,
+            actorName: null,
+            status: $reservation->status instanceof ReservationStatus ? $reservation->status->label() : ($reservation->status ?? null),
+            checkIn: is_string($reservation->check_in) ? $reservation->check_in : $reservation->check_in?->format('Y-m-d'),
+            checkOut: is_string($reservation->check_out) ? $reservation->check_out : $reservation->check_out?->format('Y-m-d'),
+            totalPrice: (float) $reservation->total_price,
+            changeType: 'checkout_due',
+            tag: 'checkout_due_'.$reservation->id.'_'.now()->format('Ymd'),
+            sectorId: $reservation->unit?->sector_id ?? $reservation->unit?->sector?->id,
+        );
+    }
+
+    /**
      * Get all relevant sector IDs for this notification.
      *
      * @return list<int>
@@ -386,6 +410,7 @@ class ReservationNotification extends Notification implements ShouldQueue
     public function getTitle(): string
     {
         return match ($this->changeType ?? $this->action) {
+            'checkout_due' => 'تنبيه موعد مغادرة اليوم — منتجع النسور',
             'status' => 'تحديث حالة — منتجع النسور',
             'membership' => 'تحديث عضوية — منتجع النسور',
             'type' => 'تحديث نوع الحجز — منتجع النسور',
@@ -403,6 +428,11 @@ class ReservationNotification extends Notification implements ShouldQueue
         $byActor = $this->actorName ? " بواسطة {$this->actorName}" : '';
         $unit = $this->unitDisplay;
         $guest = trim($this->guestName);
+
+        // 0. Checkout due notification
+        if ($this->action === 'checkout_due' || $this->changeType === 'checkout_due') {
+            return "تنبيه: موعد مغادرة {$unit} {$guest} اليوم ولم يتم تسجيل المغادرة بعد";
+        }
 
         // 1. Status changes (Checked-in, departed, confirmed, waiting)
         if ($this->changeType === 'status') {

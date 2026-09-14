@@ -548,6 +548,13 @@ export default function ReservationShow({
                                                             {reservation.type || "منتجع"}
                                                         </Tag>
                                                     </Descriptions.Item>
+                                                    {(reservation.unit?.sector?.name === 'فندق 6' || reservation.unit_persons_count) && (
+                                                        <Descriptions.Item label="أفراد الإقامة">
+                                                            <Tag color="orange" className="text-xs mr-0">
+                                                                {reservation.unit_persons_count || 4} أفراد
+                                                            </Tag>
+                                                        </Descriptions.Item>
+                                                    )}
                                                     <Descriptions.Item label="دخل من البوابة">
                                                         {reservation.enter_from_gates ? (
                                                             <Tag color="success" className="text-xs mr-0">تم الدخول</Tag>

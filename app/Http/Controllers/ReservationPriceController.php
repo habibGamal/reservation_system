@@ -20,6 +20,7 @@ class ReservationPriceController extends Controller
             'membership' => ['required', 'string', Rule::in(MembershipType::values())],
             'check_in' => ['required', 'date', 'date_format:Y-m-d', 'before:check_out'],
             'check_out' => ['required', 'date', 'date_format:Y-m-d', 'after:check_in'],
+            'unit_persons_count' => ['nullable', 'integer', 'min:1', 'max:50'],
         ], [
             'unit_id.required' => 'يرجى اختيار الوحدة السكنية',
             'membership.required' => 'يرجى اختيار فئة العضوية',
@@ -31,7 +32,13 @@ class ReservationPriceController extends Controller
             (int) $validated['unit_id'],
             $validated['membership'],
             $validated['check_in'],
-            $validated['check_out']
+            $validated['check_out'],
+            false,
+            null,
+            null,
+            [],
+            null,
+            isset($validated['unit_persons_count']) ? (int) $validated['unit_persons_count'] : null
         );
 
         return response()->json($calculation);

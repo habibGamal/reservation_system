@@ -43,6 +43,7 @@ class ReservationController extends Controller
         $sectorIds = array_values(array_unique(array_filter(array_map('intval', $rawSectorIds), fn ($id) => $id > 0)));
 
         $paymentStatus = $request->input('payment_status');
+        $checkoutToday = $request->boolean('checkout_today');
         $datePreset = $request->input('date_preset');
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
@@ -125,24 +126,26 @@ class ReservationController extends Controller
 
         // Date Preset / Range Filter
         $today = Carbon::today()->toDateString();
-        if ($startDate && $endDate) {
-            $query->where('check_in', '<=', $endDate)->where('check_out', '>=', $startDate);
-        } elseif ($startDate) {
-            $query->where('check_out', '>=', $startDate);
-        } elseif ($endDate) {
-            $query->where('check_in', '<=', $endDate);
-        } elseif ($datePreset === 'today') {
-            $query->where('check_in', '<=', $today)->where('check_out', '>=', $today);
-        } elseif ($datePreset === 'this_week') {
-            $startOfWeek = Carbon::now()->startOfWeek()->toDateString();
-            $endOfWeek = Carbon::now()->endOfWeek()->toDateString();
-            $query->where('check_in', '<=', $endOfWeek)->where('check_out', '>=', $startOfWeek);
-        } elseif ($datePreset === 'this_month') {
-            $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
-            $endOfMonth = Carbon::now()->endOfMonth()->toDateString();
-            $query->where('check_in', '<=', $endOfMonth)->where('check_out', '>=', $startOfMonth);
-        } elseif ($datePreset === 'future') {
-            $query->where('check_in', '>=', $today);
+        if (! $checkoutToday) {
+            if ($startDate && $endDate) {
+                $query->where('check_in', '<=', $endDate)->where('check_out', '>=', $startDate);
+            } elseif ($startDate) {
+                $query->where('check_out', '>=', $startDate);
+            } elseif ($endDate) {
+                $query->where('check_in', '<=', $endDate);
+            } elseif ($datePreset === 'today') {
+                $query->where('check_in', '<=', $today)->where('check_out', '>=', $today);
+            } elseif ($datePreset === 'this_week') {
+                $startOfWeek = Carbon::now()->startOfWeek()->toDateString();
+                $endOfWeek = Carbon::now()->endOfWeek()->toDateString();
+                $query->where('check_in', '<=', $endOfWeek)->where('check_out', '>=', $startOfWeek);
+            } elseif ($datePreset === 'this_month') {
+                $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
+                $endOfMonth = Carbon::now()->endOfMonth()->toDateString();
+                $query->where('check_in', '<=', $endOfMonth)->where('check_out', '>=', $startOfMonth);
+            } elseif ($datePreset === 'future') {
+                $query->where('check_in', '>=', $today);
+            }
         }
 
         // Payment Status Filter
@@ -152,6 +155,11 @@ class ReservationController extends Controller
             $query->whereRaw('(SELECT COALESCE(SUM(amount), 0) FROM payments WHERE payments.reservation_id = reservations.id) > 0 AND (SELECT COALESCE(SUM(amount), 0) FROM payments WHERE payments.reservation_id = reservations.id) < reservations.total_price');
         } elseif ($paymentStatus === 'unpaid') {
             $query->whereRaw('(SELECT COALESCE(SUM(amount), 0) FROM payments WHERE payments.reservation_id = reservations.id) = 0');
+        }
+
+        // Checkout Today Filter
+        if ($checkoutToday) {
+            $query->dueCheckoutToday();
         }
 
         // Calculate KPI Stats and Status Counts (scoped to date range, sector, and search)
@@ -220,6 +228,28 @@ class ReservationController extends Controller
         $confirmedCount = (clone $kpiQuery)->where('status', ReservationStatus::CONFIRMED->value)->count();
         $departedCount = (clone $kpiQuery)->where('status', ReservationStatus::DEPARTED->value)->count();
 
+        // Checkout Today count (independent of period, respecting allowed sectors and sector filter)
+        $checkoutTodayQuery = Reservation::query();
+        if ($allowedSectorIds !== null) {
+            if (empty($allowedSectorIds)) {
+                $checkoutTodayQuery->whereRaw('1 = 0');
+            } else {
+                $checkoutTodayQuery->whereHas('unit', function ($u) use ($allowedSectorIds) {
+                    $u->whereIn('sector_id', $allowedSectorIds);
+                });
+            }
+        }
+        if (! empty($sectorIds)) {
+            $effectiveSectors = $allowedSectorIds !== null
+                ? array_values(array_intersect($sectorIds, $allowedSectorIds))
+                : $sectorIds;
+
+            $checkoutTodayQuery->whereHas('unit', function ($u) use ($effectiveSectors) {
+                $u->whereIn('sector_id', $effectiveSectors);
+            });
+        }
+        $checkoutTodayCount = $checkoutTodayQuery->dueCheckoutToday()->count();
+
         $totalExpectedRevenue = (float) (clone $kpiQuery)->sum('total_price');
         $totalCollectedRevenue = (float) Payment::whereIn('reservation_id', (clone $kpiQuery)->select('id'))->sum('amount');
         $totalOutstandingBalance = max(0.0, round($totalExpectedRevenue - $totalCollectedRevenue, 2));
@@ -230,6 +260,7 @@ class ReservationController extends Controller
             'waiting' => $waitingCount,
             'confirmed' => $confirmedCount,
             'departed' => $departedCount,
+            'checkout_today' => $checkoutTodayCount,
             'total_expected_revenue' => $totalExpectedRevenue,
             'total_collected_revenue' => $totalCollectedRevenue,
             'total_outstanding_balance' => $totalOutstandingBalance,
@@ -267,6 +298,7 @@ class ReservationController extends Controller
                 'status' => count($statuses) === 1 ? $statuses[0] : null,
                 'statuses' => $statuses,
                 'payment_status' => ($paymentStatus && $paymentStatus !== 'all') ? $paymentStatus : null,
+                'checkout_today' => $checkoutToday,
                 'date_preset' => $datePreset ?? null,
                 'start_date' => $startDate ?? null,
                 'end_date' => $endDate ?? null,
@@ -291,6 +323,14 @@ class ReservationController extends Controller
             $initialPayment = $data['initial_payment'] ?? null;
             $extraFees = $data['extra_fees'] ?? [];
             unset($data['initial_payment'], $data['extra_fees'], $data['attachments']);
+
+            $unit = Unit::with('sector')->find($data['unit_id'] ?? null);
+            $isHotel6 = $unit?->sector?->name === 'فندق 6';
+            if ($isHotel6) {
+                $data['unit_persons_count'] = ! empty($data['unit_persons_count']) ? (int) $data['unit_persons_count'] : 4;
+            } else {
+                $data['unit_persons_count'] = null;
+            }
 
             if (! empty($data['has_meals'])) {
                 $data['meals_persons_count'] = ! empty($data['meals_persons_count']) ? (int) $data['meals_persons_count'] : 4;
@@ -378,6 +418,7 @@ class ReservationController extends Controller
         'check_in' => 'تاريخ الوصول',
         'check_out' => 'تاريخ المغادرة',
         'membership' => 'نوع العضوية',
+        'unit_persons_count' => 'عدد أفراد الإقامة بالوحدة',
         'type' => 'نوع الحجز',
         'total_price' => 'إجمالي المبلغ',
         'notes' => 'الملاحظات',
@@ -622,7 +663,7 @@ class ReservationController extends Controller
             return $val ? 'نعم' : 'لا';
         }
 
-        if ($field === 'meals_persons_count' && is_numeric($val)) {
+        if (in_array($field, ['meals_persons_count', 'unit_persons_count'], true) && is_numeric($val)) {
             return "{$val} أفراد";
         }
 
@@ -672,6 +713,17 @@ class ReservationController extends Controller
         $extraFees = array_key_exists('extra_fees', $data) ? $data['extra_fees'] : null;
         $deletedAttachmentIds = (array) ($data['deleted_attachment_ids'] ?? []);
         unset($data['extra_fees'], $data['attachments'], $data['deleted_attachment_ids']);
+
+        $targetUnitId = $data['unit_id'] ?? $reservation->unit_id;
+        $unit = Unit::with('sector')->find($targetUnitId);
+        $isHotel6 = $unit?->sector?->name === 'فندق 6';
+        if ($isHotel6) {
+            $data['unit_persons_count'] = ! empty($data['unit_persons_count'])
+                ? (int) $data['unit_persons_count']
+                : ($reservation->unit_persons_count ?: 4);
+        } else {
+            $data['unit_persons_count'] = null;
+        }
 
         if (! empty($data['has_meals'])) {
             $data['meals_persons_count'] = ! empty($data['meals_persons_count'])

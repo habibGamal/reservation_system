@@ -50,6 +50,8 @@ class ReservationIndexResource extends JsonResource
             'balance' => (float) $this->balance,
             'payment_status' => (string) $this->payment_status,
             'nights_count' => (int) $this->nights_count,
+            'is_checkout_today' => (bool) $this->is_checkout_today,
+            'is_checkout_overdue' => (bool) $this->is_checkout_overdue,
             'notes' => $this->notes,
             'updated_at' => $this->updated_at?->toIso8601String(),
 

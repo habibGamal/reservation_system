@@ -55,6 +55,11 @@ export interface ReservationFilterToolbarProps {
     paymentStatus: string;
     onPaymentStatusChange: (val: string) => void;
 
+    // Checkout Today
+    checkoutToday?: boolean;
+    onToggleCheckoutToday?: () => void;
+    checkoutTodayCount?: number;
+
     // Date & Periods
     datePreset: string;
     datePresetSelectValue: string;
@@ -101,6 +106,9 @@ export function ReservationFilterToolbar({
     units,
     paymentStatus,
     onPaymentStatusChange,
+    checkoutToday,
+    onToggleCheckoutToday,
+    checkoutTodayCount,
     datePreset,
     datePresetSelectValue,
     onDatePresetSelectChange,
@@ -557,6 +565,31 @@ export function ReservationFilterToolbar({
             {/* Row 4: Dates & Financial Filter Controls via Ant Design Select & Date Inputs */}
             <div className="flex flex-wrap items-center justify-between gap-2.5 pt-2.5 border-t text-xs">
                 <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    {/* Checkout Today Quick Filter Button */}
+                    <Button
+                        type={checkoutToday ? "primary" : "default"}
+                        onClick={onToggleCheckoutToday}
+                        className={`h-8 text-xs font-semibold gap-1.5 transition-all ${
+                            checkoutToday
+                                ? "!bg-amber-600 hover:!bg-amber-700 !border-amber-600 !text-white shadow-xs"
+                                : "!border-amber-400 !text-amber-700 dark:!text-amber-400 hover:!border-amber-500 hover:!bg-amber-50 dark:hover:!bg-amber-950/40"
+                        }`}
+                        icon={<LogOut className="h-3.5 w-3.5 shrink-0" />}
+                    >
+                        <span>مغادرة اليوم</span>
+                        {checkoutTodayCount !== undefined && (
+                            <span
+                                className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold leading-none ${
+                                    checkoutToday
+                                        ? "bg-white/25 text-white"
+                                        : "bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300"
+                                }`}
+                            >
+                                {checkoutTodayCount}
+                            </span>
+                        )}
+                    </Button>
+
                     {/* Payment Status Filter */}
                     <Select
                         value={paymentStatus}

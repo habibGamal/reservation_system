@@ -70,6 +70,7 @@ class UpdateReservationRequest extends FormRequest
             'status' => ['required', 'string', Rule::in(ReservationStatus::values())],
             'type' => ['required', 'string', Rule::in(ReservationType::values())],
             'membership' => ['required', 'string', Rule::in(MembershipType::values())],
+            'unit_persons_count' => ['nullable', 'integer', 'min:1', 'max:50'],
             'enter_from_gates' => ['nullable', 'boolean'],
             'has_meals' => ['nullable', 'boolean'],
             'meals_persons_count' => ['nullable', 'integer', 'min:1', 'max:50'],
@@ -126,6 +127,7 @@ class UpdateReservationRequest extends FormRequest
             $pricingService = app(PricingService::class);
             $membership = (string) $this->input('membership');
             $totalPrice = (float) $this->input('total_price');
+            $unitPersonsCount = $this->filled('unit_persons_count') ? (int) $this->input('unit_persons_count') : null;
             $hasMeals = (bool) $this->boolean('has_meals');
             $mealsPersonsCount = $hasMeals && $this->filled('meals_persons_count') ? (int) $this->input('meals_persons_count') : null;
             $mealsStartDate = $hasMeals ? $this->input('meals_start_date') : null;
@@ -141,7 +143,8 @@ class UpdateReservationRequest extends FormRequest
                 $mealsStartDate,
                 $mealsEndDate,
                 $extraFees,
-                $mealsPersonsCount
+                $mealsPersonsCount,
+                $unitPersonsCount
             );
             $expectedTotal = (float) $calculation['total_price'];
 

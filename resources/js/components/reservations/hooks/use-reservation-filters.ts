@@ -74,6 +74,9 @@ export function useReservationFilters({
     const [paymentStatus, setPaymentStatus] = useState<string>(
         initialFilters.payment_status || "all",
     );
+    const [checkoutToday, setCheckoutToday] = useState<boolean>(
+        Boolean(initialFilters.checkout_today),
+    );
     const [datePreset, setDatePreset] = useState<string>(
         initialFilters.date_preset !== undefined && initialFilters.date_preset !== null
             ? initialFilters.date_preset
@@ -101,6 +104,7 @@ export function useReservationFilters({
         sectorIds,
         statusFilters,
         paymentStatus,
+        checkoutToday,
         datePreset,
         startDate,
         endDate,
@@ -113,6 +117,7 @@ export function useReservationFilters({
             sectorIds,
             statusFilters,
             paymentStatus,
+            checkoutToday,
             datePreset,
             startDate,
             endDate,
@@ -123,6 +128,7 @@ export function useReservationFilters({
         sectorIds,
         statusFilters,
         paymentStatus,
+        checkoutToday,
         datePreset,
         startDate,
         endDate,
@@ -158,6 +164,10 @@ export function useReservationFilters({
         if (newPayment !== stateRef.current.paymentStatus) {
             setPaymentStatus(newPayment);
         }
+        const newCheckoutToday = Boolean(initialFilters.checkout_today);
+        if (newCheckoutToday !== stateRef.current.checkoutToday) {
+            setCheckoutToday(newCheckoutToday);
+        }
         if (initialFilters.date_preset !== undefined && initialFilters.date_preset !== null && initialFilters.date_preset !== stateRef.current.datePreset) {
             setDatePreset(initialFilters.date_preset);
         }
@@ -187,6 +197,7 @@ export function useReservationFilters({
             status?: string | null;
             statuses?: string[] | null;
             payment_status?: string | null;
+            checkout_today?: boolean | null;
             date_preset?: string | null;
             start_date?: string | null;
             end_date?: string | null;
@@ -194,6 +205,10 @@ export function useReservationFilters({
             const current = stateRef.current;
             const effectiveView = overrides.view !== undefined ? overrides.view : current.activeView;
             const effectiveSearch = overrides.search !== undefined ? overrides.search : current.search;
+            const effectiveCheckoutToday =
+                overrides.checkout_today !== undefined
+                    ? Boolean(overrides.checkout_today)
+                    : current.checkoutToday;
             const effectiveSectorIds =
                 overrides.sector_ids !== undefined
                     ? (overrides.sector_ids || [])
@@ -227,6 +242,9 @@ export function useReservationFilters({
             }
             if (effectivePaymentStatus && effectivePaymentStatus !== "all") {
                 query.payment_status = effectivePaymentStatus;
+            }
+            if (effectiveCheckoutToday) {
+                query.checkout_today = "1";
             }
             if (effectiveDatePreset) {
                 query.date_preset = effectiveDatePreset;
@@ -307,6 +325,7 @@ export function useReservationFilters({
         sectorIds.length > 0 ||
         statusFilters.length > 0 ||
         paymentStatus !== "all" ||
+        checkoutToday ||
         datePreset !== "current_period" ||
         startDate !== currentPeriod.startStr ||
         endDate !== currentPeriod.endStr;
@@ -549,12 +568,19 @@ export function useReservationFilters({
         }
     };
 
+    const handleToggleCheckoutToday = useCallback(() => {
+        const next = !stateRef.current.checkoutToday;
+        setCheckoutToday(next);
+        applyBackendFilters({ checkout_today: next });
+    }, [applyBackendFilters]);
+
     const handleResetFilters = () => {
         setSearch("");
         lastCommittedSearchRef.current = "";
         setSectorIds([]);
         setStatusFilters([]);
         setPaymentStatus("all");
+        setCheckoutToday(false);
         setDatePreset("current_period");
         setStartDate(currentPeriod.startStr);
         setEndDate(currentPeriod.endStr);
@@ -564,6 +590,7 @@ export function useReservationFilters({
             sector_ids: [],
             statuses: [],
             payment_status: "all",
+            checkout_today: false,
             date_preset: "current_period",
             start_date: currentPeriod.startStr,
             end_date: currentPeriod.endStr,
@@ -603,6 +630,7 @@ export function useReservationFilters({
         statusFilter,
         statusFilters,
         paymentStatus,
+        checkoutToday,
         datePreset,
         startDate,
         endDate,
@@ -637,6 +665,7 @@ export function useReservationFilters({
         handleSearchSubmit,
         handleClearSearch,
         handlePaymentStatusChange,
+        handleToggleCheckoutToday,
         handleDatePresetSelectChange,
         handleStepPrevPeriod,
         handleStepNextPeriod,

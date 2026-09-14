@@ -88,6 +88,7 @@ export interface Reservation {
   status: ReservationStatus;
   type: ReservationType;
   membership?: MembershipType | null;
+  unit_persons_count?: number | null;
   enter_from_gates?: boolean;
   has_meals?: boolean;
   meals_persons_count?: number | null;
@@ -102,6 +103,8 @@ export interface Reservation {
   paid_amount: number;
   balance: number;
   nights_count?: number;
+  is_checkout_today?: boolean;
+  is_checkout_overdue?: boolean;
   payment_status: PaymentStatus;
   notes?: string | null;
   attachments?: ReservationAttachment[];
@@ -156,6 +159,7 @@ export interface DashboardFilterState {
   status?: ReservationStatus | null;
   statuses?: ReservationStatus[];
   payment_status: 'paid' | 'partial' | 'unpaid' | 'all' | null;
+  checkout_today?: boolean;
   date_preset?: DatePresetType | string | null;
   start_date?: string | null;
   end_date?: string | null;
@@ -167,6 +171,7 @@ export interface KPIStats {
   waiting: number;
   confirmed: number;
   departed: number;
+  checkout_today?: number;
   total_expected_revenue: number;
   total_collected_revenue: number;
   total_outstanding_balance: number;

@@ -290,6 +290,9 @@ export default function ReservationsIndex({
                     onPaymentStatusChange={
                         filtersHook.handlePaymentStatusChange
                     }
+                    checkoutToday={filtersHook.checkoutToday}
+                    onToggleCheckoutToday={filtersHook.handleToggleCheckoutToday}
+                    checkoutTodayCount={stats.checkout_today}
                     datePreset={filtersHook.datePreset}
                     datePresetSelectValue={filtersHook.datePresetSelectValue}
                     onDatePresetSelectChange={
@@ -333,6 +336,7 @@ export default function ReservationsIndex({
                         statusFilters={filtersHook.statusFilters}
                         search={filtersHook.search}
                         paymentStatus={filtersHook.paymentStatus}
+                        checkoutToday={filtersHook.checkoutToday}
                         onBookUnit={(unit) =>
                             modals.openForUnit(unit, filtersHook.startDate)
                         }
@@ -351,6 +355,7 @@ export default function ReservationsIndex({
                         statusFilter={filtersHook.statusFilter}
                         statusFilters={filtersHook.statusFilters}
                         paymentStatusFilter={filtersHook.paymentStatus}
+                        checkoutToday={filtersHook.checkoutToday}
                         onEdit={modals.openEditDialog}
                         onDelete={handleDelete}
                         onRecordPayment={modals.openPaymentDialog}

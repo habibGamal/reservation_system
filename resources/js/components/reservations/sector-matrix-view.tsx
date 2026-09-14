@@ -31,6 +31,7 @@ interface SectorMatrixViewProps {
     statusFilters?: string[];
     search?: string;
     paymentStatus?: string;
+    checkoutToday?: boolean;
     onBookUnit: (unit: Unit) => void;
     onEditReservation: (reservation: Reservation) => void;
     onResetFilters?: () => void;
@@ -45,6 +46,7 @@ export function SectorMatrixView({
     statusFilters = [],
     search = '',
     paymentStatus = 'all',
+    checkoutToday = false,
     onBookUnit,
     onEditReservation,
     onResetFilters,
@@ -80,11 +82,13 @@ export function SectorMatrixView({
     const hasPaymentFilter = Boolean(paymentStatus && paymentStatus !== 'all');
     const hasSearchFilter = Boolean(effectiveSearch !== '');
     const hasOccupancyFilter = occupancyFilter !== 'all';
+    const hasCheckoutTodayFilter = Boolean(checkoutToday);
     const hasActiveFilter =
         hasStatusFilter ||
         hasPaymentFilter ||
         hasSearchFilter ||
-        hasOccupancyFilter;
+        hasOccupancyFilter ||
+        hasCheckoutTodayFilter;
 
     const toggleSector = (sectorId: number) => {
         setCollapsedSectors((prev) => ({
@@ -265,9 +269,28 @@ function getResStatusTag(status: ReservationStatus | string) {
         };
     }, [allowedSectors, unitReservationsMap]);
 
+function isReservationCheckoutToday(res: Reservation): boolean {
+    if (!res || res.id <= 0 || !res.check_out) return false;
+    if (res.status === 'غادر') return false;
+    if (res.is_checkout_today !== undefined) return Boolean(res.is_checkout_today);
+    const today = new Date().toLocaleDateString('en-CA');
+    return res.check_out.slice(0, 10) === today;
+}
+
+function isReservationCheckoutOverdue(res: Reservation): boolean {
+    if (!res || res.id <= 0 || !res.check_out) return false;
+    if (res.status === 'غادر') return false;
+    if (res.is_checkout_overdue !== undefined) return Boolean(res.is_checkout_overdue);
+    const today = new Date().toLocaleDateString('en-CA');
+    return res.check_out.slice(0, 10) < today;
+}
+
     // Determine state of unit
     const getUnitStatusDetails = (unit: Unit) => {
         const resList = getUnitReservations(unit);
+        const hasCheckoutToday = resList.some(isReservationCheckoutToday);
+        const hasCheckoutOverdue = resList.some(isReservationCheckoutOverdue);
+
         if (resList.length === 0) {
             return {
                 status: 'vacant' as const,
@@ -275,6 +298,8 @@ function getResStatusTag(status: ReservationStatus | string) {
                 tagColor: 'default',
                 cardBg: 'bg-card hover:bg-primary/5 border-border hover:border-primary/50',
                 textColor: 'text-muted-foreground',
+                hasCheckoutToday: false,
+                hasCheckoutOverdue: false,
             };
         }
 
@@ -285,52 +310,62 @@ function getResStatusTag(status: ReservationStatus | string) {
                 tagColor: 'purple',
                 cardBg: 'bg-purple-50/25 dark:bg-purple-950/20 border-purple-300 dark:border-purple-800 hover:border-purple-500',
                 textColor: 'text-purple-700 dark:text-purple-300',
+                hasCheckoutToday,
+                hasCheckoutOverdue,
             };
         }
 
         const res = resList[0];
-        switch (res.status) {
-            case 'تم التسكين':
-                return {
-                    status: 'checked_in' as const,
-                    label: 'تم التسكين',
-                    tagColor: 'success',
-                    cardBg: 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800 hover:border-emerald-500',
-                    textColor: 'text-emerald-700 dark:text-emerald-300',
-                };
-            case 'ثابت':
-                return {
-                    status: 'confirmed' as const,
-                    label: 'ثابت',
-                    tagColor: 'processing',
-                    cardBg: 'bg-blue-50/50 dark:bg-blue-950/20 border-blue-300 dark:border-blue-800 hover:border-blue-500',
-                    textColor: 'text-blue-700 dark:text-blue-300',
-                };
-            case 'انتظار':
-                return {
-                    status: 'waiting' as const,
-                    label: 'انتظار',
-                    tagColor: 'warning',
-                    cardBg: 'bg-amber-50/50 dark:bg-amber-950/20 border-amber-300 dark:border-amber-800 hover:border-amber-500',
-                    textColor: 'text-amber-700 dark:text-amber-300',
-                };
-            case 'غادر':
-                return {
-                    status: 'departed' as const,
-                    label: 'غادر',
-                    tagColor: 'error',
-                    cardBg: 'bg-red-50/50 dark:bg-red-950/20 border-red-300 dark:border-red-800 hover:border-red-500',
-                    textColor: 'text-red-700 dark:text-red-300',
-                };
-            default:
-                return {
-                    status: 'vacant' as const,
-                    label: 'شاغر',
-                    tagColor: 'default',
-                    cardBg: 'bg-card hover:bg-muted/40 border-border',
-                    textColor: 'text-muted-foreground',
-                };
-        }
+        const base = (() => {
+            switch (res.status) {
+                case 'تم التسكين':
+                    return {
+                        status: 'checked_in' as const,
+                        label: 'تم التسكين',
+                        tagColor: 'success',
+                        cardBg: 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800 hover:border-emerald-500',
+                        textColor: 'text-emerald-700 dark:text-emerald-300',
+                    };
+                case 'ثابت':
+                    return {
+                        status: 'confirmed' as const,
+                        label: 'ثابت',
+                        tagColor: 'processing',
+                        cardBg: 'bg-blue-50/50 dark:bg-blue-950/20 border-blue-300 dark:border-blue-800 hover:border-blue-500',
+                        textColor: 'text-blue-700 dark:text-blue-300',
+                    };
+                case 'انتظار':
+                    return {
+                        status: 'waiting' as const,
+                        label: 'انتظار',
+                        tagColor: 'warning',
+                        cardBg: 'bg-amber-50/50 dark:bg-amber-950/20 border-amber-300 dark:border-amber-800 hover:border-amber-500',
+                        textColor: 'text-amber-700 dark:text-amber-300',
+                    };
+                case 'غادر':
+                    return {
+                        status: 'departed' as const,
+                        label: 'غادر',
+                        tagColor: 'error',
+                        cardBg: 'bg-red-50/50 dark:bg-red-950/20 border-red-300 dark:border-red-800 hover:border-red-500',
+                        textColor: 'text-red-700 dark:text-red-300',
+                    };
+                default:
+                    return {
+                        status: 'vacant' as const,
+                        label: 'شاغر',
+                        tagColor: 'default',
+                        cardBg: 'bg-card hover:bg-muted/40 border-border',
+                        textColor: 'text-muted-foreground',
+                    };
+            }
+        })();
+
+        return {
+            ...base,
+            hasCheckoutToday,
+            hasCheckoutOverdue,
+        };
     };
 
     // Filter sectors and units based on active filters
@@ -406,6 +441,14 @@ function getResStatusTag(status: ReservationStatus | string) {
                             return false;
                     }
 
+                    // 5. Checkout Today Filter
+                    if (hasCheckoutTodayFilter) {
+                        const hasMatchingCheckout = resList.some(
+                            isReservationCheckoutToday,
+                        );
+                        if (!hasMatchingCheckout) return false;
+                    }
+
                     return true;
                 });
 
@@ -424,6 +467,7 @@ function getResStatusTag(status: ReservationStatus | string) {
         hasSearchFilter,
         effectiveSearch,
         occupancyFilter,
+        hasCheckoutTodayFilter,
         unitReservationsMap,
     ]);
 
@@ -779,7 +823,7 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                                 );
                                                                             }
                                                                         }}
-                                                                        className={`shadow-2xs flex flex-col justify-between rounded-lg border p-2.5 transition-all duration-150 ${statusDetails.cardBg} ${isSectorEditable ? 'cursor-pointer' : 'cursor-default opacity-85'}`}
+                                                                        className={`shadow-2xs relative flex flex-col justify-between rounded-lg border p-2.5 transition-all duration-150 overflow-hidden min-w-0 ${statusDetails.cardBg} ${isSectorEditable ? 'cursor-pointer' : 'cursor-default opacity-85'}`}
                                                                     >
                                                                         {/* Unit Name & Rooms */}
                                                                         <div className="flex items-start justify-between gap-1">
@@ -893,7 +937,7 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                         return (
                                                             <div
                                                                 key={unit.id}
-                                                                className={`shadow-2xs flex flex-col justify-between rounded-lg border p-2.5 transition-all duration-150 ${statusDetails.cardBg}`}
+                                                                className={`shadow-2xs relative flex flex-col justify-between rounded-lg border p-2.5 transition-all duration-150 overflow-hidden min-w-0 ${statusDetails.cardBg} ${statusDetails.hasCheckoutToday ? 'ring-2 ring-amber-500/80 border-amber-500 shadow-sm shadow-amber-500/15' : statusDetails.hasCheckoutOverdue ? 'ring-2 ring-red-500/80 border-red-500 shadow-sm shadow-red-500/15' : ''}`}
                                                             >
                                                                 {/* Header: Unit Name, Room Count & Multi Tag */}
                                                                 <div className="flex items-start justify-between gap-1 border-b border-purple-200/60 dark:border-purple-800/60 pb-1.5 mb-1.5">
@@ -982,9 +1026,24 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                                 )}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="text-muted-foreground flex items-center gap-1 mt-0.5 text-[9px] sm:text-[10px] tracking-tight">
+
+                                                                        {/* Alert Banner for R1 */}
+                                                                        {isReservationCheckoutOverdue(r1) ? (
+                                                                            <div className="my-1 flex items-center justify-center gap-1 rounded bg-red-500/15 border border-red-500/30 px-1 py-0.5 text-[9px] font-bold text-red-700 dark:text-red-300 w-full text-center">
+                                                                                <span>⚠️ متأخر عن المغادرة</span>
+                                                                            </div>
+                                                                        ) : isReservationCheckoutToday(r1) ? (
+                                                                            <div className="my-1 flex items-center justify-center gap-1 rounded bg-amber-500/15 border border-amber-500/30 px-1 py-0.5 text-[9px] font-bold text-amber-800 dark:text-amber-200 animate-pulse w-full text-center">
+                                                                                <span>🔔 مغادرة اليوم</span>
+                                                                            </div>
+                                                                        ) : null}
+
+                                                                        <div className="text-muted-foreground flex items-center gap-1 mt-1 text-[9px] sm:text-[10px] tracking-tight min-w-0 overflow-hidden">
                                                                             <Clock className="h-2.5 w-2.5 shrink-0 opacity-70" />
-                                                                            <span className="font-mono text-[9px] sm:text-[10px] whitespace-nowrap overflow-hidden text-ellipsis">
+                                                                            <span
+                                                                                className="font-mono text-[9px] sm:text-[10px] whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
+                                                                                title={`${r1.check_in} ← ${r1.check_out}`}
+                                                                            >
                                                                                 {
                                                                                     r1.check_in
                                                                                 }{' '}
@@ -1034,9 +1093,24 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                                 )}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="text-muted-foreground flex items-center gap-1 mt-0.5 text-[9px] sm:text-[10px] tracking-tight">
+
+                                                                        {/* Alert Banner for R2 */}
+                                                                        {isReservationCheckoutOverdue(r2) ? (
+                                                                            <div className="my-1 flex items-center justify-center gap-1 rounded bg-red-500/15 border border-red-500/30 px-1 py-0.5 text-[9px] font-bold text-red-700 dark:text-red-300 w-full text-center">
+                                                                                <span>⚠️ متأخر عن المغادرة</span>
+                                                                            </div>
+                                                                        ) : isReservationCheckoutToday(r2) ? (
+                                                                            <div className="my-1 flex items-center justify-center gap-1 rounded bg-amber-500/15 border border-amber-500/30 px-1 py-0.5 text-[9px] font-bold text-amber-800 dark:text-amber-200 animate-pulse w-full text-center">
+                                                                                <span>🔔 مغادرة اليوم</span>
+                                                                            </div>
+                                                                        ) : null}
+
+                                                                        <div className="text-muted-foreground flex items-center gap-1 mt-1 text-[9px] sm:text-[10px] tracking-tight min-w-0 overflow-hidden">
                                                                             <Clock className="h-2.5 w-2.5 shrink-0 opacity-70" />
-                                                                            <span className="font-mono text-[9px] sm:text-[10px] whitespace-nowrap overflow-hidden text-ellipsis">
+                                                                            <span
+                                                                                className="font-mono text-[9px] sm:text-[10px] whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
+                                                                                title={`${r2.check_in} ← ${r2.check_out}`}
+                                                                            >
                                                                                 {
                                                                                     r2.check_in
                                                                                 }{' '}
@@ -1054,6 +1128,9 @@ function getResStatusTag(status: ReservationStatus | string) {
 
                                                     // Single Reservation Card
                                                     const res = resList[0];
+                                                    const isCheckoutToday = isReservationCheckoutToday(res);
+                                                    const isCheckoutOverdue = isReservationCheckoutOverdue(res);
+
                                                     return (
                                                         <div
                                                             key={unit.id}
@@ -1062,17 +1139,17 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                     res,
                                                                 )
                                                             }
-                                                            className={`shadow-2xs flex cursor-pointer flex-col justify-between rounded-lg border p-2.5 transition-all duration-150 ${statusDetails.cardBg}`}
+                                                            className={`shadow-2xs relative flex cursor-pointer flex-col justify-between rounded-lg border p-2.5 transition-all duration-150 overflow-hidden min-w-0 ${statusDetails.cardBg} ${statusDetails.hasCheckoutToday ? 'ring-2 ring-amber-500/80 border-amber-500 shadow-sm shadow-amber-500/15' : statusDetails.hasCheckoutOverdue ? 'ring-2 ring-red-500/80 border-red-500 shadow-sm shadow-red-500/15' : ''}`}
                                                         >
-                                                            {/* Unit Name & Rooms */}
-                                                            <div className="flex items-start justify-between gap-1">
-                                                                <div>
-                                                                    <span className="text-foreground font-bold text-sm">
+                                                            {/* Unit Name & Rooms + Type/Status Tags */}
+                                                            <div className="flex items-start justify-between gap-1 min-w-0">
+                                                                <div className="min-w-0 flex-1">
+                                                                    <span className="text-foreground font-bold text-sm block truncate">
                                                                         {
                                                                             unit.name
                                                                         }
                                                                     </span>
-                                                                    <span className="text-muted-foreground block text-[10px]">
+                                                                    <span className="text-muted-foreground block text-[10px] truncate">
                                                                         {unit.rooms_count
                                                                             ? `${unit.rooms_count} غرف`
                                                                             : 'غرفة'}
@@ -1100,13 +1177,24 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                 </div>
                                                             </div>
 
+                                                            {/* Due Checkout / Overdue Alert Banner */}
+                                                            {isCheckoutOverdue ? (
+                                                                <div className="my-1.5 flex items-center justify-center gap-1 rounded bg-red-500/15 border border-red-500/30 px-1.5 py-0.5 text-[10px] font-bold text-red-700 dark:text-red-300 w-full text-center">
+                                                                    <span>⚠️ متأخر عن المغادرة</span>
+                                                                </div>
+                                                            ) : isCheckoutToday ? (
+                                                                <div className="my-1.5 flex items-center justify-center gap-1 rounded bg-amber-500/15 border border-amber-500/30 px-1.5 py-0.5 text-[10px] font-bold text-amber-800 dark:text-amber-200 animate-pulse w-full text-center">
+                                                                    <span>🔔 مغادرة اليوم</span>
+                                                                </div>
+                                                            ) : null}
+
                                                             {/* Middle / Guest & Dates */}
-                                                            <div className="mt-2.5 flex min-h-[46px] flex-col justify-center">
-                                                                <div className="space-y-1 text-right">
-                                                                    <div className="text-foreground flex items-start gap-1 font-semibold text-[11px] leading-snug">
+                                                            <div className="mt-1.5 flex min-h-[44px] flex-col justify-center min-w-0">
+                                                                <div className="space-y-1 text-right min-w-0">
+                                                                    <div className="text-foreground flex items-start gap-1 font-semibold text-[11px] leading-snug min-w-0">
                                                                         <User className="text-muted-foreground h-3.5 w-3.5 shrink-0 mt-0.5" />
                                                                         <span
-                                                                            className="break-words whitespace-normal font-bold text-foreground"
+                                                                            className="break-words whitespace-normal font-bold text-foreground line-clamp-2 min-w-0"
                                                                             title={
                                                                                 res
                                                                                     ?.guest
@@ -1119,9 +1207,12 @@ function getResStatusTag(status: ReservationStatus | string) {
                                                                                 'نزيل'}
                                                                         </span>
                                                                     </div>
-                                                                    <div className="text-muted-foreground flex items-center gap-1 text-[10px]">
+                                                                    <div className="text-muted-foreground flex items-center gap-1 text-[9px] sm:text-[10px] min-w-0 overflow-hidden">
                                                                         <Clock className="h-2.5 w-2.5 shrink-0 text-muted-foreground/70" />
-                                                                        <span className="font-mono text-[10px]">
+                                                                        <span
+                                                                            className="font-mono text-[9px] sm:text-[10px] whitespace-nowrap overflow-hidden text-ellipsis min-w-0 tracking-tight"
+                                                                            title={`${res?.check_in} ← ${res?.check_out}`}
+                                                                        >
                                                                             {
                                                                                 res?.check_in
                                                                             }{' '}

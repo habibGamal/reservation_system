@@ -25,8 +25,10 @@ use Spatie\Activitylog\Support\LogOptions;
  * @property ReservationStatus $status
  * @property ReservationType $type
  * @property MembershipType|null $membership
+ * @property int|null $unit_persons_count
  * @property bool $enter_from_gates
  * @property bool $has_meals
+ * @property int|null $meals_persons_count
  * @property \Illuminate\Support\Carbon|null $meals_start_date
  * @property \Illuminate\Support\Carbon|null $meals_end_date
  * @property float $meals_rate_per_night
@@ -59,6 +61,7 @@ class Reservation extends Model
         'status',
         'type',
         'membership',
+        'unit_persons_count',
         'enter_from_gates',
         'has_meals',
         'meals_persons_count',
@@ -75,6 +78,7 @@ class Reservation extends Model
      * @var array<string, mixed>
      */
     protected $attributes = [
+        'unit_persons_count' => 4,
         'enter_from_gates' => false,
         'has_meals' => false,
         'meals_persons_count' => 4,
@@ -93,6 +97,8 @@ class Reservation extends Model
         'todays_meals_count',
         'extra_fees_total',
         'payment_status',
+        'is_checkout_today',
+        'is_checkout_overdue',
     ];
 
     /**
@@ -106,6 +112,7 @@ class Reservation extends Model
             'status' => ReservationStatus::class,
             'type' => ReservationType::class,
             'membership' => MembershipType::class,
+            'unit_persons_count' => 'integer',
             'enter_from_gates' => 'boolean',
             'has_meals' => 'boolean',
             'meals_persons_count' => 'integer',
@@ -300,6 +307,59 @@ class Reservation extends Model
                 return 'Unpaid';
             }
         );
+    }
+
+    /**
+     * Determine if reservation is due for checkout today and has not departed yet.
+     */
+    protected function isCheckoutToday(): Attribute
+    {
+        return Attribute::make(
+            get: function (): bool {
+                if (! $this->check_out || $this->status === ReservationStatus::DEPARTED) {
+                    return false;
+                }
+
+                $today = Carbon::today()->toDateString();
+                $checkOut = $this->check_out instanceof Carbon
+                    ? $this->check_out->toDateString()
+                    : substr((string) $this->check_out, 0, 10);
+
+                return $checkOut === $today;
+            }
+        );
+    }
+
+    /**
+     * Determine if reservation checkout date has passed and has not departed yet.
+     */
+    protected function isCheckoutOverdue(): Attribute
+    {
+        return Attribute::make(
+            get: function (): bool {
+                if (! $this->check_out || $this->status === ReservationStatus::DEPARTED) {
+                    return false;
+                }
+
+                $today = Carbon::today()->toDateString();
+                $checkOut = $this->check_out instanceof Carbon
+                    ? $this->check_out->toDateString()
+                    : substr((string) $this->check_out, 0, 10);
+
+                return $checkOut < $today;
+            }
+        );
+    }
+
+    /**
+     * Scope a query to reservations due for checkout today (or specified date) and not departed.
+     */
+    public function scopeDueCheckoutToday($query, ?string $date = null)
+    {
+        $targetDate = $date ?? Carbon::today()->toDateString();
+
+        return $query->whereDate('check_out', $targetDate)
+            ->where('status', '!=', ReservationStatus::DEPARTED->value);
     }
 
     /**

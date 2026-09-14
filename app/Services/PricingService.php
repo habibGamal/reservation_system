@@ -16,6 +16,10 @@ class PricingService
      * @return array{
      *     nights: int,
      *     rate_per_night: float,
+     *     is_hotel6: bool,
+     *     unit_persons_count: int|null,
+     *     person_rate_per_night: float|null,
+     *     effective_rate_per_night: float,
      *     room_price: float,
      *     has_meals: bool,
      *     meals_nights: int,
@@ -36,12 +40,13 @@ class PricingService
         ?string $mealsStartDate = null,
         ?string $mealsEndDate = null,
         array $extraFees = [],
-        ?int $mealsPersonsCount = null
+        ?int $mealsPersonsCount = null,
+        ?int $unitPersonsCount = null
     ): array {
         if (is_int($unit)) {
-            $unit = Unit::with('priceRule')->findOrFail($unit);
+            $unit = Unit::with(['priceRule', 'sector'])->findOrFail($unit);
         } else {
-            $unit->loadMissing('priceRule');
+            $unit->loadMissing(['priceRule', 'sector']);
         }
 
         $in = Carbon::parse($checkIn);
@@ -59,7 +64,21 @@ class PricingService
             $ratePerNight = (float) $priceRule->rules[$membershipVal];
         }
 
-        $roomPrice = round($ratePerNight * $nights, 2);
+        $isHotel6 = $unit->sector?->name === 'فندق 6'
+            || $priceRule?->name === 'فندق 6 - 4 أفراد'
+            || str_contains($priceRule?->name ?? '', '4 أفراد');
+
+        if ($isHotel6) {
+            $unitPersons = ($unitPersonsCount !== null && $unitPersonsCount > 0) ? (int) $unitPersonsCount : 4;
+            $personRatePerNight = round($ratePerNight / 4, 2);
+            $effectiveRatePerNight = round($personRatePerNight * $unitPersons, 2);
+            $roomPrice = round($effectiveRatePerNight * $nights, 2);
+        } else {
+            $unitPersons = null;
+            $personRatePerNight = null;
+            $effectiveRatePerNight = $ratePerNight;
+            $roomPrice = round($ratePerNight * $nights, 2);
+        }
 
         // Meals calculation (persons * rate * nights)
         $mealsNights = 0;
@@ -93,6 +112,10 @@ class PricingService
         return [
             'nights' => $nights,
             'rate_per_night' => $ratePerNight,
+            'is_hotel6' => $isHotel6,
+            'unit_persons_count' => $unitPersons,
+            'person_rate_per_night' => $personRatePerNight,
+            'effective_rate_per_night' => $effectiveRatePerNight,
             'room_price' => $roomPrice,
             'has_meals' => $hasMeals,
             'meals_persons_count' => $hasMeals ? $mealsPersons : 0,

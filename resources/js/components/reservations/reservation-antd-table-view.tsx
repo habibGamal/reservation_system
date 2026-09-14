@@ -148,6 +148,7 @@ export interface ReservationTableViewProps {
     statusFilter?: string;
     statusFilters?: string[];
     paymentStatusFilter?: string;
+    checkoutToday?: boolean;
     onEdit: (reservation: Reservation) => void;
     onStatusUpdate?: (id: number, newStatus: ReservationStatus) => void;
     onReservationUpdate?: (id: number, data: Partial<Reservation>) => void;
@@ -482,6 +483,22 @@ function getGateBadge(enterFromGates?: boolean | null) {
             <span>لا</span>
         </span>
     );
+}
+
+function isReservationCheckoutToday(res: Reservation): boolean {
+    if (!res || res.id <= 0 || !res.check_out) return false;
+    if (res.status === 'غادر') return false;
+    if (res.is_checkout_today !== undefined) return Boolean(res.is_checkout_today);
+    const today = new Date().toLocaleDateString('en-CA');
+    return res.check_out.slice(0, 10) === today;
+}
+
+function isReservationCheckoutOverdue(res: Reservation): boolean {
+    if (!res || res.id <= 0 || !res.check_out) return false;
+    if (res.status === 'غادر') return false;
+    if (res.is_checkout_overdue !== undefined) return Boolean(res.is_checkout_overdue);
+    const today = new Date().toLocaleDateString('en-CA');
+    return res.check_out.slice(0, 10) < today;
 }
 
 function getStatusBadge(status: ReservationStatus | string) {
@@ -1576,6 +1593,34 @@ const TABLE_STYLES = `
         background-color: rgba(147, 51, 234, 0.03);
     }
 
+    /* Checkout Today Row Highlight */
+    .antd-reservations-table tr.antd-checkout-today-row > td:not(.ant-table-cell-fix-left):not(.ant-table-cell-fix-right) {
+        background-color: rgba(245, 158, 11, 0.08) !important;
+    }
+    .dark .antd-reservations-table tr.antd-checkout-today-row > td:not(.ant-table-cell-fix-left):not(.ant-table-cell-fix-right) {
+        background-color: rgba(245, 158, 11, 0.14) !important;
+    }
+    .antd-reservations-table tr.antd-checkout-today-row:hover > td:not(.ant-table-cell-fix-left):not(.ant-table-cell-fix-right) {
+        background-color: rgba(245, 158, 11, 0.18) !important;
+    }
+    .antd-reservations-table tr.antd-checkout-today-row > td.ant-table-cell-fix-right {
+        border-right: 4px solid #f59e0b !important;
+    }
+
+    /* Overdue Checkout Row Highlight */
+    .antd-reservations-table tr.antd-checkout-overdue-row > td:not(.ant-table-cell-fix-left):not(.ant-table-cell-fix-right) {
+        background-color: rgba(239, 68, 68, 0.06) !important;
+    }
+    .dark .antd-reservations-table tr.antd-checkout-overdue-row > td:not(.ant-table-cell-fix-left):not(.ant-table-cell-fix-right) {
+        background-color: rgba(239, 68, 68, 0.12) !important;
+    }
+    .antd-reservations-table tr.antd-checkout-overdue-row:hover > td:not(.ant-table-cell-fix-left):not(.ant-table-cell-fix-right) {
+        background-color: rgba(239, 68, 68, 0.14) !important;
+    }
+    .antd-reservations-table tr.antd-checkout-overdue-row > td.ant-table-cell-fix-right {
+        border-right: 4px solid #ef4444 !important;
+    }
+
     /* Vacant row solid fixed cell styling */
     .antd-reservations-table .ant-table-row.antd-vacant-row > td.ant-table-cell-fix-left,
     .antd-reservations-table .ant-table-row.antd-vacant-row > td.ant-table-cell-fix-right {
@@ -1902,6 +1947,7 @@ export function ReservationAntdTableView({
     statusFilter,
     statusFilters,
     paymentStatusFilter,
+    checkoutToday = false,
     onEdit,
     onStatusUpdate,
     onReservationUpdate,
@@ -2020,16 +2066,17 @@ export function ReservationAntdTableView({
             });
         }
 
-        // Include vacant units unless an exclusive status or payment filter is active
+        // Include vacant units unless an exclusive status, payment, or checkout_today filter is active
         const isStatusFilterActive =
             (statusFilters && statusFilters.length > 0 && !statusFilters.includes('all')) ||
             (statusFilter && statusFilter !== 'all');
         const isPaymentFilterActive =
             paymentStatusFilter && paymentStatusFilter !== 'all';
+        const isCheckoutTodayFilterActive = Boolean(checkoutToday);
 
         const vacantRows: Reservation[] = [];
 
-        if (!isStatusFilterActive && !isPaymentFilterActive) {
+        if (!isStatusFilterActive && !isPaymentFilterActive && !isCheckoutTodayFilterActive) {
             for (let i = 0; i < candidateUnits.length; i++) {
                 const unit = candidateUnits[i];
                 if (!reservedUnitIds.has(unit.id)) {
@@ -2068,6 +2115,7 @@ export function ReservationAntdTableView({
         statusFilter,
         statusFilters,
         paymentStatusFilter,
+        checkoutToday,
     ]);
 
     // State for Ant Design column header filters
@@ -2754,6 +2802,9 @@ export function ReservationAntdTableView({
                     return <span className="text-muted-foreground/40 text-xs">—</span>;
                 }
 
+                const isCheckoutToday = isReservationCheckoutToday(res);
+                const isOverdue = !isCheckoutToday && isReservationCheckoutOverdue(res);
+
                 return (
                     <div className="flex min-w-0 items-center gap-1.5 text-xs whitespace-nowrap">
                         <Calendar className="text-muted-foreground h-3.5 w-3.5 shrink-0" />
@@ -2763,7 +2814,7 @@ export function ReservationAntdTableView({
                         <span className="text-muted-foreground shrink-0">
                             ←
                         </span>
-                        <span className="shrink-0 font-medium">
+                        <span className={`shrink-0 font-medium ${isCheckoutToday ? 'text-amber-600 dark:text-amber-400 font-bold' : ''}`}>
                             {res.check_out}
                         </span>
                         <Tag className="bg-muted/70 text-muted-foreground m-0 inline-flex shrink-0 items-center gap-0.5 border-0 px-1.5 py-0 text-[11px] font-medium">
@@ -2773,6 +2824,16 @@ export function ReservationAntdTableView({
                                 {res.nights_count === 1 ? 'ليلة' : 'ليالي'}
                             </span>
                         </Tag>
+                        {isCheckoutToday && (
+                            <Tag className="bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/70 dark:text-amber-200 dark:border-amber-800 m-0 inline-flex shrink-0 items-center gap-1 px-1.5 py-0 text-[10px] font-bold animate-pulse">
+                                🔔 مغادرة اليوم
+                            </Tag>
+                        )}
+                        {isOverdue && (
+                            <Tag className="bg-red-100 text-red-900 border-red-300 dark:bg-red-950/70 dark:text-red-200 dark:border-red-800 m-0 inline-flex shrink-0 items-center gap-1 px-1.5 py-0 text-[10px] font-bold">
+                                ⚠️ متأخر عن المغادرة
+                            </Tag>
+                        )}
                     </div>
                 );
             },
@@ -3362,6 +3423,11 @@ export function ReservationAntdTableView({
                     const spanInfo = unitSpanMap.get(record.id);
                     if (spanInfo && spanInfo.totalCount > 1) {
                         classes.push('antd-multi-res-row');
+                    }
+                    if (isReservationCheckoutToday(record)) {
+                        classes.push('antd-checkout-today-row');
+                    } else if (isReservationCheckoutOverdue(record)) {
+                        classes.push('antd-checkout-overdue-row');
                     }
                     return classes.join(' ');
                 }}

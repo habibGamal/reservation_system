@@ -158,6 +158,7 @@ export function ReservationFormDialog({
     status: (reservation?.status ?? 'ثابت') as ReservationStatus,
     type: (reservation?.type ?? 'فرع') as ReservationType,
     membership: (reservation?.membership ?? 'عضو') as MembershipType,
+    unit_persons_count: reservation?.unit_persons_count ? Number(reservation.unit_persons_count) : 4,
     enter_from_gates: Boolean(reservation?.enter_from_gates ?? false),
     has_meals: Boolean(reservation?.has_meals ?? false),
     meals_persons_count: reservation?.meals_persons_count ? Number(reservation.meals_persons_count) : 4,
@@ -317,6 +318,12 @@ export function ReservationFormDialog({
     currentSector?.has_meals || currentSector?.name === 'فندق 6' || selectedUnit?.sector?.has_meals
   );
 
+  const isHotel6 = Boolean(
+    currentSector?.name === 'فندق 6' ||
+    selectedUnit?.sector?.name === 'فندق 6' ||
+    selectedUnit?.price_rule?.name?.includes('4 أفراد')
+  );
+
   // Reset form when dialog opens or editing reservation changes
   useEffect(() => {
     if (open) {
@@ -339,6 +346,7 @@ export function ReservationFormDialog({
           status: reservation.status,
           type: reservation.type,
           membership: reservation.membership ?? 'عضو',
+          unit_persons_count: reservation.unit_persons_count ? Number(reservation.unit_persons_count) : 4,
           enter_from_gates: Boolean(reservation.enter_from_gates),
           has_meals: Boolean(reservation.has_meals),
           meals_persons_count: reservation.meals_persons_count ? Number(reservation.meals_persons_count) : 4,
@@ -417,6 +425,7 @@ export function ReservationFormDialog({
           status: 'انتظار',
           type: 'فرع',
           membership: 'غير عضو',
+          unit_persons_count: 4,
           enter_from_gates: false,
           has_meals: hasMealsDefault,
           meals_persons_count: 4,
@@ -503,11 +512,17 @@ export function ReservationFormDialog({
     return Number(selectedUnit.price_rule.rules[data.membership] ?? 0);
   }, [selectedUnit, data.membership]);
 
+  const unitPersonsCount = Number(data.unit_persons_count) > 0 ? Number(data.unit_persons_count) : 4;
+
   // Room accommodation subtotal
   const calculatedRoomPrice = useMemo(() => {
     if (ratePerNight <= 0 || nightsCount <= 0) return 0;
+    if (isHotel6) {
+      const personRate = ratePerNight / 4;
+      return personRate * unitPersonsCount * nightsCount;
+    }
     return ratePerNight * nightsCount;
-  }, [ratePerNight, nightsCount]);
+  }, [ratePerNight, nightsCount, isHotel6, unitPersonsCount]);
 
   // Meals rate and nights calculation
   const mealRatePerNight = 450;
@@ -567,25 +582,35 @@ export function ReservationFormDialog({
   const handleUnitSelect = (val: string) => {
     const unit = units.find((u) => String(u.id) === val);
     const targetSectorHasMeals = Boolean(unit?.sector?.has_meals || unit?.sector?.name === 'فندق 6');
+    const targetIsHotel6 = Boolean(unit?.sector?.name === 'فندق 6' || unit?.price_rule?.name?.includes('4 أفراد'));
     if (!isEditing && targetSectorHasMeals && !data.has_meals) {
-      setData((prev) => ({
-        ...prev,
-        unit_id: val,
-        has_meals: true,
-        meals_persons_count: prev.meals_persons_count || 4,
-        meals_start_date: prev.meals_start_date || prev.check_in,
-        meals_end_date: prev.meals_end_date || prev.check_out,
-      }));
+      setData((prev) => {
+        const persons = targetIsHotel6 ? (prev.unit_persons_count || 4) : (prev.meals_persons_count || 4);
+        return {
+          ...prev,
+          unit_id: val,
+          unit_persons_count: targetIsHotel6 ? (prev.unit_persons_count || 4) : 4,
+          has_meals: true,
+          meals_persons_count: persons,
+          meals_start_date: prev.meals_start_date || prev.check_in,
+          meals_end_date: prev.meals_end_date || prev.check_out,
+        };
+      });
     } else if (!targetSectorHasMeals) {
       setData((prev) => ({
         ...prev,
         unit_id: val,
+        unit_persons_count: targetIsHotel6 ? (prev.unit_persons_count || 4) : 4,
         has_meals: false,
         meals_start_date: '',
         meals_end_date: '',
       }));
     } else {
-      setData('unit_id', val);
+      setData((prev) => ({
+        ...prev,
+        unit_id: val,
+        unit_persons_count: targetIsHotel6 ? (prev.unit_persons_count || 4) : 4,
+      }));
     }
   };
 
@@ -639,6 +664,12 @@ export function ReservationFormDialog({
     const submitData: Record<string, any> = {
       ...data,
     };
+
+    if (isHotel6) {
+      submitData.unit_persons_count = Number(data.unit_persons_count) || 4;
+    } else {
+      delete submitData.unit_persons_count;
+    }
 
     if (!data.has_meals || !sectorHasMeals) {
       delete submitData.has_meals;
@@ -1007,6 +1038,8 @@ export function ReservationFormDialog({
               </Col>
             </Row>
 
+
+
             {/* Dates: Check-in & Check-out */}
             <div className="mt-4 pt-3 border-t border-stone-200/80 dark:border-stone-800/80">
               <Row gutter={[16, 16]}>
@@ -1193,6 +1226,61 @@ export function ReservationFormDialog({
             </Row>
           </Card>
 
+          {/* Hotel 6 Unit Persons Option */}
+          {isHotel6 && (
+            <div className="mt-3 p-3 bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40 rounded-lg">
+              <Row gutter={[16, 12]} align="middle">
+                <Col xs={24} sm={12}>
+                  <Form.Item
+                    label={
+                      <Space size={4}>
+                        <UsergroupAddOutlined className="text-amber-600" />
+                        <span className="text-xs font-semibold text-stone-700 dark:text-stone-300">
+                          عدد أفراد الإقامة بالوحدة (السعر الأساسي لـ 4 أفراد)
+                        </span>
+                      </Space>
+                    }
+                    validateStatus={errors.unit_persons_count ? 'error' : ''}
+                    help={errors.unit_persons_count}
+                    className="mb-0"
+                  >
+                    <InputNumber
+                      value={data.unit_persons_count ? Number(data.unit_persons_count) : 4}
+                      onChange={(val) => {
+                        const newPersons = val !== null ? Number(val) : 4;
+                        setData((prev) => {
+                          const updated: any = {
+                            ...prev,
+                            unit_persons_count: newPersons,
+                          };
+                          if (prev.has_meals) {
+                            updated.meals_persons_count = newPersons;
+                          }
+                          return updated;
+                        });
+                      }}
+                      min={1}
+                      max={50}
+                      disabled={isReadOnly}
+                      className="w-full text-right"
+                    />
+                  </Form.Item>
+                </Col>
+                <Col xs={24} sm={12}>
+                  <div className="flex flex-col justify-center">
+                    <span className="text-[11px] text-stone-500 dark:text-stone-400 mb-1">
+                      احتساب سعر الوحدة لليلة:
+                    </span>
+                    <Tag color="orange" className="text-xs font-bold m-0 px-2.5 py-1 text-center">
+                      {ratePerNight > 0
+                        ? `${unitPersonsCount} أفراد × ${(ratePerNight / 4).toLocaleString('ar-EG')} ج.م = ${((ratePerNight / 4) * unitPersonsCount).toLocaleString('ar-EG')} ج.م / ليلة`
+                        : `${unitPersonsCount} أفراد (الافتراضي 4 أفراد)`}
+                    </Tag>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          )}
           {/* SECTION 3: Add-ons & Services (Meals - ONLY IF SECTOR HAS MEALS, and Extra Fees) */}
           {(sectorHasMeals || (data.extra_fees && data.extra_fees.length > 0) || !isReadOnly) && (
             <Card
@@ -1220,7 +1308,7 @@ export function ReservationFormDialog({
                             setData((prev) => ({
                               ...prev,
                               has_meals: checked,
-                              meals_persons_count: prev.meals_persons_count || 4,
+                              meals_persons_count: isHotel6 ? (prev.unit_persons_count || 4) : (prev.meals_persons_count || 4),
                               meals_start_date: checked ? (prev.meals_start_date || prev.check_in) : '',
                               meals_end_date: checked ? (prev.meals_end_date || prev.check_out) : '',
                             }));
@@ -1435,7 +1523,9 @@ export function ReservationFormDialog({
                   <span>سعر الليلة الواحدة (وفقاً لفئة {data.membership}):</span>
                 </span>
                 <Tag color="blue" className="text-xs font-bold font-mono m-0 px-2.5 py-0.5">
-                  {ratePerNight.toLocaleString('ar-EG')} ج.م / ليلة
+                  {isHotel6
+                    ? `${((ratePerNight / 4) * unitPersonsCount).toLocaleString('ar-EG')} ج.م / ليلة (${unitPersonsCount} أفراد × ${(ratePerNight / 4).toLocaleString('ar-EG')} ج.م)`
+                    : `${ratePerNight.toLocaleString('ar-EG')} ج.م / ليلة`}
                 </Tag>
               </div>
             )}
@@ -1446,7 +1536,7 @@ export function ReservationFormDialog({
                 <Col xs={12} sm={sectorHasMeals ? 6 : 8}>
                   <div className="p-2.5 rounded-lg bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800">
                     <Statistic
-                      title={<span className="text-[11px] text-stone-500">إقامة ({nightsCount} ليالٍ)</span>}
+                      title={<span className="text-[11px] text-stone-500">إقامة ({nightsCount} ليالٍ{isHotel6 ? ` • ${unitPersonsCount} أفراد` : ''})</span>}
                       value={calculatedRoomPrice}
                       suffix={<span className="text-[10px]">ج.م</span>}
                       styles={{ content: { fontSize: 13, fontWeight: 'bold' } }}
