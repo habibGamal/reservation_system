@@ -23,6 +23,40 @@ class PriceRule extends Model
 
     public const TYPE_MEAL = 'meal';
 
+    public const STANDARD_CATEGORIES = [
+        'عضو',
+        'غير عضو',
+        'مرافق',
+        'مدني',
+    ];
+
+    /**
+     * Get all known pricing categories across standard membership types and existing unit rules.
+     *
+     * @return array<string>
+     */
+    public static function getAllCategories(): array
+    {
+        $categories = self::STANDARD_CATEGORIES;
+
+        try {
+            $rules = self::where('type', self::TYPE_UNIT)->pluck('rules');
+            foreach ($rules as $rule) {
+                if (is_array($rule)) {
+                    foreach (array_keys($rule) as $key) {
+                        if ($key !== 'price_per_night' && $key !== 'rate' && trim((string) $key) !== '') {
+                            $categories[] = (string) $key;
+                        }
+                    }
+                }
+            }
+        } catch (\Throwable) {
+            // Fallback if DB table is inaccessible
+        }
+
+        return array_values(array_unique($categories));
+    }
+
     /**
      * @var list<string>
      */

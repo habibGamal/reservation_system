@@ -111,7 +111,6 @@ class Reservation extends Model
             'check_out' => 'date:Y-m-d',
             'status' => ReservationStatus::class,
             'type' => ReservationType::class,
-            'membership' => MembershipType::class,
             'unit_persons_count' => 'integer',
             'enter_from_gates' => 'boolean',
             'has_meals' => 'boolean',
@@ -122,6 +121,32 @@ class Reservation extends Model
             'meals_total_price' => 'float',
             'total_price' => 'float',
         ];
+    }
+
+    /**
+     * Get or set the reservation membership.
+     * Supports standard MembershipType enum cases as well as custom price rule categories.
+     *
+     * @return Attribute<MembershipType|string|null, MembershipType|string|null>
+     */
+    protected function membership(): Attribute
+    {
+        return Attribute::make(
+            get: static function (mixed $value): MembershipType|string|null {
+                if ($value === null) {
+                    return null;
+                }
+
+                return MembershipType::tryFrom((string) $value) ?? (string) $value;
+            },
+            set: static function (mixed $value): ?string {
+                if ($value instanceof MembershipType) {
+                    return $value->value;
+                }
+
+                return $value !== null ? (string) $value : null;
+            }
+        );
     }
 
     public function getActivitylogOptions(): LogOptions

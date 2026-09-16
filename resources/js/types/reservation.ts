@@ -1,6 +1,6 @@
 export type ReservationStatus = 'تم التسكين' | 'انتظار' | 'ثابت' | 'غادر';
 export type ReservationType = 'فرع' | 'ادارة' | 'منتجع';
-export type MembershipType = 'عضو' | 'غير عضو' | 'مرافق' | 'مدني';
+export type MembershipType = 'عضو' | 'غير عضو' | 'مرافق' | 'مدني' | (string & {});
 export type PaymentMethod = 'Cash' | 'visa' | 'instapay';
 export type PaymentStatus = 'Fully Paid' | 'Partially Paid' | 'Unpaid';
 export type ActiveView = 'table' | 'matrix' | 'meals';

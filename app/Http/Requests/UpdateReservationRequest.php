@@ -69,7 +69,7 @@ class UpdateReservationRequest extends FormRequest
             'check_out' => ['required', 'date', 'date_format:Y-m-d', 'after:check_in'],
             'status' => ['required', 'string', Rule::in(ReservationStatus::values())],
             'type' => ['required', 'string', Rule::in(ReservationType::values())],
-            'membership' => ['required', 'string', Rule::in(MembershipType::values())],
+            'membership' => ['required', 'string', 'max:100'],
             'unit_persons_count' => ['nullable', 'integer', 'min:1', 'max:50'],
             'enter_from_gates' => ['nullable', 'boolean'],
             'has_meals' => ['nullable', 'boolean'],
@@ -123,9 +123,21 @@ class UpdateReservationRequest extends FormRequest
                 );
             }
 
+            // Custom membership options are only allowed if defined in the unit's price rule
+            $membership = (string) $this->input('membership');
+            if (! in_array($membership, MembershipType::values(), true)) {
+                $unit = Unit::with('priceRule')->find($unitId);
+                $rules = $unit?->priceRule?->rules;
+                if (! is_array($rules) || ! isset($rules[$membership])) {
+                    $validator->errors()->add(
+                        'membership',
+                        "فئة التسعير '{$membership}' غير متوفرة في قاعدة تسعير هذه الوحدة."
+                    );
+                }
+            }
+
             // Verify authorized price override if unit has pricing rules
             $pricingService = app(PricingService::class);
-            $membership = (string) $this->input('membership');
             $totalPrice = (float) $this->input('total_price');
             $unitPersonsCount = $this->filled('unit_persons_count') ? (int) $this->input('unit_persons_count') : null;
             $hasMeals = (bool) $this->boolean('has_meals');

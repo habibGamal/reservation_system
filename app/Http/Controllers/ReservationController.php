@@ -1018,7 +1018,7 @@ class ReservationController extends Controller
 
         $validated = $request->validate([
             'status' => ['nullable', 'string', Rule::in(ReservationStatus::values())],
-            'membership' => ['nullable', 'string', Rule::in(MembershipType::values())],
+            'membership' => ['nullable', 'string', 'max:100'],
             'type' => ['nullable', 'string', Rule::in(ReservationType::values())],
             'enter_from_gates' => ['nullable', 'boolean'],
             'notes' => ['nullable', 'string', 'max:2000'],

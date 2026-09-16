@@ -304,6 +304,35 @@ export function ReservationFormDialog({
     return units.find((u) => String(u.id) === data.unit_id);
   }, [units, data.unit_id]);
 
+  // Dynamic membership options: only standard 4 categories + custom options from THIS unit's price rule
+  const membershipOptions = useMemo(() => {
+    const base = [
+      { value: 'عضو', label: 'عضو' },
+      { value: 'غير عضو', label: 'غير عضو' },
+      { value: 'مرافق', label: 'مرافق' },
+      { value: 'مدني', label: 'مدني' },
+    ];
+    const seen = new Set(base.map((b) => b.value));
+
+    // Only include custom options from the selected unit's assigned price rule
+    const unitRules = selectedUnit?.price_rule?.rules;
+    if (unitRules) {
+      Object.keys(unitRules).forEach((k) => {
+        if (!seen.has(k) && k !== 'price_per_night' && k !== 'rate' && k.trim() !== '') {
+          seen.add(k);
+          base.push({ value: k, label: k });
+        }
+      });
+    }
+
+    if (data.membership && !seen.has(data.membership)) {
+      seen.add(data.membership);
+      base.push({ value: data.membership, label: data.membership });
+    }
+
+    return base;
+  }, [selectedUnit, data.membership]);
+
   // Determine current active sector and whether meals apply
   const currentSector = useMemo(() => {
     if (selectedUnit?.sector) return selectedUnit.sector;
@@ -583,12 +612,19 @@ export function ReservationFormDialog({
     const unit = units.find((u) => String(u.id) === val);
     const targetSectorHasMeals = Boolean(unit?.sector?.has_meals || unit?.sector?.name === 'فندق 6');
     const targetIsHotel6 = Boolean(unit?.sector?.name === 'فندق 6' || unit?.price_rule?.name?.includes('4 أفراد'));
+
+    const targetUnitRules = unit?.price_rule?.rules;
+    const isCustomMembership = !['عضو', 'غير عضو', 'مرافق', 'مدني'].includes(data.membership);
+    const membershipSupported = !isCustomMembership || Boolean(targetUnitRules && targetUnitRules[data.membership] !== undefined);
+    const nextMembership = membershipSupported ? data.membership : 'عضو';
+
     if (!isEditing && targetSectorHasMeals && !data.has_meals) {
       setData((prev) => {
         const persons = targetIsHotel6 ? (prev.unit_persons_count || 4) : (prev.meals_persons_count || 4);
         return {
           ...prev,
           unit_id: val,
+          membership: nextMembership,
           unit_persons_count: targetIsHotel6 ? (prev.unit_persons_count || 4) : 4,
           has_meals: true,
           meals_persons_count: persons,
@@ -600,6 +636,7 @@ export function ReservationFormDialog({
       setData((prev) => ({
         ...prev,
         unit_id: val,
+        membership: nextMembership,
         unit_persons_count: targetIsHotel6 ? (prev.unit_persons_count || 4) : 4,
         has_meals: false,
         meals_start_date: '',
@@ -609,6 +646,7 @@ export function ReservationFormDialog({
       setData((prev) => ({
         ...prev,
         unit_id: val,
+        membership: nextMembership,
         unit_persons_count: targetIsHotel6 ? (prev.unit_persons_count || 4) : 4,
       }));
     }
@@ -1197,12 +1235,7 @@ export function ReservationFormDialog({
                   <Select
                     value={data.membership}
                     onChange={(val) => setData('membership', val as MembershipType)}
-                    options={[
-                      { value: 'عضو', label: 'عضو' },
-                      { value: 'غير عضو', label: 'غير عضو' },
-                      { value: 'مرافق', label: 'مرافق' },
-                      { value: 'مدني', label: 'مدني' },
-                    ]}
+                    options={membershipOptions}
                     disabled={isReadOnly}
                     className="w-full"
                   />

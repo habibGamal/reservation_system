@@ -2951,12 +2951,33 @@ export function ReservationAntdTableView({
                     return <span className="text-muted-foreground/40 text-xs">—</span>;
                 }
 
+                const targetUnit = (units || []).find((u) => u.id === res.unit_id) || res.unit;
+                const unitRules = targetUnit?.price_rule?.rules;
+                let rowMembershipOptions = MEMBERSHIP_OPTIONS;
+                if (unitRules) {
+                    const extraKeys = Object.keys(unitRules).filter(
+                        (k) => !['عضو', 'غير عضو', 'مرافق', 'مدني', 'price_per_night', 'rate'].includes(k) && k.trim() !== ''
+                    );
+                    if (extraKeys.length > 0) {
+                        rowMembershipOptions = [
+                            ...MEMBERSHIP_OPTIONS,
+                            ...extraKeys.map((k) => ({ value: k, label: k })),
+                        ];
+                    }
+                }
+                if (res.membership && !rowMembershipOptions.some((opt) => opt.value === res.membership)) {
+                    rowMembershipOptions = [
+                        ...rowMembershipOptions,
+                        { value: res.membership, label: res.membership },
+                    ];
+                }
+
                 return (
                     <LazySelect<MembershipType>
                         value={(res.membership ?? 'عضو') as MembershipType}
                         onChange={(val) => handleMembershipChange(res.id, val)}
                         disabled={!canEditReservation || !hasSectorEditAccess(res)}
-                        options={MEMBERSHIP_OPTIONS as { value: MembershipType; label: React.ReactNode }[]}
+                        options={rowMembershipOptions as { value: MembershipType; label: React.ReactNode }[]}
                     />
                 );
             },

@@ -17,7 +17,7 @@ class ReservationPriceController extends Controller
     {
         $validated = $request->validate([
             'unit_id' => ['required', 'integer', 'exists:units,id'],
-            'membership' => ['required', 'string', Rule::in(MembershipType::values())],
+            'membership' => ['required', 'string', 'max:100'],
             'check_in' => ['required', 'date', 'date_format:Y-m-d', 'before:check_out'],
             'check_out' => ['required', 'date', 'date_format:Y-m-d', 'after:check_in'],
             'unit_persons_count' => ['nullable', 'integer', 'min:1', 'max:50'],
@@ -27,6 +27,20 @@ class ReservationPriceController extends Controller
             'check_in.required' => 'تاريخ الوصول مطلوب',
             'check_out.required' => 'تاريخ المغادرة مطلوب',
         ]);
+
+        $membership = (string) $validated['membership'];
+        if (! in_array($membership, MembershipType::values(), true)) {
+            $unit = \App\Models\Unit::with('priceRule')->find((int) $validated['unit_id']);
+            $rules = $unit?->priceRule?->rules;
+            if (! is_array($rules) || ! isset($rules[$membership])) {
+                return response()->json([
+                    'message' => "فئة التسعير '{$membership}' غير متوفرة في قاعدة تسعير هذه الوحدة.",
+                    'errors' => [
+                        'membership' => ["فئة التسعير '{$membership}' غير متوفرة في قاعدة تسعير هذه الوحدة."],
+                    ],
+                ], 422);
+            }
+        }
 
         $calculation = $pricingService->calculate(
             (int) $validated['unit_id'],

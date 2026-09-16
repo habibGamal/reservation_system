@@ -44,10 +44,23 @@ class PriceRuleController extends Controller
                 'rules.غير عضو' => ['required', 'numeric', 'min:0'],
                 'rules.مرافق' => ['required', 'numeric', 'min:0'],
                 'rules.مدني' => ['required', 'numeric', 'min:0'],
+                'rules.*' => ['required', 'numeric', 'min:0'],
             ], [
                 'name.required' => 'اسم قاعدة التسعير مطلوب',
                 'rules.required' => 'قواعد التسعير مطلوبة لجميع الفئات',
+                'rules.*.required' => 'سعر الفئة مطلوب',
+                'rules.*.numeric' => 'يجب أن يكون سعر كل فئة رقماً',
+                'rules.*.min' => 'لا يمكن أن يكون السعر أقل من صفر',
             ]);
+
+            $cleanedRules = [];
+            foreach ($validated['rules'] as $category => $price) {
+                $trimmedCategory = trim((string) $category);
+                if ($trimmedCategory !== '') {
+                    $cleanedRules[$trimmedCategory] = (float) $price;
+                }
+            }
+            $validated['rules'] = $cleanedRules;
         }
 
         PriceRule::create($validated);
@@ -80,7 +93,22 @@ class PriceRuleController extends Controller
                 'rules.غير عضو' => ['required', 'numeric', 'min:0'],
                 'rules.مرافق' => ['required', 'numeric', 'min:0'],
                 'rules.مدني' => ['required', 'numeric', 'min:0'],
+                'rules.*' => ['required', 'numeric', 'min:0'],
+            ], [
+                'name.required' => 'اسم قاعدة التسعير مطلوب',
+                'rules.required' => 'قواعد التسعير مطلوبة لجميع الفئات',
+                'rules.*.numeric' => 'يجب أن يكون سعر كل فئة رقماً',
+                'rules.*.min' => 'لا يمكن أن يكون السعر أقل من صفر',
             ]);
+
+            $cleanedRules = [];
+            foreach ($validated['rules'] as $category => $price) {
+                $trimmedCategory = trim((string) $category);
+                if ($trimmedCategory !== '') {
+                    $cleanedRules[$trimmedCategory] = (float) $price;
+                }
+            }
+            $validated['rules'] = $cleanedRules;
         }
 
         $priceRule->update($validated);

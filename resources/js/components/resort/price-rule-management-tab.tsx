@@ -23,11 +23,20 @@ import {
     Edit2,
     Plus,
     Shield,
+    Sparkles,
     Trash2,
     UserCheck,
     Users,
 } from 'lucide-react';
 import type { PriceRule } from '@/types/reservation';
+
+const STANDARD_RULE_KEYS = new Set(['عضو', 'غير عضو', 'مرافق', 'مدني', 'price_per_night', 'rate']);
+
+interface CustomPricingOption {
+    id: string;
+    name: string;
+    price: number | null;
+}
 
 interface PriceRuleWithUnitsCount extends PriceRule {
     units_count?: number;
@@ -46,6 +55,9 @@ export function PriceRuleManagementTab({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
+    const [createCustomOptions, setCreateCustomOptions] = useState<CustomPricingOption[]>([]);
+    const [editCustomOptions, setEditCustomOptions] = useState<CustomPricingOption[]>([]);
+
     const [createForm] = Form.useForm();
     const [editForm] = Form.useForm();
 
@@ -53,9 +65,70 @@ export function PriceRuleManagementTab({
         r.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
     );
 
+    const addCreateCustomOption = () => {
+        setCreateCustomOptions((prev) => [
+            ...prev,
+            { id: Math.random().toString(36).substring(2, 9), name: '', price: null },
+        ]);
+    };
+
+    const updateCreateCustomOption = (id: string, field: 'name' | 'price', value: any) => {
+        setCreateCustomOptions((prev) =>
+            prev.map((opt) => (opt.id === id ? { ...opt, [field]: value } : opt))
+        );
+    };
+
+    const removeCreateCustomOption = (id: string) => {
+        setCreateCustomOptions((prev) => prev.filter((opt) => opt.id !== id));
+    };
+
+    const addEditCustomOption = () => {
+        setEditCustomOptions((prev) => [
+            ...prev,
+            { id: Math.random().toString(36).substring(2, 9), name: '', price: null },
+        ]);
+    };
+
+    const updateEditCustomOption = (id: string, field: 'name' | 'price', value: any) => {
+        setEditCustomOptions((prev) =>
+            prev.map((opt) => (opt.id === id ? { ...opt, [field]: value } : opt))
+        );
+    };
+
+    const removeEditCustomOption = (id: string) => {
+        setEditCustomOptions((prev) => prev.filter((opt) => opt.id !== id));
+    };
+
     const handleCreate = async () => {
         try {
             const values = await createForm.validateFields();
+
+            const customRules: Record<string, number> = {};
+            for (const opt of createCustomOptions) {
+                const trimmed = opt.name.trim();
+                if (!trimmed) {
+                    message.error('يرجى كتابة اسم لجميع الفئات الإضافية أو حذف الحقول الفارغة');
+                    return;
+                }
+                if (STANDARD_RULE_KEYS.has(trimmed)) {
+                    message.error(`الفئة "${trimmed}" موجودة بالفعل ضمن الفئات الأساسية`);
+                    return;
+                }
+                if (customRules[trimmed] !== undefined) {
+                    message.error(`الفئة "${trimmed}" مكررة أكثر من مرة`);
+                    return;
+                }
+                if (opt.price === null || opt.price === undefined || isNaN(Number(opt.price))) {
+                    message.error(`يرجى تحديد السعر لفئة "${trimmed}"`);
+                    return;
+                }
+                if (Number(opt.price) < 0) {
+                    message.error(`لا يمكن أن يكون سعر فئة "${trimmed}" سالباً`);
+                    return;
+                }
+                customRules[trimmed] = Number(opt.price);
+            }
+
             setIsSubmitting(true);
             router.post(
                 '/price-rules',
@@ -66,6 +139,7 @@ export function PriceRuleManagementTab({
                         'غير عضو': Number(values.non_member_price),
                         مرافق: Number(values.companion_price),
                         مدني: Number(values.civilian_price),
+                        ...customRules,
                     },
                 },
                 {
@@ -74,6 +148,7 @@ export function PriceRuleManagementTab({
                         message.success('تمت إضافة قاعدة التسعير بنجاح');
                         setIsCreateOpen(false);
                         createForm.resetFields();
+                        setCreateCustomOptions([]);
                     },
                     onError: (errors) => {
                         const firstError = Object.values(errors)[0];
@@ -94,6 +169,16 @@ export function PriceRuleManagementTab({
         const isMeal = rule.type === 'meal' || rule.name === 'وجبات غذائية';
         const rulesMap = rule.rules || {};
         const mealPrice = rulesMap['price_per_night'] ?? rulesMap['rate'] ?? rulesMap['عضو'] ?? 450;
+
+        const customTiers: CustomPricingOption[] = Object.entries(rulesMap)
+            .filter(([key]) => !STANDARD_RULE_KEYS.has(key))
+            .map(([key, value]) => ({
+                id: Math.random().toString(36).substring(2, 9),
+                name: key,
+                price: Number(value),
+            }));
+        setEditCustomOptions(customTiers);
+
         editForm.setFieldsValue({
             name: rule.name,
             meal_price: mealPrice,
@@ -108,8 +193,37 @@ export function PriceRuleManagementTab({
         if (!editingRule) return;
         try {
             const values = await editForm.validateFields();
-            setIsSubmitting(true);
             const isMeal = editingRule.type === 'meal' || editingRule.name === 'وجبات غذائية';
+
+            const customRules: Record<string, number> = {};
+            if (!isMeal) {
+                for (const opt of editCustomOptions) {
+                    const trimmed = opt.name.trim();
+                    if (!trimmed) {
+                        message.error('يرجى كتابة اسم لجميع الفئات الإضافية أو حذف الحقول الفارغة');
+                        return;
+                    }
+                    if (STANDARD_RULE_KEYS.has(trimmed)) {
+                        message.error(`الفئة "${trimmed}" موجودة بالفعل ضمن الفئات الأساسية`);
+                        return;
+                    }
+                    if (customRules[trimmed] !== undefined) {
+                        message.error(`الفئة "${trimmed}" مكررة أكثر من مرة`);
+                        return;
+                    }
+                    if (opt.price === null || opt.price === undefined || isNaN(Number(opt.price))) {
+                        message.error(`يرجى تحديد السعر لفئة "${trimmed}"`);
+                        return;
+                    }
+                    if (Number(opt.price) < 0) {
+                        message.error(`لا يمكن أن يكون سعر فئة "${trimmed}" سالباً`);
+                        return;
+                    }
+                    customRules[trimmed] = Number(opt.price);
+                }
+            }
+
+            setIsSubmitting(true);
             const payload = isMeal
                 ? {
                     name: values.name,
@@ -126,6 +240,7 @@ export function PriceRuleManagementTab({
                         'غير عضو': Number(values.non_member_price),
                         مرافق: Number(values.companion_price),
                         مدني: Number(values.civilian_price),
+                        ...customRules,
                     },
                 };
 
@@ -138,6 +253,7 @@ export function PriceRuleManagementTab({
                         message.success('تم تحديث قاعدة التسعير بنجاح');
                         setEditingRule(null);
                         editForm.resetFields();
+                        setEditCustomOptions([]);
                     },
                     onError: (errors) => {
                         const firstError = Object.values(errors)[0];
@@ -285,6 +401,40 @@ export function PriceRuleManagementTab({
             },
         },
         {
+            title: (
+                <span className="flex items-center gap-1">
+                    <Sparkles className="h-3.5 w-3.5 text-purple-600" />
+                    <span>خيارات إضافية</span>
+                </span>
+            ),
+            key: 'extra_options',
+            width: 180,
+            align: 'center',
+            render: (_, record) => {
+                const isMeal = record.type === 'meal' || record.name === 'وجبات غذائية';
+                if (isMeal) {
+                    return <span className="text-muted-foreground text-xs">-</span>;
+                }
+                const extraEntries = Object.entries(record.rules || {}).filter(
+                    ([k]) => !STANDARD_RULE_KEYS.has(k)
+                );
+                if (extraEntries.length === 0) {
+                    return <span className="text-muted-foreground text-xs">-</span>;
+                }
+                return (
+                    <div className="flex flex-wrap gap-1 justify-center">
+                        {extraEntries.map(([k, v]) => (
+                            <Tooltip key={k} title={`سعر فئة ${k}: ${Number(v).toLocaleString()} ج.م`}>
+                                <Tag color="purple" className="m-0 text-xs font-medium">
+                                    <span className="font-semibold">{k}:</span> {Number(v).toLocaleString()} ج.م
+                                </Tag>
+                            </Tooltip>
+                        ))}
+                    </div>
+                );
+            },
+        },
+        {
             title: 'الوحدات المطبقة عليها',
             key: 'units_count',
             width: 150,
@@ -400,6 +550,7 @@ export function PriceRuleManagementTab({
                 onCancel={() => {
                     setIsCreateOpen(false);
                     createForm.resetFields();
+                    setCreateCustomOptions([]);
                 }}
                 confirmLoading={isSubmitting}
                 okText="إضافة قاعدة التسعير"
@@ -486,6 +637,68 @@ export function PriceRuleManagementTab({
                             </Col>
                         </Row>
                     </div>
+
+                    {/* Dynamic Custom Pricing Options */}
+                    <div className="mt-3 rounded-lg border p-3 bg-muted/10">
+                        <div className="flex items-center justify-between mb-2">
+                            <div>
+                                <div className="text-xs font-semibold text-stone-800 dark:text-stone-200">
+                                    خيارات وفئات تسعير إضافية (اختياري)
+                                </div>
+                                <div className="text-[11px] text-muted-foreground">
+                                    إضافة فئات تسعير مخصصة بخلاف الفئات الأربعة الأساسية
+                                </div>
+                            </div>
+                            <AntButton
+                                type="dashed"
+                                size="small"
+                                icon={<Plus className="h-3.5 w-3.5" />}
+                                onClick={addCreateCustomOption}
+                            >
+                                إضافة خيار آخر
+                            </AntButton>
+                        </div>
+
+                        {createCustomOptions.length === 0 ? (
+                            <div className="text-center py-2.5 text-xs text-muted-foreground border border-dashed rounded-md bg-background/50">
+                                لا توجد خيارات إضافية. اضغط على "إضافة خيار آخر" لإضافة فئة جديدة.
+                            </div>
+                        ) : (
+                            <div className="space-y-2">
+                                {createCustomOptions.map((opt) => (
+                                    <div key={opt.id} className="flex items-center gap-2 p-2 rounded-md bg-background border shadow-xs">
+                                        <div className="flex-1">
+                                            <AntInput
+                                                placeholder="اسم الفئة (مثال: رتبة خاصة، جهة خارجية، سياحة...)"
+                                                value={opt.name}
+                                                onChange={(e) => updateCreateCustomOption(opt.id, 'name', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="w-36">
+                                            <InputNumber
+                                                min={0}
+                                                step={50}
+                                                addonAfter="ج.م"
+                                                className="w-full"
+                                                placeholder="السعر"
+                                                value={opt.price}
+                                                onChange={(val) => updateCreateCustomOption(opt.id, 'price', val)}
+                                            />
+                                        </div>
+                                        <Tooltip title="حذف هذا الخيار">
+                                            <AntButton
+                                                type="text"
+                                                danger
+                                                size="small"
+                                                icon={<Trash2 className="h-4 w-4" />}
+                                                onClick={() => removeCreateCustomOption(opt.id)}
+                                            />
+                                        </Tooltip>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </Form>
             </Modal>
 
@@ -502,6 +715,7 @@ export function PriceRuleManagementTab({
                 onCancel={() => {
                     setEditingRule(null);
                     editForm.resetFields();
+                    setEditCustomOptions([]);
                 }}
                 confirmLoading={isSubmitting}
                 okText="حفظ التعديلات"
@@ -537,69 +751,133 @@ export function PriceRuleManagementTab({
                             </Form.Item>
                         </div>
                     ) : (
-                        <div className="rounded-lg border p-3 bg-muted/20">
-                            <div className="mb-2.5 text-xs font-semibold text-muted-foreground">
-                                تعديل الأسعار اليومية لكل فئة (بالجنيه المصري):
+                        <>
+                            <div className="rounded-lg border p-3 bg-muted/20">
+                                <div className="mb-2.5 text-xs font-semibold text-muted-foreground">
+                                    تعديل الأسعار اليومية لكل فئة (بالجنيه المصري):
+                                </div>
+                                <Row gutter={12}>
+                                    <Col span={12}>
+                                        <Form.Item
+                                            name="member_price"
+                                            label="سعر العضو"
+                                            rules={[{ required: true, message: 'مطلوب' }]}
+                                        >
+                                            <InputNumber
+                                                min={0}
+                                                step={50}
+                                                addonAfter="ج.م"
+                                                className="w-full"
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Form.Item
+                                            name="non_member_price"
+                                            label="سعر غير العضو"
+                                            rules={[{ required: true, message: 'مطلوب' }]}
+                                        >
+                                            <InputNumber
+                                                min={0}
+                                                step={50}
+                                                addonAfter="ج.م"
+                                                className="w-full"
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Form.Item
+                                            name="companion_price"
+                                            label="سعر المرافق"
+                                            rules={[{ required: true, message: 'مطلوب' }]}
+                                        >
+                                            <InputNumber
+                                                min={0}
+                                                step={50}
+                                                addonAfter="ج.م"
+                                                className="w-full"
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Form.Item
+                                            name="civilian_price"
+                                            label="سعر المدني"
+                                            rules={[{ required: true, message: 'مطلوب' }]}
+                                        >
+                                            <InputNumber
+                                                min={0}
+                                                step={50}
+                                                addonAfter="ج.م"
+                                                className="w-full"
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
                             </div>
-                            <Row gutter={12}>
-                                <Col span={12}>
-                                    <Form.Item
-                                        name="member_price"
-                                        label="سعر العضو"
-                                        rules={[{ required: true, message: 'مطلوب' }]}
+
+                            {/* Dynamic Custom Pricing Options for Edit */}
+                            <div className="mt-3 rounded-lg border p-3 bg-muted/10">
+                                <div className="flex items-center justify-between mb-2">
+                                    <div>
+                                        <div className="text-xs font-semibold text-stone-800 dark:text-stone-200">
+                                            خيارات وفئات تسعير إضافية (اختياري)
+                                        </div>
+                                        <div className="text-[11px] text-muted-foreground">
+                                            إضافة أو تعديل فئات تسعير مخصصة لهذه القاعدة
+                                        </div>
+                                    </div>
+                                    <AntButton
+                                        type="dashed"
+                                        size="small"
+                                        icon={<Plus className="h-3.5 w-3.5" />}
+                                        onClick={addEditCustomOption}
                                     >
-                                        <InputNumber
-                                            min={0}
-                                            step={50}
-                                            addonAfter="ج.م"
-                                            className="w-full"
-                                        />
-                                    </Form.Item>
-                                </Col>
-                                <Col span={12}>
-                                    <Form.Item
-                                        name="non_member_price"
-                                        label="سعر غير العضو"
-                                        rules={[{ required: true, message: 'مطلوب' }]}
-                                    >
-                                        <InputNumber
-                                            min={0}
-                                            step={50}
-                                            addonAfter="ج.م"
-                                            className="w-full"
-                                        />
-                                    </Form.Item>
-                                </Col>
-                                <Col span={12}>
-                                    <Form.Item
-                                        name="companion_price"
-                                        label="سعر المرافق"
-                                        rules={[{ required: true, message: 'مطلوب' }]}
-                                    >
-                                        <InputNumber
-                                            min={0}
-                                            step={50}
-                                            addonAfter="ج.م"
-                                            className="w-full"
-                                        />
-                                    </Form.Item>
-                                </Col>
-                                <Col span={12}>
-                                    <Form.Item
-                                        name="civilian_price"
-                                        label="سعر المدني"
-                                        rules={[{ required: true, message: 'مطلوب' }]}
-                                    >
-                                        <InputNumber
-                                            min={0}
-                                            step={50}
-                                            addonAfter="ج.م"
-                                            className="w-full"
-                                        />
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                        </div>
+                                        إضافة خيار آخر
+                                    </AntButton>
+                                </div>
+
+                                {editCustomOptions.length === 0 ? (
+                                    <div className="text-center py-2.5 text-xs text-muted-foreground border border-dashed rounded-md bg-background/50">
+                                        لا توجد خيارات إضافية. اضغط على "إضافة خيار آخر" لإضافة فئة جديدة.
+                                    </div>
+                                ) : (
+                                    <div className="space-y-2">
+                                        {editCustomOptions.map((opt) => (
+                                            <div key={opt.id} className="flex items-center gap-2 p-2 rounded-md bg-background border shadow-xs">
+                                                <div className="flex-1">
+                                                    <AntInput
+                                                        placeholder="اسم الفئة (مثال: رتبة خاصة، جهة خارجية، سياحة...)"
+                                                        value={opt.name}
+                                                        onChange={(e) => updateEditCustomOption(opt.id, 'name', e.target.value)}
+                                                    />
+                                                </div>
+                                                <div className="w-36">
+                                                    <InputNumber
+                                                        min={0}
+                                                        step={50}
+                                                        addonAfter="ج.م"
+                                                        className="w-full"
+                                                        placeholder="السعر"
+                                                        value={opt.price}
+                                                        onChange={(val) => updateEditCustomOption(opt.id, 'price', val)}
+                                                    />
+                                                </div>
+                                                <Tooltip title="حذف هذا الخيار">
+                                                    <AntButton
+                                                        type="text"
+                                                        danger
+                                                        size="small"
+                                                        icon={<Trash2 className="h-4 w-4" />}
+                                                        onClick={() => removeEditCustomOption(opt.id)}
+                                                    />
+                                                </Tooltip>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </>
                     )}
                 </Form>
             </Modal>
