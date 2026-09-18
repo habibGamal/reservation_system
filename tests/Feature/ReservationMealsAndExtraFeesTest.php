@@ -337,6 +337,37 @@ class ReservationMealsAndExtraFeesTest extends TestCase
         ]);
     }
 
+    public function test_update_reservation_validates_custom_membership_against_unit_price_rule(): void
+    {
+        $reservation = Reservation::create([
+            'guest_id' => $this->guest->id,
+            'unit_id' => $this->hotel6Unit->id,
+            'check_in' => '2026-10-01',
+            'check_out' => '2026-10-04',
+            'status' => ReservationStatus::CONFIRMED->value,
+            'type' => ReservationType::BRANCH->value,
+            'membership' => MembershipType::MEMBER->value,
+            'total_price' => 2400.00,
+            'created_by' => $this->receptionist->id,
+        ]);
+
+        $response = $this->actingAs($this->receptionist)->put(
+            route('reservations.update', $reservation),
+            [
+                'guest_id' => $this->guest->id,
+                'unit_id' => $this->hotel6Unit->id,
+                'check_in' => '2026-10-01',
+                'check_out' => '2026-10-04',
+                'status' => ReservationStatus::CONFIRMED->value,
+                'type' => ReservationType::BRANCH->value,
+                'membership' => 'invalid_custom_tier',
+                'total_price' => 2400.00,
+            ]
+        );
+
+        $response->assertSessionHasErrors(['membership']);
+    }
+
     public function test_todays_meals_count_accessor(): void
     {
         $today = Carbon::today()->format('Y-m-d');

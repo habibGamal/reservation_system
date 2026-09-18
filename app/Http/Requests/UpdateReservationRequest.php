@@ -6,6 +6,7 @@ use App\Enums\MembershipType;
 use App\Enums\ReservationStatus;
 use App\Enums\ReservationType;
 use App\Models\Reservation;
+use App\Models\Unit;
 use App\Services\AvailabilityService;
 use App\Services\PricingService;
 use Illuminate\Contracts\Validation\ValidationRule;
